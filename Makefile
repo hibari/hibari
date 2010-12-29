@@ -9,6 +9,8 @@ TGZ=$(PKG).tgz
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 
+.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec clean realclean distclean
+
 all: package
 
 test: eunit
@@ -51,6 +53,10 @@ clean:
 realclean: clean
 	@echo "realcleaning: $(PKG) ..."
 	rm -f $(PLT)
+
+distclean:
+	@echo "distcleaning: $(PKG) ..."
+	repo forall -v -c 'git clean -fdx --exclude=lib/'
 
 $(PLT):
 	@echo "building: $(PLT) ..."
