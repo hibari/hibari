@@ -2,13 +2,14 @@
 # -*- tab-width:4;indent-tabs-mode:nil -*-
 # ex: ts=4 sw=4 et
 
-RUNNER_SCRIPT_DIR=$(cd ${0%/*} && pwd)
+RUNNER_SCRIPT_DIR={{runner_script_dir}}
+RUNNER_SCRIPT=${0##*/}
 
-RUNNER_BASE_DIR=${RUNNER_SCRIPT_DIR%/*}
-RUNNER_ETC_DIR=$RUNNER_BASE_DIR/etc
-RUNNER_LOG_DIR=$RUNNER_BASE_DIR/log
-PIPE_DIR=/tmp/$RUNNER_BASE_DIR/
-RUNNER_USER=
+RUNNER_BASE_DIR={{runner_base_dir}}
+RUNNER_ETC_DIR={{runner_etc_dir}}
+RUNNER_LOG_DIR={{runner_log_dir}}
+PIPE_DIR={{pipe_dir}}
+RUNNER_USER={{runner_user}}
 
 # Make sure this script is running as the appropriate user
 if [ ! -z "$RUNNER_USER" ] && [ `whoami` != "$RUNNER_USER" ]; then
@@ -52,6 +53,20 @@ NODETOOL="$ERTS_PATH/escript $ERTS_PATH/nodetool $NAME_ARG $COOKIE_ARG"
 # Check the first argument for instructions
 case "$1" in
     start)
+        ###--- Hibari custom START
+        # Check for vm swappiness
+        VM_SWAPPINESS=/proc/sys/vm/swappiness
+        VM_NEW=0
+
+        if [ -f $VM_SWAPPINESS ]; then
+            VM_CURRENT=`cat $VM_SWAPPINESS`
+
+            if [ $VM_CURRENT -gt $VM_NEW ]; then
+                logger -t -p daemon.warning "$SCRIPT[$$]" "Change VM's swappiness value ($VM_SWAPPINESS) from $VM_CURRENT to $VM_NEW"
+            fi
+        fi
+        ###--- Hibari custom FINISH
+
         # Make sure there is not already a node running
         RES=`$NODETOOL ping`
         if [ "$RES" = "pong" ]; then
