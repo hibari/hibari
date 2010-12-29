@@ -9,7 +9,7 @@ TGZ=$(PKG).tgz
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 
-.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec clean realclean distclean
+.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec ctags etags clean realclean distclean
 
 all: package
 
@@ -45,6 +45,12 @@ dialyze: build-plt clean compile
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(PKG) ..."
 	dialyzer --plt $(PLT) -r ./lib
+
+ctags:
+	find ./lib -name "*.[he]rl" -print | grep -v .eunit | ctags -
+
+etags:
+	find ./lib -name "*.[he]rl" -print | grep -v .eunit | etags -
 
 clean:
 	@echo "cleaning: $(PKG) ..."
