@@ -1,36 +1,40 @@
-VSN?=none
-DIST?=none
+VSN?=unknown
+DIST?=unknown
 ARCH=$(shell erl -noshell -eval 'io:format(erlang:system_info(system_architecture)), halt().')
 WORDSIZE=$(shell erl -noshell -eval 'io:format(integer_to_list(erlang:system_info(wordsize)*8)), halt().')
 
-PKG=hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)
-TGZ=$(PKG).tgz
+RELPKG="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)"
+RELTGZ="$(RELPKG).tgz"
+RELSHA="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-shasum.txt"
 
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 
 .PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec ctags etags clean realclean distclean
 
-all: package
+all: compile
 
 test: eunit
 
 package: generate
-	@echo "packaging: $(PKG) ..."
-	@echo "*** UNDER CONSTRUCTION ***"
+	@echo "packaging: $(RELPKG) ..."
+	@rm -f ../$(RELTGZ) ../$(RELSHA)
+	@tar -C ./rel -cvzf ../$(RELTGZ) hibari
+	@(cd .. && shasum $(RELTGZ) | tee $(RELSHA))
+	@(cd .. && ls -l $(RELTGZ) $(RELSHA))
 
 generate: clean compile
-	@echo "generating: $(PKG) ..."
+	@echo "generating: $(RELPKG) ..."
 	find ./lib -name svn -type l | xargs rm -f
 	find ./lib -name rr-cache -type l | xargs rm -f
 	./rebar generate
 
 compile:
-	@echo "compiling: $(PKG) ..."
+	@echo "compiling: $(RELPKG) ..."
 	./rebar compile
 
 eunit: compile
-	@echo "eunit testing: $(PKG) ..."
+	@echo "eunit testing: $(RELPKG) ..."
 	./rebar eunit
 
 build-plt: $(PLT)
@@ -39,11 +43,11 @@ check-plt: $(PLT)
 	dialyzer --plt $(PLT) --check_plt
 
 dialyze: build-plt clean compile
-	@echo "dialyzing: $(PKG) ..."
+	@echo "dialyzing: $(RELPKG) ..."
 	dialyzer --plt $(PLT) -r ./lib --no_spec
 
 dialyze-spec: build-plt clean compile
-	@echo "dialyzing w/spec: $(PKG) ..."
+	@echo "dialyzing w/spec: $(RELPKG) ..."
 	dialyzer --plt $(PLT) -r ./lib
 
 ctags:
@@ -57,15 +61,15 @@ etags:
 	find ./lib -name "*.config" -print | grep -v .eunit | etags -a -
 
 clean:
-	@echo "cleaning: $(PKG) ..."
+	@echo "cleaning: $(RELPKG) ..."
 	./rebar clean
 
 realclean: clean
-	@echo "realcleaning: $(PKG) ..."
+	@echo "realcleaning: $(RELPKG) ..."
 	rm -f $(PLT)
 
 distclean:
-	@echo "distcleaning: $(PKG) ..."
+	@echo "distcleaning: $(RELPKG) ..."
 	repo forall -v -c 'git clean -fdx --exclude=lib/'
 
 $(PLT):
