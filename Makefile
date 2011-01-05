@@ -10,7 +10,7 @@ RELSHA="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-shasum.txt"
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 
-.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec ctags etags clean realclean distclean
+.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec ctags etags clean realclean distclean
 
 all: compile
 
@@ -42,13 +42,15 @@ build-plt: $(PLT)
 check-plt: $(PLT)
 	dialyzer --plt $(PLT) --check_plt
 
-dialyze: build-plt clean compile
-	@echo "dialyzing: $(RELPKG) ..."
-	dialyzer --plt $(PLT) -r ./lib --no_spec
+dialyze: dialyze-spec
 
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(RELPKG) ..."
-	dialyzer --plt $(PLT) -r ./lib
+	dialyzer --plt $(PLT) -r ./lib -Wunmatched_returns -Werror_handling -Wrace_conditions
+
+dialyze-nospec: build-plt clean compile
+	@echo "dialyzing w/o spec: $(RELPKG) ..."
+	dialyzer --plt $(PLT) -r ./lib --no_spec
 
 ctags:
 	find ./lib -name "*.[he]rl" -print | grep -v .eunit | ctags -
@@ -89,7 +91,6 @@ $(PLT):
 		kernel \
 		mnesia \
 		observer \
-		odbc \
 		parsetools \
 		public_key \
 		runtime_tools \
