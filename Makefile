@@ -46,7 +46,7 @@ dialyze: dialyze-spec
 
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(RELPKG) ..."
-	dialyzer --plt $(PLT) -r ./lib -Wunmatched_returns -Wrace_conditions
+	dialyzer --plt $(PLT) -r ./lib -Wunmatched_returns
 
 dialyze-nospec: build-plt clean compile
 	@echo "dialyzing w/o spec: $(RELPKG) ..."
