@@ -53,16 +53,16 @@ dialyze-nospec: build-plt clean compile
 	dialyzer --plt $(PLT) -r ./lib --no_spec
 
 ctags:
-	find ./lib -name "*.[he]rl" -print | grep -v .eunit | ctags -
-	find ./lib -name "*.app.src" -print | grep -v .eunit | ctags -a -
-	find ./lib -name "*.config" -print | grep -v .eunit | ctags -a -
-	find ./lib -name "*.[ch]" -print | grep -v .eunit | ctags -a -
+	find ./lib -name "*.[he]rl" -print | fgrep -v .eunit | ctags -
+	find ./lib -name "*.app.src" -print | fgrep -v .eunit | ctags -a -
+	find ./lib -name "*.config" -print | fgrep -v .eunit | ctags -a -
+	find ./lib -name "*.[ch]" -print | fgrep -v .eunit | ctags -a -
 
 etags:
-	find ./lib -name "*.[he]rl" -print | grep -v .eunit | etags -
-	find ./lib -name "*.app.src" -print | grep -v .eunit | etags -a -
-	find ./lib -name "*.config" -print | grep -v .eunit | etags -a -
-	find ./lib -name "*.[ch]" -print | grep -v .eunit | etags -a -
+	find ./lib -name "*.[he]rl" -print | fgrep -v .eunit | etags -
+	find ./lib -name "*.app.src" -print | fgrep -v .eunit | etags -a -
+	find ./lib -name "*.config" -print | fgrep -v .eunit | etags -a -
+	find ./lib -name "*.[ch]" -print | fgrep -v .eunit | etags -a -
 
 clean:
 	@echo "cleaning: $(RELPKG) ..."
