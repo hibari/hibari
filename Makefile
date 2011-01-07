@@ -102,5 +102,4 @@ $(PLT):
 		syntax_tools \
 		tools \
 		webtool \
-		wx \
 		xmerl
