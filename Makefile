@@ -5,7 +5,7 @@ WORDSIZE=$(shell erl -noshell -eval 'io:format(integer_to_list(erlang:system_inf
 
 RELPKG="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)"
 RELTGZ="$(RELPKG).tgz"
-RELSHA="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-shasum.txt"
+RELMD5="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt"
 
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
@@ -18,10 +18,10 @@ test: eunit
 
 package: generate
 	@echo "packaging: $(RELPKG) ..."
-	@rm -f ../$(RELTGZ) ../$(RELSHA)
+	@rm -f ../$(RELTGZ) ../$(RELMD5)
 	@tar -C ./rel -cvzf ../$(RELTGZ) hibari
-	@(cd .. && shasum $(RELTGZ) | tee $(RELSHA))
-	@(cd .. && ls -l $(RELTGZ) $(RELSHA))
+	@(cd .. && md5sum $(RELTGZ) | tee $(RELMD5))
+	@(cd .. && ls -l $(RELTGZ) $(RELMD5))
 
 generate: clean compile
 	@echo "generating: $(RELPKG) ..."
