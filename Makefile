@@ -1,11 +1,11 @@
-VSN?=unknown
-DIST?=unknown
+DIST?=dev
+VSN?=$(shell grep '{rel, "hibari"' rel/reltool.config | sed 's/^.*rel, "hibari", "\(.*\)",/\1/')
 ARCH=$(shell erl -noshell -eval 'io:format(erlang:system_info(system_architecture)), halt().')
 WORDSIZE=$(shell erl -noshell -eval 'io:format(integer_to_list(erlang:system_info(wordsize)*8)), halt().')
 
-RELPKG="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)"
-RELTGZ="$(RELPKG).tgz"
-RELMD5="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt"
+RELPKG=hibari-$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)
+RELTGZ=$(RELPKG).tgz
+RELMD5=hibari-$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt
 
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
@@ -13,23 +13,38 @@ PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 DIALYZE_IGNORE_WARN?=dialyze-ignore-warnings.txt
 DIALYZE_NOSPEC_IGNORE_WARN?=dialyze-nospec-ignore-warnings.txt
 
-.PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
+.PHONY: all test check-package package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
 
 all: compile
 
 test: eunit
 
+check-package: package
+	@echo "checking packaging: $(RELPKG) ..."
+	@rm -rf ./tmp
+	@mkdir ./tmp
+	tar -C ./tmp -xzf ../$(RELTGZ)
+	./tmp/hibari/bin/hibari start
+	@sleep 5
+	./tmp/hibari/bin/hibari-admin bootstrap
+	@sleep 1
+	./tmp/hibari/bin/hibari-admin client-add hibari@127.0.0.1
+	@sleep 1
+	./tmp/hibari/bin/hibari-admin client-list
+	./tmp/hibari/bin/hibari-admin client-delete hibari@127.0.0.1
+	./tmp/hibari/bin/hibari stop
+
 package: generate
 	@echo "packaging: $(RELPKG) ..."
 	@rm -f ../$(RELTGZ) ../$(RELMD5)
-	@tar -C ./rel -cvzf ../$(RELTGZ) hibari
+	@tar -C ./rel -czf ../$(RELTGZ) hibari
 	@(cd .. && (md5sum $(RELTGZ) 2> /dev/null || md5 -r $(RELTGZ) 2> /dev/null) | tee $(RELMD5))
 	@(cd .. && ls -l $(RELTGZ) $(RELMD5))
 
 generate: clean compile
 	@echo "generating: $(RELPKG) ..."
-	find ./lib -name svn -type l | xargs rm -f
-	find ./lib -name rr-cache -type l | xargs rm -f
+	@find ./lib -name svn -type l | xargs rm -f
+	@find ./lib -name rr-cache -type l | xargs rm -f
 	./rebar generate
 
 compile:
