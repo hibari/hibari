@@ -1,0 +1,263 @@
+%% -*- erlang -*-
+
+%%%-------------------------------------------------------------------
+%%% Copyright (c) 2008-2011 Gemini Mobile Technologies, Inc.  All rights reserved.
+%%%
+%%% Licensed under the Apache License, Version 2.0 (the "License");
+%%% you may not use this file except in compliance with the License.
+%%% You may obtain a copy of the License at
+%%%
+%%%     http://www.apache.org/licenses/LICENSE-2.0
+%%%
+%%% Unless required by applicable law or agreed to in writing, software
+%%% distributed under the License is distributed on an "AS IS" BASIS,
+%%% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%%% See the License for the specific language governing permissions and
+%%% limitations under the License.
+%%%
+%%% File    : nodetool-admin
+%%% Purpose : Helper Script for interacting with live clusters
+%%%-------------------------------------------------------------------
+
+main(Args) ->
+    %% Extract the args
+    {RestArgs, TargetNode} = process_args(Args, [], undefined),
+
+    ok = ping_node(TargetNode),
+
+    case RestArgs of
+        ["ping"] ->
+            %% If we got this far, the node already responsed to a ping, so just dump
+            %% a "pong"
+            io:format("pong\n");
+        ["bootstrap"] ->
+            ok = bootstrap(TargetNode, 1, [TargetNode]);
+        ["bootstrap", BricksPerChainStr, Brick | RestBricks] ->
+            BricksPerChain = list_to_integer(BricksPerChainStr),
+            Bricks = [ list_to_atom(Node) || Node <- [Brick | RestBricks] ],
+            ok = bootstrap(TargetNode, BricksPerChain, Bricks);
+        ["client-add", Client | RestClients] ->
+            Clients = [ list_to_atom(Node) || Node <- [Client | RestClients] ],
+            ok = client_add(TargetNode, Clients);
+        ["client-delete", Client | RestClients] ->
+            Clients = [ list_to_atom(Node) || Node <- [Client | RestClients] ],
+            ok = client_delete(TargetNode, Clients);
+        ["client-list"] ->
+            ok = client_list(TargetNode);
+        ["rpc", Module, Function | RpcArgs] ->
+            case rpc:call(TargetNode, list_to_atom(Module), list_to_atom(Function), [RpcArgs], 60000) of
+                ok ->
+                    ok;
+                {badrpc, Reason} ->
+                    io:format("RPC to ~p failed: ~p\n", [TargetNode, Reason]),
+                    halt(1);
+                _ ->
+                    halt(1)
+            end;
+        Other ->
+            io:format("Other: ~p\n", [Other]),
+            io:format("Usage: nodetool-admin {ping|bootstrap|bootstrap <bricksperchain> <brick> ...|client-add <client> ...|client-delete <client> ...|client-list}\n")
+    end,
+    net_kernel:stop().
+
+process_args([], Acc, TargetNode) ->
+    {lists:reverse(Acc), TargetNode};
+process_args(["-setcookie", Cookie | Rest], Acc, TargetNode) ->
+    erlang:set_cookie(node(), list_to_atom(Cookie)),
+    process_args(Rest, Acc, TargetNode);
+process_args(["-name", TargetName | Rest], Acc, _) ->
+    ThisNode = append_node_suffix(TargetName, "_maint_"),
+    {ok, _} = net_kernel:start([ThisNode, longnames]),
+    process_args(Rest, Acc, nodename(TargetName));
+process_args(["-sname", TargetName | Rest], Acc, _) ->
+    ThisNode = append_node_suffix(TargetName, "_maint_"),
+    {ok, _} = net_kernel:start([ThisNode, shortnames]),
+    process_args(Rest, Acc, nodename(TargetName));
+process_args([Arg | Rest], Acc, Opts) ->
+    process_args(Rest, [Arg | Acc], Opts).
+
+nodename(Name) ->
+    case string:tokens(Name, "@") of
+        [_Node, _Host] ->
+            list_to_atom(Name);
+        [Node] ->
+            [_, Host] = string:tokens(atom_to_list(node()), "@"),
+            list_to_atom(lists:concat([Node, "@", Host]))
+    end.
+
+append_node_suffix(Name, Suffix) ->
+    case string:tokens(Name, "@") of
+        [Node, Host] ->
+            list_to_atom(lists:concat([Node, Suffix, os:getpid(), "@", Host]));
+        [Node] ->
+            list_to_atom(lists:concat([Node, Suffix, os:getpid()]))
+    end.
+
+ping_node(TargetNode) ->
+    %% See if the node is currently running  -- if it's not, we'll bail
+    case {net_kernel:hidden_connect_node(TargetNode), net_adm:ping(TargetNode)} of
+        {true, pong} ->
+            ok;
+        {_, pang} ->
+            io:format("Node ~p not responding to pings.\n", [TargetNode]),
+            halt(1);
+        Unknown ->
+            io:format("Node ~p unknown response to pings: ~p\n", [TargetNode, Unknown]),
+            halt(1)
+    end.
+
+bootstrap_nodes(TargetNode) ->
+    case rpc:call(TargetNode, brick_admin, bootstrap_nodes, [], 60000) of
+        BootstrapNodes when is_list(BootstrapNodes) ->
+            BootstrapNodes;
+        {badrpc, Reason} ->
+            io:format("RPC(bootstrap_nodes) to ~p failed: ~p\n", [TargetNode, Reason]),
+            halt(1);
+        Unknown ->
+            io:format("RPC(bootstrap_nodes) to ~p failed due to unknown response: ~p\n", [TargetNode, Unknown]),
+            halt(1)
+    end.
+
+bootstrap(TargetNode, BricksPerChain, Bricks) ->
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% check brick nodes
+    [ ok=ping_node(Node) || Node <- Bricks ],
+
+    %% read schema filename
+    case rpc:call(hd(BootstrapNodes), brick_admin, schema_filename, [], 60000) of
+        SchemaFilename when is_list(SchemaFilename) ->
+            ok;
+        {badrpc, Reason1} ->
+            SchemaFilename = "",
+            io:format("RPC(schema_filename) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason1]),
+            halt(1);
+        Unknown1 ->
+            SchemaFilename = "",
+            io:format("RPC(schema_filename) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown1]),
+            halt(1)
+    end,
+
+    %% bootstrap
+    DataProps = [maketab_bigdata],
+    VarPrefixP = true,
+    PrefixSep = '$/',
+    NumSep = 3,
+
+    BootstrapArgs = [SchemaFilename, DataProps, VarPrefixP, PrefixSep, NumSep, Bricks, BricksPerChain, BootstrapNodes],
+    case rpc:call(hd(BootstrapNodes), brick_admin, bootstrap, BootstrapArgs, 60000) of
+        ok ->
+            ok;
+        {badrpc, Reason2} ->
+            io:format("RPC(bootstrap) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason2]),
+            halt(1);
+        Unknown2 ->
+            io:format("RPC(bootstrap) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown2]),
+            halt(1)
+    end,
+
+    %% copy Schema.local to other Brick Admin nodes
+    CopyArgs = [tl(BootstrapNodes), SchemaFilename],
+    case rpc:call(hd(BootstrapNodes), brick_admin, copy_new_schema, CopyArgs, 60000) of
+        {ok, {_,[]}} ->
+            ok;
+        {badrpc, Reason3} ->
+            io:format("RPC(copy_new_schema) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason3]),
+            halt(1);
+        Unknown3 ->
+            io:format("RPC(copy_new_schmea) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown3]),
+            halt(1)
+    end,
+
+    io:format("ok~n"),
+    ok.
+
+client_add(TargetNode, Clients) ->
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% check client nodes
+    [ ok=ping_node(Node) || Node <- Clients ],
+
+    %% add clients
+    [ case rpc:call(hd(BootstrapNodes), brick_admin, add_client_monitor, [Node], 60000) of
+          ok ->
+              ok;
+          {badrpc, Reason1} ->
+              io:format("RPC(add_client_monitor) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason1]),
+              halt(1);
+          Unknown1 ->
+              io:format("RPC(add_client_monitor) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown1]),
+              halt(1)
+      end || Node <- Clients ],
+
+    %% spam gh to all nodes
+    timer:sleep(500),
+    rpc:call(hd(BootstrapNodes), brick_admin, spam_gh_to_all_nodes, [], 60000),
+    timer:sleep(500),
+
+    %% TODO
+    %% %% smoke check
+    %% [ case rpc:call(Node, brick_simple, get, [tab1, <<255,255,255,255,255,255>>], 60000) of
+    %%       key_not_exist ->
+    %%           ok;
+    %%       {badrpc, Reason2} ->
+    %%           io:format("RPC(get) to ~p failed: ~p\n", [Node, Reason2]),
+    %%           halt(1);
+    %%       Unknown2 ->
+    %%           io:format("RPC(get) to ~p failed due to unknown response: ~p\n", [Node, Unknown2]),
+    %%           halt(1)
+    %%   end || Node <- Clients ],
+
+    io:format("ok~n"),
+    ok.
+
+client_delete(TargetNode, Clients) ->
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% delete clients
+    [ case rpc:call(hd(BootstrapNodes), brick_admin, delete_client_monitor, [Node], 60000) of
+          ok ->
+              ok;
+          {badrpc, Reason} ->
+              io:format("RPC(delete_client_monitor) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason]),
+              halt(1);
+          Unknown ->
+              io:format("RPC(delete_client_monitor) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown]),
+              halt(1)
+      end || Node <- Clients ],
+
+    io:format("ok~n"),
+    ok.
+
+client_list(TargetNode) ->
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% list clients
+    case rpc:call(hd(BootstrapNodes), brick_admin, get_client_monitor_list, [], 60000) of
+        Res when is_list(Res) ->
+            io:format("~p~n", [Res]),
+            ok;
+        {badrpc, Reason} ->
+            io:format("RPC(get_client_monitor_list) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason]),
+            halt(1);
+        Unknown ->
+            io:format("RPC(get_client_monitor_list) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown]),
+            halt(1)
+    end,
+    ok.
