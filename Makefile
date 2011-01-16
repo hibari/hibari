@@ -10,6 +10,9 @@ RELMD5="hibari_$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt"
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 
+DIALYZE_IGNORE_WARN?=dialyze-ignore-warnings.txt
+DIALYZE_NOSPEC_IGNORE_WARN?=dialyze-nospec-ignore-warnings.txt
+
 .PHONY: all test package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
 
 all: compile
@@ -46,24 +49,24 @@ dialyze: dialyze-spec
 
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(RELPKG) ..."
-	dialyzer --plt $(PLT) -Wunmatched_returns -r ./lib
+	dialyzer --plt $(PLT) -Wunmatched_returns -r ./lib | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
 dialyze-nospec: build-plt clean compile
 	@echo "dialyzing w/o spec: $(RELPKG) ..."
-	dialyzer --plt $(PLT) --no_spec -r ./lib
+	dialyzer --plt $(PLT) --no_spec -r ./lib | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-eunit: dialyze-eunit-spec
 
 dialyze-eunit-spec: build-plt clean compile
 	@echo "dialyzing .eunit w/spec: $(RELPKG) ..."
 	./rebar eunit perform=0
-	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo`
-	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo`
+	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
+	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
 dialyze-eunit-nospec: build-plt clean compile
 	@echo "dialyzing .eunit w/o spec: $(RELPKG) ..."
 	./rebar eunit perform=0
-	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo`
+	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 ctags:
 	find ./lib -name "*.[he]rl" -print | fgrep -v .eunit | ctags -
