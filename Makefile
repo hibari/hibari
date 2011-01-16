@@ -23,7 +23,7 @@ package: generate
 	@echo "packaging: $(RELPKG) ..."
 	@rm -f ../$(RELTGZ) ../$(RELMD5)
 	@tar -C ./rel -cvzf ../$(RELTGZ) hibari
-	@(cd .. && md5sum $(RELTGZ) | tee $(RELMD5))
+	@(cd .. && (md5sum $(RELTGZ) 2> /dev/null || md5 -r $(RELTGZ) 2> /dev/null) | tee $(RELMD5))
 	@(cd .. && ls -l $(RELTGZ) $(RELMD5))
 
 generate: clean compile
