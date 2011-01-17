@@ -41,6 +41,6 @@ brick_mboxmon.erl:329: Function start_water_report_loop/3 has no local return
 brick_server.erl:5128: The created fun has no local return
 ####################
 # gdss-admin
-brick_admin.erl:1303: Function bootstrap_scan_loop/0 has no local return
-brick_admin.erl:1315: Function bootstrap_scan_loop2/0 has no local return
+brick_admin.erl:1315: Function bootstrap_scan_loop/0 has no local return
+brick_admin.erl:1327: Function bootstrap_scan_loop2/0 has no local return
 brick_chainmon.erl:1096: The created fun has no local return
