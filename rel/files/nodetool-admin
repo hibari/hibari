@@ -144,7 +144,7 @@ bootstrap(TargetNode, BricksPerChain, Bricks) ->
 
     %% bootstrap
     DataProps = [maketab_bigdata],
-    VarPrefixP = true,
+    VarPrefixP = false,
     PrefixSep = '$/',
     NumSep = 3,
 
