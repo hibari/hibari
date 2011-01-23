@@ -47,6 +47,7 @@ generate: clean compile
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
 	./rebar generate
+	@perl -i -pe 's/%% (.* generated) at .*//g;' rel/hibari/releases/*/*.{rel,script}
 
 compile:
 	@echo "compiling: $(RELPKG) ..."
