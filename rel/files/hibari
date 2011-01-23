@@ -65,6 +65,10 @@ case "$1" in
                 logger -t -p daemon.warning "$SCRIPT[$$]" "Change VM's swappiness value ($VM_SWAPPINESS) from $VM_CURRENT to $VM_NEW"
             fi
         fi
+
+        # Make sure data directory exists
+        GDSS_DATA_DIR={{gdss_data_dir}}
+        mkdir -p $GDSS_DATA_DIR
         ###--- Hibari custom FINISH
 
         # Make sure there is not already a node running
