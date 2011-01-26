@@ -13,14 +13,14 @@ PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 DIALYZE_IGNORE_WARN?=dialyze-ignore-warnings.txt
 DIALYZE_NOSPEC_IGNORE_WARN?=dialyze-nospec-ignore-warnings.txt
 
-.PHONY: all test check-package package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
+.PHONY: all test bootstrap-package check-package package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
 
 all: compile
 
 test: eunit
 
-check-package: package
-	@echo "checking packaging: $(RELPKG) ..."
+bootstrap-package: package
+	@echo "bootstrapping package: $(RELPKG) ..."
 	@rm -rf ./tmp
 	@mkdir ./tmp
 	tar -C ./tmp -xzf ../$(RELTGZ)
@@ -28,6 +28,9 @@ check-package: package
 	@sleep 5
 	./tmp/hibari/bin/hibari-admin bootstrap
 	@sleep 1
+
+check-package: bootstrap-package
+	@echo "checking package: $(RELPKG) ..."
 	./tmp/hibari/bin/hibari-admin client-add hibari@127.0.0.1
 	@sleep 1
 	./tmp/hibari/bin/hibari-admin client-list
