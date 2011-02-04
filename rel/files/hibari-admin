@@ -2,12 +2,13 @@
 # -*- tab-width:4;indent-tabs-mode:nil -*-
 # ex: ts=4 sw=4 et
 
-RUNNER_SCRIPT_DIR={{runner_script_dir}}
-RUNNER_SCRIPT=${0##*/}
+RUNNER_SCRIPT_DIR=$(cd ${0%/*} && pwd)
 
-RUNNER_BASE_DIR={{runner_base_dir}}
-RUNNER_ETC_DIR={{runner_etc_dir}}
-RUNNER_USER={{runner_user}}
+RUNNER_BASE_DIR=${RUNNER_SCRIPT_DIR%/*}
+RUNNER_ETC_DIR=$RUNNER_BASE_DIR/etc
+RUNNER_LOG_DIR=$RUNNER_BASE_DIR/log
+PIPE_DIR=tmp/$RUNNER_BASE_DIR/
+RUNNER_USER=
 
 # Make sure this script is running as the appropriate user
 if [ ! -z "$RUNNER_USER" ] && [ `whoami` != "$RUNNER_USER" ]; then
@@ -48,7 +49,7 @@ NODETOOL="$ERTS_PATH/escript $ERTS_PATH/nodetool-admin $NAME_ARG $COOKIE_ARG"
 # Check the first argument for instructions
 case "$1" in
     bootstrap)
-        # Make sure a node IS running
+        # Make sure there IS a node running
         RES=`$NODETOOL ping`
         if [ "$RES" != "pong" ]; then
             echo "Node is not running!"

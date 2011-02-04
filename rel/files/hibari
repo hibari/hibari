@@ -2,14 +2,13 @@
 # -*- tab-width:4;indent-tabs-mode:nil -*-
 # ex: ts=4 sw=4 et
 
-RUNNER_SCRIPT_DIR={{runner_script_dir}}
-RUNNER_SCRIPT=${0##*/}
+RUNNER_SCRIPT_DIR=$(cd ${0%/*} && pwd)
 
-RUNNER_BASE_DIR={{runner_base_dir}}
-RUNNER_ETC_DIR={{runner_etc_dir}}
-RUNNER_LOG_DIR={{runner_log_dir}}
-PIPE_DIR={{pipe_dir}}
-RUNNER_USER={{runner_user}}
+RUNNER_BASE_DIR=${RUNNER_SCRIPT_DIR%/*}
+RUNNER_ETC_DIR=$RUNNER_BASE_DIR/etc
+RUNNER_LOG_DIR=$RUNNER_BASE_DIR/log
+PIPE_DIR=$RUNNER_BASE_DIR/tmp
+RUNNER_USER=
 
 # Make sure this script is running as the appropriate user
 if [ ! -z "$RUNNER_USER" ] && [ `whoami` != "$RUNNER_USER" ]; then
@@ -136,13 +135,19 @@ case "$1" in
         $ERTS_PATH/to_erl $PIPE_DIR
         ;;
 
-    console)
+    console|console_clean)
+        # .boot file typically just $SCRIPT (ie, the app name)
+        # however, for debugging, sometimes start_clean.boot is useful:
+        case "$1" in
+            console)        BOOTFILE=$SCRIPT ;;
+            console_clean)  BOOTFILE=start_clean ;;
+        esac
         # Setup beam-required vars
         ROOTDIR=$RUNNER_BASE_DIR
         BINDIR=$ROOTDIR/erts-$ERTS_VSN/bin
         EMU=beam
         PROGNAME=`echo $0 | sed 's/.*\\///'`
-        CMD="$BINDIR/erlexec -boot $RUNNER_BASE_DIR/releases/$APP_VSN/$SCRIPT -embedded -config $RUNNER_ETC_DIR/app.config -args_file $RUNNER_ETC_DIR/vm.args -- ${1+"$@"}"
+        CMD="$BINDIR/erlexec -boot $RUNNER_BASE_DIR/releases/$APP_VSN/$BOOTFILE -embedded -config $RUNNER_ETC_DIR/app.config -args_file $RUNNER_ETC_DIR/vm.args -- ${1+"$@"}"
         export EMU
         export ROOTDIR
         export BINDIR
