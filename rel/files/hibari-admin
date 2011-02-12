@@ -7,7 +7,8 @@ RUNNER_SCRIPT_DIR=$(cd ${0%/*} && pwd)
 RUNNER_BASE_DIR=${RUNNER_SCRIPT_DIR%/*}
 RUNNER_ETC_DIR=$RUNNER_BASE_DIR/etc
 RUNNER_LOG_DIR=$RUNNER_BASE_DIR/log
-PIPE_DIR=tmp/$RUNNER_BASE_DIR/
+# Note the trailing slash on $PIPE_DIR/
+PIPE_DIR=$RUNNER_BASE_DIR/tmp/
 RUNNER_USER=
 
 # Make sure this script is running as the appropriate user
@@ -17,6 +18,9 @@ fi
 
 # Make sure CWD is set to runner base dir
 cd $RUNNER_BASE_DIR
+
+# Make sure log directory exists
+mkdir -p $RUNNER_LOG_DIR
 
 # Extract the target node name from node.args
 NAME_ARG=`grep -e '-[s]*name' $RUNNER_ETC_DIR/vm.args`
