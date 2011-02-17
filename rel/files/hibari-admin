@@ -64,6 +64,18 @@ case "$1" in
         $NODETOOL $*
         ;;
 
+    create-table)
+        # Make sure there IS a node running
+        RES=`$NODETOOL ping`
+        if [ "$RES" != "pong" ]; then
+            echo "Node is not running!"
+            exit 1
+        fi
+
+        ## Cluster createtable
+        $NODETOOL $*
+        ;;
+
     client-add)
         # Make sure a node IS running
         RES=`$NODETOOL ping`
@@ -101,7 +113,7 @@ case "$1" in
         ;;
 
     *)
-        echo "Usage: $SCRIPT {bootstrap|bootstrap <bricksperchain> <brick> ...|client-add <client> ...|client-delete <client> ...|client-list}"
+        echo "Usage: $SCRIPT {(bootstrap | create-table <name>) [-bigdata] [-disklogging] [-syncwrites] [-varprefix] [-varprefixsep <char>] [-varprefixnum <num>] [-bricksperchain <num>] [-numnodesperblock <num>] [-blockmultfactor <num>] [-local <num> | <brick> ...] | client-add <client> ... | client-delete <client> ... | client-list}"
         exit 1
         ;;
 esac

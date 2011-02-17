@@ -33,11 +33,67 @@ main(Args) ->
             %% a "pong"
             io:format("pong\n");
         ["bootstrap"] ->
-            ok = bootstrap(TargetNode, 1, [TargetNode]);
-        ["bootstrap", BricksPerChainStr, Brick | RestBricks] ->
-            BricksPerChain = list_to_integer(BricksPerChainStr),
-            Bricks = [ list_to_atom(Node) || Node <- [Brick | RestBricks] ],
-            ok = bootstrap(TargetNode, BricksPerChain, Bricks);
+            BigDataP = true,
+            DiskLoggingP = true,
+            SyncWritesP = true,
+            VarPrefixP = false,
+            VarPrefixSep = '$/',
+            VarPrefixNum = 3,
+            BricksPerChain = 1,
+            NumBricks = 1,
+            ok = bootstrap_local(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
+                                 , VarPrefixP, VarPrefixSep, VarPrefixNum
+                                 , BricksPerChain, NumBricks);
+        ["bootstrap", BootstrapArgs] ->
+            {Props, Bricks} = parse_table_args(BootstrapArgs),
+            LocalP = proplists:is_defined(local, Props),
+            BigDataP = proplists:get_value(bigdata, Props, true),
+            DiskLoggingP = proplists:get_value(disklogging, Props, true),
+            SyncWritesP = proplists:get_value(syncwrites, Props, true),
+            VarPrefixP = proplists:get_value(varprefix, Props, true),
+            VarPrefixSep = proplists:get_value(varprefixsep, Props, '$/'),
+            VarPrefixNum = proplists:get_value(varprefixnum, Props, 3),
+            BricksPerChain = proplists:get_value(bricksperchain, Props, 1),
+
+            if LocalP ->
+                    NumBricks = proplists:get_value(local, Props, 1),
+                    ok = bootstrap_local(TargetNode
+                                         , BigDataP, DiskLoggingP, SyncWritesP
+                                         , VarPrefixP, VarPrefixSep, VarPrefixNum
+                                         , BricksPerChain, NumBricks);
+               true ->
+                    ok = bootstrap(TargetNode
+                                   , BigDataP, DiskLoggingP, SyncWritesP
+                                   , VarPrefixP, VarPrefixSep, VarPrefixNum
+                                   , BricksPerChain, Bricks)
+            end;
+        ["create-table", TableStr | CreateTableArgs] ->
+            Table = list_to_atom(TableStr),
+            {Props, Bricks} = parse_table_args(CreateTableArgs),
+
+            LocalP = proplists:is_defined(local, Props),
+            BigDataP = proplists:get_value(bigdata, Props, true),
+            DiskLoggingP = proplists:get_value(disklogging, Props, true),
+            SyncWritesP = proplists:get_value(syncwrites, Props, true),
+            VarPrefixP = proplists:get_value(varprefix, Props, true),
+            VarPrefixSep = proplists:get_value(varprefixsep, Props, '$/'),
+            VarPrefixNum = proplists:get_value(varprefixnum, Props, 3),
+            BricksPerChain = proplists:get_value(bricksperchain, Props, 1),
+            NumNodesPerBlock = proplists:get_value(numnodesperblock, Props, 0),
+            BlockMultFactor = proplists:get_value(blockmultfactor, Props, 0),
+
+            EffBricks =
+                if LocalP ->
+                        NumBricks = proplists:get_value(local, Props, 1),
+                        [ TargetNode || _ <- lists:seq(1, NumBricks) ];
+                   true ->
+                        Bricks
+                end,
+            ok = createtable(TargetNode, Table
+                             , BigDataP, DiskLoggingP, SyncWritesP
+                             , VarPrefixP, VarPrefixSep, VarPrefixNum
+                             , BricksPerChain, NumNodesPerBlock, BlockMultFactor
+                             , EffBricks);
         ["client-add", Client | RestClients] ->
             Clients = [ list_to_atom(Node) || Node <- [Client | RestClients] ],
             ok = client_add(TargetNode, Clients);
@@ -68,9 +124,44 @@ main(Args) ->
             end;
         Other ->
             io:format("Other: ~p\n", [Other]),
-            io:format("Usage: nodetool-admin {ping|bootstrap|bootstrap <bricksperchain> <brick> ...|client-add <client> ...|client-delete <client> ...|client-list}\n")
+            io:format("Usage: nodetool-admin {(bootstrap | create-table <name>) [-bigdata] [-disklogging] [-syncwrites] [-varprefix] [-varprefixsep <char>] [-varprefixnum <num>] [-bricksperchain <num>] [-numnodesperblock <num>] [-blockmultfactor <num>] [-local <num> | <brick> ...] | client-add <client> ... | client-delete <client> ... | client-list}\n")
     end,
     net_kernel:stop().
+
+
+parse_table_args(StrArgs) ->
+    parse_table_args(StrArgs, []).
+
+parse_table_args([], Args) ->
+    Keys = [bigdata, disklogging, syncwrites
+            , varprefix, varprefixsep, varprefixnum
+            , bricksperchain, numnodesperblock, blockmultfactor
+            , local],
+    {Lists, Rest} = proplists:split(lists:reverse(Args), Keys),
+    {lists:flatten(Lists), Rest};
+parse_table_args(["-bigdata" | StrArgs], Args) ->
+    parse_table_args(StrArgs, [bigdata|proplists:delete(bigdata,Args)]);
+parse_table_args(["-disklogging" | StrArgs], Args) ->
+    parse_table_args(StrArgs, [disklogging|proplists:delete(disklogging,Args)]);
+parse_table_args(["-syncwrites" | StrArgs], Args) ->
+    parse_table_args(StrArgs, [syncwrites|proplists:delete(syncwrites,Args)]);
+parse_table_args(["-varprefix" | StrArgs], Args) ->
+    parse_table_args(StrArgs, [varprefix|proplists:delete(varprefix,Args)]);
+parse_table_args(["-varprefixsep", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{varprefixsep,list_to_integer(Num)}|proplists:delete(varprefixsep,Args)]);
+parse_table_args(["-varprefixnum", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{varprefixnum,list_to_integer(Num)}|proplists:delete(varprefixnum,Args)]);
+parse_table_args(["-bricksperchain", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{bricksperchain,list_to_integer(Num)}|proplists:delete(bricksperchain,Args)]);
+parse_table_args(["-numnodesperblock", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{numnodesperblock,list_to_integer(Num)}|proplists:delete(numnodesperblock,Args)]);
+parse_table_args(["-blockmultfactor", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{blockmultfactor,list_to_integer(Num)}|proplists:delete(blockmultfactor,Args)]);
+parse_table_args(["-local", Num | StrArgs], Args) ->
+    parse_table_args(StrArgs, [{local,list_to_integer(Num)}|proplists:delete(local,Args)]);
+parse_table_args([Brick | StrArgs], Args) ->
+    parse_table_args(StrArgs, [nodename(Brick)|Args]).
+
 
 process_args([], Acc, TargetNode) ->
     {lists:reverse(Acc), TargetNode};
@@ -159,10 +250,12 @@ ping_node(TargetNode) ->
         {true, pong} ->
             ok;
         {_, pang} ->
-            io:format("Node ~p not responding to pings.\n", [TargetNode]),
+            io:format("Node ~p not responding to pings.\n"
+                      , [TargetNode]),
             halt(1);
         Unknown ->
-            io:format("Node ~p unknown response to pings: ~p\n", [TargetNode, Unknown]),
+            io:format("Node ~p unknown response to pings: ~p\n"
+                      , [TargetNode, Unknown]),
             halt(1)
     end.
 
@@ -171,14 +264,82 @@ bootstrap_nodes(TargetNode) ->
         BootstrapNodes when is_list(BootstrapNodes) ->
             BootstrapNodes;
         {badrpc, Reason} ->
-            io:format("RPC(bootstrap_nodes) to ~p failed: ~p\n", [TargetNode, Reason]),
+            io:format("RPC(bootstrap_nodes) to ~p failed: ~p\n"
+                      , [TargetNode, Reason]),
             halt(1);
         Unknown ->
-            io:format("RPC(bootstrap_nodes) to ~p failed due to unknown response: ~p\n", [TargetNode, Unknown]),
+            io:format("RPC(bootstrap_nodes) to ~p failed due to unknown response: ~p\n"
+                      , [TargetNode, Unknown]),
             halt(1)
     end.
 
-bootstrap(TargetNode, BricksPerChain, Bricks) ->
+bootstrap_local(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
+                , VarPrefixP, VarPrefixSep, VarPrefixNum
+                , BricksPerChain, NumBricks) ->
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% read schema filename
+    case rpc:call(hd(BootstrapNodes), brick_admin, schema_filename, [], 60000) of
+        SchemaFilename when is_list(SchemaFilename) ->
+            ok;
+        {badrpc, Reason1} ->
+            SchemaFilename = "",
+            io:format("RPC(schema_filename) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason1]),
+            halt(1);
+        Unknown1 ->
+            SchemaFilename = "",
+            io:format("RPC(schema_filename) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown1]),
+            halt(1)
+    end,
+
+    %% bootstrap
+    DataProps =
+        [ maketab_bigdata || BigDataP ]
+        ++ [ maketab_do_logging || DiskLoggingP ]
+        ++ [ maketab_do_sync || SyncWritesP ],
+
+    BootstrapArgs = [SchemaFilename, DataProps, VarPrefixP, VarPrefixSep, VarPrefixNum, NumBricks, BricksPerChain, BootstrapNodes],
+    case rpc:call(hd(BootstrapNodes), brick_admin, bootstrap_local, BootstrapArgs, 60000) of
+        ok ->
+            ok;
+        {badrpc, Reason2} ->
+            io:format("RPC(bootstrap) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason2]),
+            halt(1);
+        Unknown2 ->
+            io:format("RPC(bootstrap) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown2]),
+            halt(1)
+    end,
+
+    %% copy Schema.local to other Brick Admin nodes
+    CopyArgs = [tl(BootstrapNodes), SchemaFilename],
+    case rpc:call(hd(BootstrapNodes), brick_admin, copy_new_schema, CopyArgs, 60000) of
+        {ok, {_,[]}} ->
+            ok;
+        {badrpc, Reason3} ->
+            io:format("RPC(copy_new_schema) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason3]),
+            halt(1);
+        Unknown3 ->
+            io:format("RPC(copy_new_schmea) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown3]),
+            halt(1)
+    end,
+
+    io:format("ok~n"),
+    ok.
+
+bootstrap(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
+          , VarPrefixP, VarPrefixSep, VarPrefixNum
+          , BricksPerChain, Bricks) ->
+
     %% read bootstrap nodes
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
@@ -194,29 +355,33 @@ bootstrap(TargetNode, BricksPerChain, Bricks) ->
             ok;
         {badrpc, Reason1} ->
             SchemaFilename = "",
-            io:format("RPC(schema_filename) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason1]),
+            io:format("RPC(schema_filename) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason1]),
             halt(1);
         Unknown1 ->
             SchemaFilename = "",
-            io:format("RPC(schema_filename) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown1]),
+            io:format("RPC(schema_filename) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown1]),
             halt(1)
     end,
 
     %% bootstrap
-    DataProps = [maketab_bigdata],
-    VarPrefixP = false,
-    PrefixSep = '$/',
-    NumSep = 3,
+    DataProps =
+        [ maketab_bigdata || BigDataP ]
+        ++ [ maketab_do_logging || DiskLoggingP ]
+        ++ [ maketab_do_sync || SyncWritesP ],
 
-    BootstrapArgs = [SchemaFilename, DataProps, VarPrefixP, PrefixSep, NumSep, Bricks, BricksPerChain, BootstrapNodes],
+    BootstrapArgs = [SchemaFilename, DataProps, VarPrefixP, VarPrefixSep, VarPrefixNum, Bricks, BricksPerChain, BootstrapNodes],
     case rpc:call(hd(BootstrapNodes), brick_admin, bootstrap, BootstrapArgs, 60000) of
         ok ->
             ok;
         {badrpc, Reason2} ->
-            io:format("RPC(bootstrap) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason2]),
+            io:format("RPC(bootstrap) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason2]),
             halt(1);
         Unknown2 ->
-            io:format("RPC(bootstrap) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown2]),
+            io:format("RPC(bootstrap) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown2]),
             halt(1)
     end,
 
@@ -226,10 +391,83 @@ bootstrap(TargetNode, BricksPerChain, Bricks) ->
         {ok, {_,[]}} ->
             ok;
         {badrpc, Reason3} ->
-            io:format("RPC(copy_new_schema) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason3]),
+            io:format("RPC(copy_new_schema) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason3]),
             halt(1);
         Unknown3 ->
-            io:format("RPC(copy_new_schmea) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown3]),
+            io:format("RPC(copy_new_schmea) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown3]),
+            halt(1)
+    end,
+
+    io:format("ok~n"),
+    ok.
+
+createtable(TargetNode, Table
+            , BigDataP, DiskLoggingP, SyncWritesP
+            , VarPrefixP, VarPrefixSep, VarPrefixNum
+            , BricksPerChain, NumNodesPerBlock, BlockMultFactor
+            , Bricks) ->
+
+    %% read bootstrap nodes
+    BootstrapNodes = bootstrap_nodes(TargetNode),
+
+    %% check bootstrap nodes
+    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+
+    %% check brick nodes
+    [ ok=ping_node(Node) || Node <- Bricks ],
+
+    MakeChainArgs = [Table, BricksPerChain, Bricks, NumNodesPerBlock, BlockMultFactor],
+    case rpc:call(hd(BootstrapNodes), brick_admin, make_chain_description, MakeChainArgs, 60000) of
+        Chains when is_list(Chains) ->
+            DataProps =
+                [ maketab_bigdata || BigDataP ]
+                ++ [ maketab_do_logging || DiskLoggingP ]
+                ++ [ maketab_do_sync || SyncWritesP ],
+            MakeTableArgs = [DataProps, VarPrefixP, VarPrefixSep, VarPrefixNum, Chains],
+            case rpc:call(hd(BootstrapNodes), brick_admin, make_common_table_opts, MakeTableArgs, 60000) of
+                BrickOpts when is_list(BrickOpts) ->
+                    AddTableArgs = [Table, Chains, BrickOpts],
+                    case rpc:call(hd(BootstrapNodes), brick_admin, add_table, AddTableArgs, 60000) of
+                        ok ->
+                            case rpc:call(hd(BootstrapNodes), brick_admin, spam_gh_to_all_nodes, []) of
+                                ok ->
+                                    ok;
+                                {badrpc, Reason4} ->
+                                    io:format("RPC(createtable-4) to ~p failed: ~p\n"
+                                              , [hd(BootstrapNodes), Reason4]),
+                                    halt(1);
+                                Unknown4 ->
+                                    io:format("RPC(createtable-4) to ~p failed due to unknown response: ~p\n"
+                                              , [hd(BootstrapNodes), Unknown4]),
+                                    halt(1)
+                            end;
+                        {badrpc, Reason3} ->
+                            io:format("RPC(createtable-3) to ~p failed: ~p\n"
+                                      , [hd(BootstrapNodes), Reason3]),
+                            halt(1);
+                        Unknown3 ->
+                            io:format("RPC(createtable-3) to ~p failed due to unknown response: ~p\n"
+                                      , [hd(BootstrapNodes), Unknown3]),
+                            halt(1)
+                    end;
+                {badrpc, Reason2} ->
+                    io:format("RPC(createtable-2) to ~p failed: ~p\n"
+                              , [hd(BootstrapNodes), Reason2]),
+                    halt(1);
+                Unknown2 ->
+                    io:format("RPC(createtable-2) to ~p failed due to unknown response: ~p\n"
+                              , [hd(BootstrapNodes), Unknown2]),
+                    halt(1)
+            end;
+        {badrpc, Reason1} ->
+            io:format("RPC(createtable-1) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason1]),
+            halt(1);
+        Unknown1 ->
+            io:format("RPC(createtable-1) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown1]),
             halt(1)
     end,
 
@@ -251,10 +489,12 @@ client_add(TargetNode, Clients) ->
           ok ->
               ok;
           {badrpc, Reason1} ->
-              io:format("RPC(add_client_monitor) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason1]),
+              io:format("RPC(add_client_monitor) to ~p failed: ~p\n"
+                        , [hd(BootstrapNodes), Reason1]),
               halt(1);
           Unknown1 ->
-              io:format("RPC(add_client_monitor) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown1]),
+              io:format("RPC(add_client_monitor) to ~p failed due to unknown response: ~p\n"
+                        , [hd(BootstrapNodes), Unknown1]),
               halt(1)
       end || Node <- Clients ],
 
@@ -291,10 +531,12 @@ client_delete(TargetNode, Clients) ->
           ok ->
               ok;
           {badrpc, Reason} ->
-              io:format("RPC(delete_client_monitor) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason]),
+              io:format("RPC(delete_client_monitor) to ~p failed: ~p\n"
+                        , [hd(BootstrapNodes), Reason]),
               halt(1);
           Unknown ->
-              io:format("RPC(delete_client_monitor) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown]),
+              io:format("RPC(delete_client_monitor) to ~p failed due to unknown response: ~p\n"
+                        , [hd(BootstrapNodes), Unknown]),
               halt(1)
       end || Node <- Clients ],
 
@@ -314,10 +556,12 @@ client_list(TargetNode) ->
             io:format("~p~n", [Res]),
             ok;
         {badrpc, Reason} ->
-            io:format("RPC(get_client_monitor_list) to ~p failed: ~p\n", [hd(BootstrapNodes), Reason]),
+            io:format("RPC(get_client_monitor_list) to ~p failed: ~p\n"
+                      , [hd(BootstrapNodes), Reason]),
             halt(1);
         Unknown ->
-            io:format("RPC(get_client_monitor_list) to ~p failed due to unknown response: ~p\n", [hd(BootstrapNodes), Unknown]),
+            io:format("RPC(get_client_monitor_list) to ~p failed due to unknown response: ~p\n"
+                      , [hd(BootstrapNodes), Unknown]),
             halt(1)
     end,
     ok.
