@@ -33,12 +33,12 @@ mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type 
   fdsrv:stop/0
 ####################
 # gdss-brick
-brick_ets.erl:2999: The created fun has no local return
+brick_ets.erl:3004: The created fun has no local return
 brick_itimer.erl:213: Function start_interval_loop/1 has no local return
 brick_itimer.erl:219: Function interval_loop/1 has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_mboxmon.erl:329: Function start_water_report_loop/3 has no local return
-brick_server.erl:5193: The created fun has no local return
+brick_server.erl:4971: The created fun has no local return
 ####################
 # gdss-admin
 brick_admin.erl:1315: Function bootstrap_scan_loop/0 has no local return
