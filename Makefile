@@ -21,7 +21,7 @@ test: eunit
 
 bootstrap-package: package
 	@echo "bootstrapping package: $(RELPKG) ..."
-	@-./tmp/hibari/bin/hibari stop 2> /dev/null
+	@-./tmp/hibari/bin/hibari stop &> /dev/null
 	@rm -rf ./tmp
 	@mkdir ./tmp
 	tar -C ./tmp -xzf ../$(RELTGZ)
