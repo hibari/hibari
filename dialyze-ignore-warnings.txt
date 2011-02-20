@@ -49,7 +49,7 @@ reloader.erl:62: Expression produces a value of type ['error' | 'gone' | 'reload
 # gdss-brick
 brick_ets.erl:3004: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
-brick_server.erl:4971: The created fun has no local return
+brick_server.erl:4995: The created fun has no local return
 ####################
 # gdss-admin
 brick_chainmon.erl:1096: The created fun has no local return
