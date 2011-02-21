@@ -44,7 +44,7 @@ main(Args) ->
             ok = bootstrap_local(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
                                  , VarPrefixP, VarPrefixSep, VarPrefixNum
                                  , BricksPerChain, NumBricks);
-        ["bootstrap", BootstrapArgs] ->
+        ["bootstrap" | BootstrapArgs] ->
             {Props, Bricks} = parse_table_args(BootstrapArgs),
             LocalP = proplists:is_defined(local, Props),
             BigDataP = proplists:get_value(bigdata, Props, true),
