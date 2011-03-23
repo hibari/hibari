@@ -1,0 +1,43 @@
+%%% -*- mode: erlang -*-
+
+%% Additional library directories to add to the code path
+{lib_dirs, ["./lib"]}.
+
+%% Require OTP version R13B04 or R14
+{require_otp_vsn, "R13B04|R14"}.
+
+%% Sub directories
+{sub_dirs, ["lib/gmt_util"
+            , "lib/cluster_info"
+            , "lib/partition_detector"
+            , "lib/congestion_watcher"
+            , "lib/mochiweb"
+            , "lib/ubf"
+            , "lib/ubf_jsonrpc"
+            , "lib/ubf_thrift"
+            , "lib/gdss_brick"
+            , "lib/gdss_client"
+            , "lib/gdss_admin"
+            , "lib/gdss_ubf_proto"
+            , "lib/gdss_json_rpc_proto"
+            , "lib/gdss_s3_proto"
+            , "rel"
+           ]}.
+
+%% Depends
+{deps_dir, "lib"}.
+{deps, [{gmt_util, "0.1.1", {git, "git://github.com/hibari/gmt-util.git", "HEAD"}}
+        , {cluster_info, "0.1.0", {git, "git://github.com/hibari/cluster-info.git", "HEAD"}}
+        , {partition_detector, "0.1.0", {git, "git://github.com/hibari/partition-detector.git", "HEAD"}}
+        , {congestion_watcher, "0.1.0", {git, "git://github.com/hibari/congestion-watcher.git", "HEAD"}}
+        , {mochiweb, "1.5.0", {git, "git://github.com/hibari/mochiweb.git", "HEAD"}}
+        , {ubf, "1.15.1", {git, "git://github.com/hibari/ubf.git", "HEAD"}}
+        , {ubf_jsonrpc, "0.1.0", {git, "git://github.com/hibari/ubf-jsonrpc.git", "HEAD"}}
+        , {ubf_thrift, "0.1.0", {git, "git://github.com/hibari/ubf-thrift.git", "HEAD"}}
+        , {gdss_brick, "0.1.2", {git, "git://github.com/hibari/gdss-brick.git", "HEAD"}}
+        , {gdss_client, "0.1.0", {git, "git://github.com/hibari/gdss-client.git", "HEAD"}}
+        , {gdss_admin, "0.1.1", {git, "git://github.com/hibari/gdss-admin.git", "HEAD"}}
+        , {gdss_ubf_proto, "0.1.1", {git, "git://github.com/hibari/gdss-ubf-proto.git", "HEAD"}}
+        , {gdss_json_rpc_proto, "0.1.0", {git, "git://github.com/hibari/gdss-json-rpc-proto.git", "HEAD"}}
+        , {gdss_s3_proto, "0.1.0", {git, "git://github.com/hibari/gdss-s3-proto.git", "HEAD"}}
+       ]}.
