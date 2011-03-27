@@ -25,13 +25,6 @@ ebf.erl:21: Function encode/1 has no local return
 ebf.erl:32: Function decode/1 has no local return
 ebf.erl:36: Function decode/2 has no local return
 ####################
-# mochiweb
-mochiweb_socket.erl:31: The pattern 'ok' can never match the type {'error',_} | {'ok',{'sslsocket',_,_}}
-mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type {'ok',{'sslsocket',_,_}}
-  fdsrv:bind_socket/2
-  fdsrv:start/0
-  fdsrv:stop/0
-####################
 # gdss-brick
 brick_ets.erl:3004: The created fun has no local return
 brick_itimer.erl:213: Function start_interval_loop/1 has no local return
