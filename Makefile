@@ -80,13 +80,13 @@ dialyze-eunit: dialyze-eunit-spec
 
 dialyze-eunit-spec: build-plt clean compile
 	@echo "dialyzing .eunit w/spec: $(RELPKG) ..."
-	./rebar eunit perform=0
+	./rebar eunit-compile
 	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
 dialyze-eunit-nospec: build-plt clean compile
 	@echo "dialyzing .eunit w/o spec: $(RELPKG) ..."
-	./rebar eunit perform=0
+	./rebar eunit-compile
 	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 ctags:
