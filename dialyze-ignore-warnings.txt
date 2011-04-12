@@ -20,6 +20,15 @@ leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match 
 # yecc
 yeccpre.hrl:49: Function return_error/2 will never be called
 ####################
+# meck
+meck.erl:85: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:111: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:129: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:146: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:161: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:228: Expression produces a value of type ['ok'], but this value is unmatched
+meck.erl:504: Expression produces a value of type 'ok' | {'error',atom()}, but this value is unmatched
+####################
 # mochiweb
 mochiglobal.erl:33: Expression produces a value of type {'error','badfile' | 'native_code' | 'nofile' | 'not_purged' | 'sticky_directory'} | {'module',atom()}, but this value is unmatched
 mochiweb.erl:23: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
