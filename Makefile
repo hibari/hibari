@@ -70,10 +70,12 @@ dialyze: dialyze-spec
 
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(RELPKG) ..."
+	find ./lib -wholename "*/meck/test/cover_test_module.beam" -exec rm {} \;
 	dialyzer --plt $(PLT) -Wunmatched_returns -r ./lib | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
 dialyze-nospec: build-plt clean compile
 	@echo "dialyzing w/o spec: $(RELPKG) ..."
+	find ./lib -wholename "*/meck/test/cover_test_module.beam" -exec rm {} \;
 	dialyzer --plt $(PLT) --no_spec -r ./lib | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-eunit: dialyze-eunit-spec
