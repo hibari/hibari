@@ -29,7 +29,7 @@ ebf.erl:32: Function decode/1 has no local return
 ebf.erl:36: Function decode/2 has no local return
 ####################
 # gdss-brick
-brick_ets.erl:3004: The created fun has no local return
+brick_ets.erl:3022: The created fun has no local return
 brick_itimer.erl:213: Function start_interval_loop/1 has no local return
 brick_itimer.erl:219: Function interval_loop/1 has no local return
 brick_mboxmon.erl:313: The created fun has no local return
