@@ -51,7 +51,7 @@ mochiweb_socket_server.erl:123: Expression produces a value of type 'ok' | {'err
 reloader.erl:62: Expression produces a value of type ['error' | 'gone' | 'reload' | 'reload_but_test_failed' | 'unmodified'], but this value is unmatched
 ####################
 # gdss-brick
-brick_ets.erl:3004: The created fun has no local return
+brick_ets.erl:3022: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_server.erl:4995: The created fun has no local return
 ####################
