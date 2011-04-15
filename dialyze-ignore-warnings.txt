@@ -21,24 +21,8 @@ leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match 
 yeccpre.hrl:49: Function return_error/2 will never be called
 ####################
 # mochiweb
-mochiglobal.erl:33: Expression produces a value of type {'error','badfile' | 'native_code' | 'nofile' | 'not_purged' | 'sticky_directory'} | {'module',atom()}, but this value is unmatched
-mochiweb_http.erl:99: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_http.erl:103: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_http.erl:106: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_http.erl:129: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_http.erl:132: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_http.erl:169: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_request.erl:224: Expression produces a value of type 'ok' | {'mochiweb_response',_,_,_}, but this value is unmatched
-mochiweb_request.erl:402: Expression produces a value of type [any()], but this value is unmatched
-mochiweb_request.erl:501: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_request.erl:504: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_request.erl:518: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_request.erl:530: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_request.erl:615: Expression produces a value of type 'ok' | {'error',atom()}, but this value is unmatched
-mochiweb_socket_server.erl:120: Expression produces a value of type 'ok' | 'void' | {'error',_}, but this value is unmatched
-mochiweb_socket_server.erl:122: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-mochiweb_socket_server.erl:123: Expression produces a value of type 'ok' | {'error',_}, but this value is unmatched
-reloader.erl:62: Expression produces a value of type ['error' | 'gone' | 'reload' | 'reload_but_test_failed' | 'unmodified'], but this value is unmatched
+mochiweb_socket.erl:31: The pattern 'ok' can never match the type {'error',_} | {'ok',{'sslsocket',_,_}}
+mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type {'ok',{'sslsocket',_,_}}
 ####################
 # gdss-brick
 brick_ets.erl:3022: The created fun has no local return

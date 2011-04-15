@@ -23,6 +23,10 @@ yeccpre.hrl:49: Function return_error/2 will never be called
 # meck
 meck.erl:450: Function invalidate_and_raise/5 has no local return
 ####################
+# mochi
+mochiweb_socket.erl:31: The pattern 'ok' can never match the type {'error',_} | {'ok',{'sslsocket',_,_}}
+mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type {'ok',{'sslsocket',_,_}}
+####################
 # ubf
 ebf.erl:21: Function encode/1 has no local return
 ebf.erl:32: Function decode/1 has no local return
