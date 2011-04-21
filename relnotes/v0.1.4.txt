@@ -1,0 +1,28 @@
+
+v0.1.4
+
+This is a bug fix release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- GH5 (hibari/gdss-client): Deprecate 'infinity' as a timeout
+- GH6 (hibari/gdss-brick): fix for timestamp checking
+- GMT BZ29559: remove system_info(procs) from cluster dump
+- GMT BZ29779: find_the_brick() should return brick_not_available on error
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- GH4 (hibari/gdss-client): Refactor brick_simple into 2
+- New "brick_simple_stub" module for testing brick_simple(_client) callers
+- Introduce meck
+- Introduce riak_err
+- Implement gmt_eqc:module/2
+  * For quickcheck-style unit tests, Hibari requires the full featured
+    version of QuviQ's eqc tool to be in your Erlang path.  Currently,
+    eqcmini and proper can test only a subset of Hibari's unit tests.
+
+--- OTHERS --------------------------------------------------------------
+
+- Comment out some io:format calls in network_partition_detector
+
+_EOF_
