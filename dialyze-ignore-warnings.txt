@@ -31,3 +31,6 @@ brick_server.erl:4995: The created fun has no local return
 ####################
 # gdss-admin
 brick_chainmon.erl:1096: The created fun has no local return
+####################
+# riak_err
+riak_err_handler.erl:161: Expression produces a value of type 'ok' | {'error',atom()}, but this value is unmatched
