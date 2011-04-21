@@ -24,5 +24,6 @@ This is a bug fix release for Hibari.
 --- OTHERS --------------------------------------------------------------
 
 - Comment out some io:format calls in network_partition_detector
+- Set 'error' (rather than 'all') as the default sasl log type
 
 _EOF_
