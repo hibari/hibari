@@ -18,3 +18,6 @@
 
 ## Increase number of ets tables
 --env ERL_MAX_ETS_TABLES 10007
+
+## Increase for busy dist port (only for patched R13B04)
+--env ERTS_DE_BUSY_LIMIT 1048576
