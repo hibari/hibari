@@ -16,6 +16,10 @@ leexinc.hrl:243: The pattern <Rest, Line, {'token', _T, Push}, Error> can never 
 leexinc.hrl:248: The pattern <Rest, Line, {'end_token', _T, Push}, Error> can never match the type <_,_,'error' | 'skip_token',_>
 leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never match the type <_,_,'error',_>
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
+leexinc.hrl:49: The pattern <Rest, Line, {'token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token' | {'end_token',{'dot',_}},[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:54: The pattern <Rest, Line, {'end_token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:59: The pattern <Rest, Line, {'skip_token', Push}, Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:62: The pattern <_Rest, Line, {'error', S}, _Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
 ####################
 # yecc
 yeccpre.hrl:49: Function return_error/2 will never be called
@@ -24,9 +28,24 @@ yeccpre.hrl:49: Function return_error/2 will never be called
 mochiweb_socket.erl:31: The pattern 'ok' can never match the type {'error',_} | {'ok',{'sslsocket',_,_}}
 mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type {'ok',{'sslsocket',_,_}}
 ####################
+# ubf
+contract_lex.xrl:14: Function yyaction_2/2 has no local return
+contract_lex.xrl:62: Function parse_erlang_single_expr/1 has no local return
+contract_lex.xrl:66: The call erl_eval:exprs(Rs::[any()],[]) does not have an opaque term of type erl_eval:binding_struct() as 2nd argument
+####################
+# gmt-util
+gmt_erlang.erl:280: Function parse_erlang_single_expr/1 has no local return
+gmt_erlang.erl:284: The call erl_eval:exprs(Rs::[any()],[]) does not have an opaque term of type erl_eval:binding_struct() as 2nd argument
+gmt_util.erl:1023: Function parse_erlang_single_expr/1 has no local return
+gmt_util.erl:1030: The call erl_eval:exprs(Rs::[any()],[]) does not have an opaque term of type erl_eval:binding_struct() as 2nd argument
+####################
 # gdss-brick
+brick_ets.erl:302: The variable XF can never match since previous clauses completely covered the type 'undefined'
 brick_ets.erl:3022: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
+brick_server.erl:1420: The pattern 'none' can never match the type 'undefined'
+brick_server.erl:1421: The pattern 'ssf_only' can never match the type 'undefined'
+brick_server.erl:1422: Guard test is_list(L::'undefined') can never succeed
 brick_server.erl:4995: The created fun has no local return
 ####################
 # gdss-admin
