@@ -1,9 +1,9 @@
 ####################
 # leex
-leexinc.hrl:49: The pattern <Rest, Line, {'token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token' | {'end_token',{'dot',_}},[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,_} | {'string',_,[any()]}]>
-leexinc.hrl:54: The pattern <Rest, Line, {'end_token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,_} | {'string',_,[any()]}]>
-leexinc.hrl:59: The pattern <Rest, Line, {'skip_token', Push}, Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,_} | {'string',_,[any()]}]>
-leexinc.hrl:62: The pattern <_Rest, Line, {'error', S}, _Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,_} | {'string',_,[any()]}]>
+leexinc.hrl:49: The pattern <Rest, Line, {'token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token' | {'end_token',{'dot',_}},[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:54: The pattern <Rest, Line, {'end_token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:59: The pattern <Rest, Line, {'skip_token', Push}, Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
+leexinc.hrl:62: The pattern <_Rest, Line, {'error', S}, _Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
 leexinc.hrl:118: The pattern <Rest, Line, {'token', T, Push}> can never match the type <_,_,'error' | 'skip_token' | {'end_token',{'dot',_}}>
 leexinc.hrl:123: The pattern <Rest, Line, {'end_token', T, Push}> can never match the type <_,_,'error' | 'skip_token'>
 leexinc.hrl:128: The pattern <Rest, Line, {'skip_token', Push}> can never match the type <_,_,'error'>
@@ -16,17 +16,9 @@ leexinc.hrl:243: The pattern <Rest, Line, {'token', _T, Push}, Error> can never 
 leexinc.hrl:248: The pattern <Rest, Line, {'end_token', _T, Push}, Error> can never match the type <_,_,'error' | 'skip_token',_>
 leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never match the type <_,_,'error',_>
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
-leexinc.hrl:49: The pattern <Rest, Line, {'token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token' | {'end_token',{'dot',_}},[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
-leexinc.hrl:54: The pattern <Rest, Line, {'end_token', T, Push}, Ts> can never match the type <_,_,'error' | 'skip_token',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
-leexinc.hrl:59: The pattern <Rest, Line, {'skip_token', Push}, Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
-leexinc.hrl:62: The pattern <_Rest, Line, {'error', S}, _Ts> can never match the type <_,_,'error',[{atom(),_} | {'atom',_,atom()} | {'binary',_,binary()} | {'float',_,float()} | {'integer',_,integer()} | {'string',_,[any()]}]>
 ####################
 # yecc
 yeccpre.hrl:49: Function return_error/2 will never be called
-####################
-# mochiweb
-mochiweb_socket.erl:31: The pattern 'ok' can never match the type {'error',_} | {'ok',{'sslsocket',_,_}}
-mochiweb_socket.erl:36: The pattern Err = {'error', _} can never match the type {'ok',{'sslsocket',_,_}}
 ####################
 # ubf
 contract_lex.xrl:14: Function yyaction_2/2 has no local return
