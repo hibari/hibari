@@ -1,0 +1,15 @@
+
+v0.1.6
+
+This is a bug fix release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- GH1 (hibari/gdss-admin): inconsistent wrappers for supervisor calls
+- GH1 (hibari/gdss-s3-proto): mechanically rename gdss-s3-proto modules
+
+--- OTHERS --------------------------------------------------------------
+
+- Minor fixes to permit building Hibari with Erlang/OTP R14B03 (preview).
+
+_EOF_
