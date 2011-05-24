@@ -7,6 +7,7 @@ This is a bug fix release for Hibari.
 
 - GH1 (hibari/gdss-admin): inconsistent wrappers for supervisor calls
 - GH1 (hibari/gdss-s3-proto): mechanically rename gdss-s3-proto modules
+- GH8 (hibari/hibari): default configuration values need review and adjustment
 
 --- OTHERS --------------------------------------------------------------
 
