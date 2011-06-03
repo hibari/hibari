@@ -1,0 +1,15 @@
+
+v0.1.7
+
+This is a bug fix release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- GH6 (hibari/gdss-brick): Add new configuration brick_min_log_size_mb
+- GH8 (hibari/gdss-brick): private log - bad check for log file rotation
+
+--- OTHERS --------------------------------------------------------------
+
+N/A
+
+_EOF_

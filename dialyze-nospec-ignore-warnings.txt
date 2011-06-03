@@ -18,7 +18,7 @@ yeccpre.hrl:49: Function return_error/2 will never be called
 brick_admin.erl:1315: Function bootstrap_scan_loop/0 has no local return
 brick_admin.erl:1327: Function bootstrap_scan_loop2/0 has no local return
 brick_chainmon.erl:1096: The created fun has no local return
-brick_ets.erl:3022: The created fun has no local return
+brick_ets.erl:3053: The created fun has no local return
 brick_itimer.erl:213: Function start_interval_loop/1 has no local return
 brick_itimer.erl:219: Function interval_loop/1 has no local return
 brick_mboxmon.erl:313: The created fun has no local return

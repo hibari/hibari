@@ -16,7 +16,7 @@ leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
 yeccpre.hrl:49: Function return_error/2 will never be called
 brick_chainmon.erl:1096: The created fun has no local return
-brick_ets.erl:3022: The created fun has no local return
+brick_ets.erl:3053: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_server.erl:4995: The created fun has no local return
 riak_err_handler.erl:161: Expression produces a value of type 'ok' | {'error',atom()}, but this value is unmatched
