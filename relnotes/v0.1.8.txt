@@ -1,0 +1,14 @@
+
+v0.1.8
+
+This is a bug fix release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- GH6 (hibari/gdss-client): clear_table() only works for one chain
+
+--- OTHERS --------------------------------------------------------------
+
+N/A
+
+_EOF_
