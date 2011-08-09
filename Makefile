@@ -1,11 +1,11 @@
-DIST?=dev
+XDIST?=dev
 VSN?=$(shell grep '{rel, "hibari"' rel/reltool.config | sed 's/^.*rel, "hibari", "\(.*\)",/\1/')
 ARCH=$(shell erl -noshell -eval 'io:format(erlang:system_info(system_architecture)), halt().')
 WORDSIZE=$(shell erl -noshell -eval 'io:format(integer_to_list(try erlang:system_info({wordsize, external}) of Val -> 8*Val catch error:badarg -> 8*erlang:system_info(wordsize) end)), halt().')
 
-RELPKG=hibari-$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)
+RELPKG=hibari-$(VSN)-$(XDIST)-$(ARCH)-$(WORDSIZE)
 RELTGZ=$(RELPKG).tgz
-RELMD5=hibari-$(VSN)-$(DIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt
+RELMD5=hibari-$(VSN)-$(XDIST)-$(ARCH)-$(WORDSIZE)-md5sum.txt
 
 OTPREL=$(shell erl -noshell -eval 'io:format(erlang:system_info(otp_release)), halt().')
 PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
