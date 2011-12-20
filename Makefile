@@ -13,8 +13,29 @@ PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 DIALYZE_IGNORE_WARN?=dialyze-ignore-warnings.txt
 DIALYZE_NOSPEC_IGNORE_WARN?=dialyze-nospec-ignore-warnings.txt
 
-.PHONY: all test bootstrap-package check-package package generate compile eunit build-plt check-plt dialyze dialyze-spec dialyze-nospec dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec ctags etags clean realclean distclean
+ifeq ($(shell uname -s),Darwin)
+	ifeq ($(shell uname -m),x86_64)
+		otp_configure_flags= --enable-darwin-64bit
+	else
+		otp_configure_flags= --enable-darwin-universal
+	endif
+else
+	otp_configure_flags=
+endif
 
+.PHONY: all test \
+	compile compile-eqc compile-proper \
+	eunit-compile eqc-compile proper-compile \
+	eunit eqc proper \
+	doc \
+	build-plt check-plt \
+	dialyze dialyze-spec dialyze-nospec \
+	dialyze-eunit dialyze-eunit-spec dialyze-eunit-nospec \
+	dialyze-eqc dialyze-eqc-spec dialyze-eqc-nospec \
+	dialyze-proper dialyze-proper-spec dialyze-proper-nospec \
+	ctags etags \
+	clean realclean distclean \
+	bootstrap-package check-package package generate
 all: compile
 
 test: eunit
@@ -57,9 +78,39 @@ compile:
 	@echo "compiling: $(RELPKG) ..."
 	./rebar compile
 
-eunit: compile
+compile-eqc:
+	@echo "compiling-eqc: $(RELPKG) ..."
+	./rebar compile -D QC -D QC_EQC
+
+compile-proper:
+	@echo "compiling-proper: $(RELPKG) ..."
+	./rebar compile -D QC -D QC_PROPER
+
+eunit-compile: compile
+	@echo "eunit test compiling: $(RELPKG) ..."
+	./rebar eunit-compile
+
+eqc-compile: compile-eqc
+	@echo "eqc test compiling: $(RELPKG) ..."
+	./rebar eunit-compile -D QC -D QC_EQC
+
+proper-compile: compile-proper
+	@echo "proper test compiling: $(RELPKG) ..."
+	./rebar eunit-compile -D QC -D QC_PROPER
+
+eunit: eunit-compile
 	@echo "eunit testing: $(RELPKG) ..."
-	./rebar eunit
+	./rebar eunit skip_apps=meck
+
+eqc: eqc-compile
+	@echo "eqc testing: $(RELPKG) ... not implemented yet"
+
+proper: proper-compile
+	@echo "proper testing: $(RELPKG) ... not implemented yet"
+
+doc: compile
+	@echo "edoc generating: $(RELPKG) ..."
+	./rebar doc
 
 build-plt: $(PLT)
 
@@ -70,25 +121,46 @@ dialyze: dialyze-spec
 
 dialyze-spec: build-plt clean compile
 	@echo "dialyzing w/spec: $(RELPKG) ..."
-	find ./lib -wholename "*/meck/test/cover_test_module.beam" -exec rm {} \;
 	dialyzer --plt $(PLT) -Wunmatched_returns -r ./lib | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
 dialyze-nospec: build-plt clean compile
 	@echo "dialyzing w/o spec: $(RELPKG) ..."
-	find ./lib -wholename "*/meck/test/cover_test_module.beam" -exec rm {} \;
 	dialyzer --plt $(PLT) --no_spec -r ./lib | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-eunit: dialyze-eunit-spec
 
-dialyze-eunit-spec: build-plt clean compile
+dialyze-eunit-spec: build-plt clean eunit-compile
 	@echo "dialyzing .eunit w/spec: $(RELPKG) ..."
-	./rebar eunit-compile
 	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
 
-dialyze-eunit-nospec: build-plt clean compile
+dialyze-eunit-nospec: build-plt clean eunit-compile
 	@echo "dialyzing .eunit w/o spec: $(RELPKG) ..."
 	./rebar eunit-compile
+	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+
+dialyze-eqc: dialyze-eqc-spec
+
+dialyze-eqc-spec: build-plt clean eqc-compile
+	@echo "dialyzing .eqc w/spec: $(RELPKG) ..."
+	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
+	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
+
+dialyze-eqc-nospec: build-plt clean eqc-compile
+	@echo "dialyzing .eqc w/o spec: $(RELPKG) ..."
+	./rebar eqc-compile
+	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+
+dialyze-proper: dialyze-proper-spec
+
+dialyze-proper-spec: build-plt clean proper-compile
+	@echo "dialyzing .proper w/spec: $(RELPKG) ..."
+	#TODO dialyzer --plt $(PLT) -Wunmatched_returns -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
+	dialyzer --plt $(PLT) -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_IGNORE_WARN)
+
+dialyze-proper-nospec: build-plt clean proper-compile
+	@echo "dialyzing .proper w/o spec: $(RELPKG) ..."
+	./rebar proper-compile
 	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 ctags:
@@ -142,3 +214,37 @@ $(PLT):
 		tools \
 		webtool \
 		xmerl
+
+otp: otp.git
+	make -C otp.git install
+
+otp.git:
+	rm -rf $(CURDIR)/otp
+	mkdir -p $(CURDIR)/otp
+	git clone git://github.com/erlang/otp.git otp.git
+	(cd otp.git && \
+		git co OTP_R15B && \
+		./otp_build autoconf && \
+		./configure \
+			--disable-hipe \
+			--enable-debug \
+			--enable-kernel-poll \
+			--enable-threads \
+			--enable-dynamic-ssl-lib \
+			--enable-shared-zlib \
+			--enable-smp-support \
+			$(otp_configure_flags) \
+			--prefix=$(CURDIR)/otp)
+	make -C otp.git
+
+otp-debug: otp.git
+	env ERL_TOP=$(PWD)/otp.git make -C ./otp.git/erts/emulator debug FLAVOR=smp
+
+otp-valgrind: otp.git
+	env ERL_TOP=$(PWD)/otp.git make -C ./otp.git/erts/emulator valgrind FLAVOR=smp
+
+cerl-debug: otp.git
+	env ERL_TOP=$(PWD)/otp.git ./otp.git/bin/cerl -debug
+
+cerl-valgrind: otp.git
+	env ERL_TOP=$(PWD)/otp.git ./otp.git/bin/cerl -valgrind
