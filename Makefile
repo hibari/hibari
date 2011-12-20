@@ -35,6 +35,7 @@ endif
 	dialyze-proper dialyze-proper-spec dialyze-proper-nospec \
 	ctags etags \
 	clean realclean distclean \
+	otp_make_release_tests otp_run_release_tests \
 	bootstrap-package check-package package generate
 all: compile
 
@@ -216,13 +217,13 @@ $(PLT):
 		xmerl
 
 otp: otp.git
-	make -C otp.git install
+	make -C $(CURDIR)/otp.git install
 
 otp.git:
 	rm -rf $(CURDIR)/otp
 	mkdir -p $(CURDIR)/otp
 	git clone git://github.com/erlang/otp.git otp.git
-	(cd otp.git && \
+	(cd $(CURDIR)/otp.git && \
 		git co OTP_R15B && \
 		./otp_build autoconf && \
 		./configure \
@@ -235,16 +236,41 @@ otp.git:
 			--enable-smp-support \
 			$(otp_configure_flags) \
 			--prefix=$(CURDIR)/otp)
-	make -C otp.git
+	make -C $(CURDIR)/otp.git
 
 otp-debug: otp.git
-	env ERL_TOP=$(PWD)/otp.git make -C ./otp.git/erts/emulator debug FLAVOR=smp
+	env ERL_TOP=$(CURDIR)/otp.git make -C otp.git/erts/emulator debug FLAVOR=smp
 
 otp-valgrind: otp.git
-	env ERL_TOP=$(PWD)/otp.git make -C ./otp.git/erts/emulator valgrind FLAVOR=smp
+	env ERL_TOP=$(CURDIR)/otp.git make -C otp.git/erts/emulator valgrind FLAVOR=smp
 
 cerl-debug: otp.git
-	env ERL_TOP=$(PWD)/otp.git ./otp.git/bin/cerl -debug
+	env ERL_TOP=$(CURDIR)/otp.git otp.git/bin/cerl -debug
 
 cerl-valgrind: otp.git
-	env ERL_TOP=$(PWD)/otp.git ./otp.git/bin/cerl -valgrind
+	env ERL_TOP=$(CURDIR)/otp.git otp.git/bin/cerl -valgrind
+
+## See https://github.com/erlang/otp/wiki/Running-tests for details
+otp_make_release_tests: otp.git
+	rm -rf otp.git/release/tests
+	env ERL_TOP=$(CURDIR)/otp.git ERL_LIBS=$(CURDIR)/otp.git/lib \
+		make -C otp.git release_tests
+
+otp_run_release_tests: otp_make_release_tests
+	@echo ""
+	@echo "** Warning killing all local beam, beam.smp, and epmd programs **"
+	@echo ""
+	sleep 10
+	killall -q -9 beam || true
+	killall -q -9 beam.smp || true
+	killall -q -9 epmd || true
+	@echo ""
+	@echo "** Open '$(CURDIR)/otp.git/release/tests/test_server/index.html' in your browser**"
+	@echo ""
+	sleep 10
+	(cd $(CURDIR)/otp.git/release/tests/test_server && \
+		env ERL_TOP=$(CURDIR)/otp.git ERL_LIBS=$(CURDIR)/otp.git/lib \
+			$(CURDIR)/otp.git/bin/erl \
+				-s ts install \
+				-s ts run \
+				-s erlang halt)
