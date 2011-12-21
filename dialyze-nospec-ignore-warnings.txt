@@ -19,21 +19,10 @@ brick_ets.erl:3053: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_mboxmon.erl:329: Function start_water_report_loop/3 has no local return
 brick_server.erl:4995: The created fun has no local return
-ebf.erl:29: Callback info about the contract_proto behaviour is not available
 ebf.erl:44: Function encode/1 has no local return
 ebf.erl:55: Function decode/1 has no local return
 ebf.erl:59: Function decode/2 has no local return
 ebf.erl:68: Function decode_init/0 has no local return
 ebf.erl:72: Function decode_init/1 has no local return
-ebf_driver.erl:34: Callback info about the contract_driver behaviour is not available
-ftbf.erl:3: Callback info about the contract_proto behaviour is not available
-ftbf_driver.erl:5: Callback info about the contract_driver behaviour is not available
-jsf.erl:118: Callback info about the contract_proto behaviour is not available
-jsf_driver.erl:5: Callback info about the contract_driver behaviour is not available
 meck.erl:621: Function invalidate_and_raise/6 has no local return
 meck.erl:644: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
-tbf.erl:257: Callback info about the contract_proto behaviour is not available
-tbf_driver.erl:5: Callback info about the contract_driver behaviour is not available
-ubf.erl:40: Callback info about the contract_proto behaviour is not available
-ubf_driver.erl:27: Callback info about the contract_driver behaviour is not available
-ubf_thrift_plugin.erl:7: Callback info about the ubf_plugin_stateless behaviour is not available

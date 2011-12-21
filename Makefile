@@ -37,6 +37,7 @@ endif
 	clean realclean distclean \
 	otp_make_release_tests otp_run_release_tests \
 	bootstrap-package check-package package generate
+
 all: compile
 
 test: eunit
@@ -126,7 +127,7 @@ dialyze-spec: build-plt clean compile
 
 dialyze-nospec: build-plt clean compile
 	@echo "dialyzing w/o spec: $(RELPKG) ..."
-	dialyzer --plt $(PLT) --no_spec -r ./lib | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+	dialyzer --plt $(PLT) --no_spec -Wno_undefined_callbacks -r ./lib | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-eunit: dialyze-eunit-spec
 
@@ -138,7 +139,7 @@ dialyze-eunit-spec: build-plt clean eunit-compile
 dialyze-eunit-nospec: build-plt clean eunit-compile
 	@echo "dialyzing .eunit w/o spec: $(RELPKG) ..."
 	./rebar eunit-compile
-	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+	dialyzer --plt $(PLT) --no_spec -Wno_undefined_callbacks -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-eqc: dialyze-eqc-spec
 
@@ -150,7 +151,7 @@ dialyze-eqc-spec: build-plt clean eqc-compile
 dialyze-eqc-nospec: build-plt clean eqc-compile
 	@echo "dialyzing .eqc w/o spec: $(RELPKG) ..."
 	./rebar eqc-compile
-	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+	dialyzer --plt $(PLT) --no_spec -Wno_undefined_callbacks -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 dialyze-proper: dialyze-proper-spec
 
@@ -162,7 +163,7 @@ dialyze-proper-spec: build-plt clean proper-compile
 dialyze-proper-nospec: build-plt clean proper-compile
 	@echo "dialyzing .proper w/o spec: $(RELPKG) ..."
 	./rebar proper-compile
-	dialyzer --plt $(PLT) --no_spec -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
+	dialyzer --plt $(PLT) --no_spec -Wno_undefined_callbacks -r `find ./lib -name .eunit -print | xargs echo` | fgrep -v -f $(DIALYZE_NOSPEC_IGNORE_WARN)
 
 ctags:
 	find ./lib -name "*.[he]rl" -print | fgrep -v .eunit | ctags -
