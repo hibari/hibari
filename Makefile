@@ -49,7 +49,7 @@ bootstrap-package: package
 	@mkdir ./tmp
 	tar -C ./tmp -xzf ../$(RELTGZ)
 	./tmp/hibari/bin/hibari start
-	@sleep 5
+	@sleep 10
 	./tmp/hibari/bin/hibari-admin bootstrap
 	@sleep 1
 
