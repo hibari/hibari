@@ -14,9 +14,15 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
 
+# Hibari Mailing Lists
+
+- [Google Group **hibaridb-users** for English Speakers](http://groups.google.com/forum/#!forum/hibaridb-users)
+- [Google Group **hibaridb-users-ja** for Japanese Speakers](http://groups.google.com/forum/#!forum/hibaridb-users-ja)
+
+
 # Roadmap
 
-Short-term roadmap.
+Short-term roadmap
 
 ## v0.1 series (unstable)
 
@@ -24,11 +30,11 @@ Short-term roadmap.
   * Minor bug fixes
   * Update for Erlang/OTP R15
   * Support for building on Ubuntu, including ARMv7 architecture
-  * Move S3 and JSON-RPC components out from Hibari destribution
+  * Move S3 and JSON-RPC components out from Hibari distribution
     (remove from the `repo` manifests.)
-    ** S3 and JSON-RPC will become separate projects and will use
-       `rebar` to manage dependencies. (Hibari will continue to use
-       `repo`)
+    + S3 and JSON-RPC will become separate projects and will use
+      `rebar` to manage dependencies. (Hibari will continue to use
+      `repo`)
 
 
 ## v0.5 series (unstable)
@@ -56,7 +62,7 @@ Short-term roadmap.
 
 - MapReduce (mruby?)
 - SNMP support
-- LETS (Google LevelDB) or HanoiDB for an altertaitve key storage
+- LETS (Google LevelDB) or HanoiDB for an alternative key storage
 - Scavenger enhancements
 
 
