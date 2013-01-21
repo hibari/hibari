@@ -64,6 +64,7 @@ Short-term roadmap
 - LETS (Google LevelDB) or HanoiDB as an alternative key storage for
   optimizing RAM usage
 - Scavenger enhancements
+- Big writes/reads (`append` and `partial_read`)
 
 
 _EOF_
