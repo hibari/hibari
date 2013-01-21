@@ -31,10 +31,9 @@ Short-term roadmap
   * Update for Erlang/OTP R15
   * Support for building on Ubuntu, including ARMv7 architecture
   * Move S3 and JSON-RPC components out from Hibari distribution
-    (remove from the `repo` manifests.)
-    + S3 and JSON-RPC will become separate projects and will use
-      `rebar` to manage dependencies. (Hibari will continue to use
-      `repo`)
+    (remove from the `repo` manifests.)  S3 and JSON-RPC will become
+    separate projects and will use `rebar` to manage
+    dependencies. (Hibari will continue to use `repo`)
 
 
 ## v0.5 series (unstable)
@@ -62,7 +61,8 @@ Short-term roadmap
 
 - MapReduce (mruby?)
 - SNMP support
-- LETS (Google LevelDB) or HanoiDB for an alternative key storage
+- LETS (Google LevelDB) or HanoiDB as an alternative key storage for
+  optimizing RAM usage
 - Scavenger enhancements
 
 
