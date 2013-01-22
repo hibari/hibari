@@ -1,0 +1,22 @@
+
+v0.1.10
+
+This is a maintenance release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- N/A
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- EUnit fixes
+
+--- OTHERS --------------------------------------------------------------
+
+- GH1 (manifest/hibari/gdss-ubf-proto): Move S3 and JSON-RPC out from
+  Hibari main project
+- Updates for Erlang R15B
+- Add README with mailing list addresses and a short-term roadmap
+
+
+_EOF_
