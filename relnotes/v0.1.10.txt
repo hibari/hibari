@@ -5,10 +5,13 @@ This is a maintenance release for Hibari.
 
 --- FIXES ---------------------------------------------------------------
 
-- N/A
+- None (no bug has found in this period)
 
 --- ENHANCEMENTS --------------------------------------------------------
 
+- Fix minor issues for building Hibari on Ubuntu (for both x86_64 and
+  ARMv7 architectures). Now Hibari can run on ARMv7 machines from
+  BeagleBone to Calxeda EnergyCore server-class SoC.
 - EUnit fixes
 
 --- OTHERS --------------------------------------------------------------
