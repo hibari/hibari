@@ -26,7 +26,7 @@ endif
 .PHONY: all test \
 	compile compile-eqc compile-proper \
 	eunit-compile eqc-compile proper-compile \
-	eunit eunit-core eunit-thrift eunit-s3 eunit-json \
+	eunit eunit-core eunit-thrift \
 	eqc proper \
 	doc \
 	build-plt check-plt \
@@ -109,19 +109,11 @@ eunit: eunit-compile
 
 eunit-core: eunit-compile
 	@echo "eunit testing (core): $(RELPKG) ..."
-	./rebar eunit skip_apps='meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf,gdss_json_rpc_proto,ubf_jsonrpc,mochiweb,gdss_s3_proto,s3'
+	./rebar eunit skip_apps='meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf'
 
 eunit-thrift: eunit-compile
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown,gdss_json_rpc_proto,ubf_jsonrpc,mochiweb,gdss_s3_proto,s3'
-
-eunit-s3: eunit-compile
-	@echo "eunit testing (s3): $(RELPKG) ..."
-	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf,gdss_json_rpc_proto,ubf_jsonrpc,mochiweb'
-
-eunit-json: eunit-compile
-	@echo "eunit testing (json-rpc): $(RELPKG) ..."
-	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,gdss_s3_proto,s3'
+	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
 
 eqc: eqc-compile
 	@echo "eqc testing: $(RELPKG) ... not implemented yet"
