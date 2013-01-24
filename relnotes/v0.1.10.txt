@@ -5,13 +5,14 @@ This is a maintenance release for Hibari.
 
 --- FIXES ---------------------------------------------------------------
 
-- None (no bug has found in this period)
+- Python EBF Client - Turn on TCP_NODELAY to avoid performance problem
 
 --- ENHANCEMENTS --------------------------------------------------------
 
 - Fix minor issues for building Hibari on Ubuntu (for both x86_64 and
   ARMv7 architectures). Now Hibari can run on ARMv7 machines from
   BeagleBone to Calxeda EnergyCore server-class SoC.
+- Conditionally enable mnesia partition detector
 - EUnit fixes
 
 --- OTHERS --------------------------------------------------------------
