@@ -18,15 +18,25 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
 
-# Hibari Mailing Lists
+# Mailing Lists
 
 - [Google Group **hibaridb-users** for English Speakers](http://groups.google.com/forum/#!forum/hibaridb-users)
 - [Google Group **hibaridb-users-ja** for Japanese Speakers](http://groups.google.com/forum/#!forum/hibaridb-users-ja)
 
 
+# Hibari Clients
+
+As of Hibari v0.1 (since year 2010), only the native Erlang client has
+been used in production. All other client APIs (Thrift, JSON-RPC, UBF,
+and S3) are still in proof of concept stage and only implement the
+basic operations.
+
+Hibari v0.5 will have a full-featured Thrift client.
+
+
 # Roadmap
 
-Short-term roadmap
+Short-term roadmap (as of January 2013)
 
 ## v0.1 series (unstable)
 
@@ -48,6 +58,7 @@ Short-term roadmap
   * Server-side timestamp and rename (Server-side timestamp is
     required by Thrift API)
   * Server-side counter
+  * The latest external libraries (ubf, ubf-thrift, riak-err)
   * Basho Bench driver
 
 
@@ -72,6 +83,30 @@ Short-term roadmap
   optimizing RAM usage
 - Scavenger enhancements
 - Big writes/reads (`append` to a value and `partial_read` from a value)
+
+
+## License
+
+Copyright (c) 2005-2013 Hibari developers.  All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+## Note for License
+
+Hibari has decided to display "Hibari developers" as the copyright
+name in the source code files and manuals. Actual copyright holder
+names (contributors) will be listed in the AUTHORS file.
 
 
 _EOF_
