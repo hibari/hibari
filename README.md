@@ -55,6 +55,7 @@ Short-term roadmap (as of January 2013)
 - v0.5
   * A complete Thrift API (`do`, `get_many`, and `testset` flag for
     `set` and `replace`)
+  * More `hibari-admin` commands (e.g. control and monitor scavenger)
   * Server-side timestamp and rename (Server-side timestamp is
     required by Thrift API)
   * Server-side counter
