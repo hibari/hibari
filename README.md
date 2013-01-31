@@ -1,5 +1,7 @@
-Welcome to Hibari. Hibari is a production-ready, distributed,
-key-value, NOSQL database. Hibari uses chain replication for strong
+# Welcome to Hibari
+
+Hibari is a production-ready, distributed, key-value, big-data
+store (NOSQL database).  Hibari uses chain replication for strong
 consistency, high-availability, and durability. Hibari has excellent
 performance especially for read and large value operations.
 
