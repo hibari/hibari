@@ -7,7 +7,7 @@ performance especially for read and large value operations.
 
 **Product Info** (Cloudian, Inc.)
 
-- [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
+- [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF format, 558KB)
 - [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
 
 
@@ -29,12 +29,14 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
+They are a bit outdated. Documentation rework is planned for Hibari
+v0.6.
+
 
 # Mailing Lists
 
 - [Google Group **hibaridb-users** for English Speakers](http://groups.google.com/forum/#!forum/hibaridb-users)
 - [Google Group **hibaridb-users-ja** for Japanese Speakers](http://groups.google.com/forum/#!forum/hibaridb-users-ja)
-
 
 # Hibari Clients
 
@@ -68,7 +70,7 @@ Short-term roadmap (as of February 2013)
   * A complete Thrift API (`do`, `get_many`, and `testset` flag for
     `set` and `replace`)
   * More `hibari-admin` commands (e.g. control and monitor scavenger)
-  * Delete table operation
+  * Delete table operation, which is missing in v0.1 series
   * Server-side timestamp and rename (Server-side timestamp is
     required by Thrift API)
   * Server-side counter
@@ -119,8 +121,8 @@ limitations under the License.
 ## Note for License
 
 Hibari has decided to display "Hibari developers" as the copyright
-name in the source code files and manuals. Actual copyright holder
-names (contributors) will be listed in the AUTHORS file.
+holder name in the source code files and manuals. Actual copyright
+holder names (contributors) will be listed in the AUTHORS file.
 
 
 _EOF_
