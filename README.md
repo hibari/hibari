@@ -17,6 +17,10 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
+- Product Info (Cloudian, Inc.)
+  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) PDF Format, 558KB
+  * [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
+
 
 # Mailing Lists
 
