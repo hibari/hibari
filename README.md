@@ -1,7 +1,16 @@
 Welcome to Hibari. Hibari is a production-ready, distributed,
-key-value, big data store. Hibari uses chain replication for strong
+key-value, NOSQL database. Hibari uses chain replication for strong
 consistency, high-availability, and durability. Hibari has excellent
 performance especially for read and large value operations.
+
+- Product Info (Cloudian, Inc.)
+  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
+  * [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
+
+
+# News
+
+- Feb 4, 2013 - Hibari v0.1.10 Released. [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
 
 
 # Quick Start
@@ -17,10 +26,6 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
-- Product Info (Cloudian, Inc.)
-  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
-  * [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
-
 
 # Mailing Lists
 
@@ -30,9 +35,9 @@ Please read Getting Started section of Hibari Application Developer Guide.
 
 # Hibari Clients
 
-As of Hibari v0.1 (since year 2010), only the native Erlang client has
-been used in production. All other client APIs (Thrift, JSON-RPC, UBF,
-and S3) are still in proof of concept stage and only implement basic
+As of Hibari v0.1 (since year 2010), only the native Erlang client is
+used in production. All other client APIs (Thrift, JSON-RPC, UBF, and
+S3) are still in proof of concept stage and only implement basic
 operations.
 
 Hibari v0.5 will have a full-featured Thrift client.
