@@ -3,9 +3,10 @@ key-value, NOSQL database. Hibari uses chain replication for strong
 consistency, high-availability, and durability. Hibari has excellent
 performance especially for read and large value operations.
 
-- Product Info (Cloudian, Inc.)
-  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
-  * [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
+**Product Info** (Cloudian, Inc.)
+
+- [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
+- [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
 
 
 # News
