@@ -18,7 +18,7 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
 - Product Info (Cloudian, Inc.)
-  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) PDF Format, 558KB
+  * [Hibari White Paper](http://www.cloudian.com/cloud-storage-products/white-papers/2011-08-Hibari-Whitepaper.pdf) (PDF Format, 558KB)
   * [Hibari NOSQL Database (Japanese)](http://www.cloudian.jp/technologies/hibari-nosql-database.html)
 
 
@@ -32,15 +32,15 @@ Please read Getting Started section of Hibari Application Developer Guide.
 
 As of Hibari v0.1 (since year 2010), only the native Erlang client has
 been used in production. All other client APIs (Thrift, JSON-RPC, UBF,
-and S3) are still in proof of concept stage and only implement the
-basic operations.
+and S3) are still in proof of concept stage and only implement basic
+operations.
 
 Hibari v0.5 will have a full-featured Thrift client.
 
 
 # Roadmap
 
-Short-term roadmap (as of January 2013)
+Short-term roadmap (as of February 2013)
 
 ## v0.1 series (unstable)
 
