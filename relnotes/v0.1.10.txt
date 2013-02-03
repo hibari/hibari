@@ -1,0 +1,31 @@
+
+v0.1.10 - February 2013
+
+This is a maintenance release for Hibari.
+
+--- FIXES ---------------------------------------------------------------
+
+- Python EBF Client - Turn on TCP_NODELAY to avoid poor performance
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- Fix minor issues for building Hibari on Ubuntu (for both x86_64 and
+  ARMv7 architectures).  Now Hibari will run on ARMv7 machines from
+  BeagleBone embedded device to Calxeda EnergyCore(*1) server-class SoC.
+- Conditionally enable mnesia partition detector
+- EUnit fixes
+
+--- OTHERS --------------------------------------------------------------
+
+- GH1 (manifest/hibari/gdss-ubf-proto): Remove S3 and JSON-RPC from
+  Hibari main project
+- Updates for Erlang R15B
+- Add README with mailing list addresses and a short-term roadmap
+- Change the copyright holder name from Gemini Mobile Technologies to
+  "Hibari developers"
+
+---
+*1 Not tested on this platform at the release timing. Tests are
+   scheduled in Q1 2013.
+
+_EOF_

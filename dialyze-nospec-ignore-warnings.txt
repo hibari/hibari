@@ -14,17 +14,15 @@ leexinc.hrl:243: The pattern <Rest, Line, {'token', _T, Push}, Error> can never 
 leexinc.hrl:248: The pattern <Rest, Line, {'end_token', _T, Push}, Error> can never match the type <_,_,'error' | 'skip_token',_>
 leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never match the type <_,_,'error',_>
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
-yeccpre.hrl:49: Function return_error/2 will never be called
-brick_admin.erl:1315: Function bootstrap_scan_loop/0 has no local return
-brick_admin.erl:1327: Function bootstrap_scan_loop2/0 has no local return
 brick_chainmon.erl:1096: The created fun has no local return
 brick_ets.erl:3053: The created fun has no local return
-brick_itimer.erl:213: Function start_interval_loop/1 has no local return
-brick_itimer.erl:219: Function interval_loop/1 has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_mboxmon.erl:329: Function start_water_report_loop/3 has no local return
 brick_server.erl:4995: The created fun has no local return
-ebf.erl:21: Function encode/1 has no local return
-ebf.erl:32: Function decode/1 has no local return
-ebf.erl:36: Function decode/2 has no local return
-meck.erl:450: Function invalidate_and_raise/5 has no local return
+ebf.erl:44: Function encode/1 has no local return
+ebf.erl:55: Function decode/1 has no local return
+ebf.erl:59: Function decode/2 has no local return
+ebf.erl:68: Function decode_init/0 has no local return
+ebf.erl:72: Function decode_init/1 has no local return
+meck.erl:621: Function invalidate_and_raise/6 has no local return
+meck.erl:644: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>

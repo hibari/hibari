@@ -14,9 +14,12 @@ leexinc.hrl:243: The pattern <Rest, Line, {'token', _T, Push}, Error> can never 
 leexinc.hrl:248: The pattern <Rest, Line, {'end_token', _T, Push}, Error> can never match the type <_,_,'error' | 'skip_token',_>
 leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never match the type <_,_,'error',_>
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
-yeccpre.hrl:49: Function return_error/2 will never be called
 brick_chainmon.erl:1096: The created fun has no local return
 brick_ets.erl:3053: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_server.erl:4995: The created fun has no local return
+meck.erl:644: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
+partition_detector_sup.erl:32: The return type {'ok',_} in the specification of init/1 is not a subtype of 'ignore' | {'ok',{{'one_for_all',non_neg_integer(),non_neg_integer()} | {'one_for_one',non_neg_integer(),non_neg_integer()} | {'rest_for_one',non_neg_integer(),non_neg_integer()} | {'simple_one_for_one',non_neg_integer(),non_neg_integer()},[{_,{atom() | tuple(),atom(),'undefined' | [any()]},'permanent' | 'temporary' | 'transient','brutal_kill' | 'infinity' | non_neg_integer(),'supervisor' | 'worker','dynamic' | [atom() | tuple()]}]}}, which is the expected return type for the callback of supervisor behaviour
 riak_err_handler.erl:161: Expression produces a value of type 'ok' | {'error',atom()}, but this value is unmatched
+riak_err_monitor.erl:84: The specified type for the 2nd argument of handle_call/3 (reference()) is not a supertype of {pid(),_}, which is expected type for this argument in the callback of the gen_server behaviour
+riak_err_sup.erl:39: The return type {'ok',{{'one_for_one',1000,3600},[tuple()]}} in the specification of init/1 is not a subtype of 'ignore' | {'ok',{{'one_for_all',non_neg_integer(),non_neg_integer()} | {'one_for_one',non_neg_integer(),non_neg_integer()} | {'rest_for_one',non_neg_integer(),non_neg_integer()} | {'simple_one_for_one',non_neg_integer(),non_neg_integer()},[{_,{atom() | tuple(),atom(),'undefined' | [any()]},'permanent' | 'temporary' | 'transient','brutal_kill' | 'infinity' | non_neg_integer(),'supervisor' | 'worker','dynamic' | [atom() | tuple()]}]}}, which is the expected return type for the callback of supervisor behaviour

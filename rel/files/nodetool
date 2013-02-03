@@ -11,6 +11,28 @@ main(Args) ->
     %% Extract the args
     {RestArgs, TargetNode} = process_args(Args, [], undefined),
 
+    %% process_args() has side-effects (e.g. when processing "-name"),
+    %% so take care of app-starting business first.
+    [application:start(App) || App <- [crypto, public_key, ssl]],
+
+    %% any commands that don't need a running node
+    case RestArgs of
+        ["chkconfig", File] ->
+            case file:consult(File) of
+                {ok, _} ->
+                    io:format("ok\n"),
+                    halt(0);
+                {error, {Line, Mod, Term}} ->
+                    io:format(["Error on line ", file:format_error({Line, Mod, Term}), "\n"]),
+                    halt(1);
+                {error, R} ->
+                    io:format(["Error reading config file: ", file:format_error(R), "\n"]),
+                    halt(1)
+            end;
+        _ ->
+            ok
+    end,
+
     %% See if the node is currently running  -- if it's not, we'll bail
     case {net_kernel:hidden_connect_node(TargetNode), net_adm:ping(TargetNode)} of
         {true, pong} ->
@@ -46,6 +68,16 @@ main(Args) ->
                 _ ->
                     halt(1)
             end;
+        ["rpc_infinity", Module, Function | RpcArgs] ->
+            case rpc:call(TargetNode, list_to_atom(Module), list_to_atom(Function), [RpcArgs], infinity) of
+                ok ->
+                    ok;
+                {badrpc, Reason} ->
+                    io:format("RPC to ~p failed: ~p\n", [TargetNode, Reason]),
+                    halt(1);
+                _ ->
+                    halt(1)
+            end;
         ["rpcterms", Module, Function, ArgsAsString] ->
             case rpc:call(TargetNode, list_to_atom(Module), list_to_atom(Function),
                           consult(ArgsAsString), 60000) of
@@ -57,7 +89,7 @@ main(Args) ->
             end;
         Other ->
             io:format("Other: ~p\n", [Other]),
-            io:format("Usage: nodetool {ping|stop|restart|reboot}\n")
+            io:format("Usage: nodetool {ping|stop|restart|reboot|chkconfig}\n")
     end,
     net_kernel:stop().
 

@@ -2,7 +2,7 @@
 %% ex: ft=erlang ts=4 sw=4 et
 
 %%%-------------------------------------------------------------------
-%%% Copyright (c) 2008-2011 Gemini Mobile Technologies, Inc.  All rights reserved.
+%%% Copyright (c) 2008-2013 Hibari developers.  All rights reserved.
 %%%
 %%% Licensed under the Apache License, Version 2.0 (the "License");
 %%% you may not use this file except in compliance with the License.
@@ -24,6 +24,28 @@ main(Args) ->
     ok = start_epmd(),
     %% Extract the args
     {RestArgs, TargetNode} = process_args(Args, [], undefined),
+
+    %% process_args() has side-effects (e.g. when processing "-name"),
+    %% so take care of app-starting business first.
+    [application:start(App) || App <- [crypto, public_key, ssl]],
+
+    %% any commands that don't need a running node
+    case RestArgs of
+        ["chkconfig", File] ->
+            case file:consult(File) of
+                {ok, _} ->
+                    io:format("ok\n"),
+                    halt(0);
+                {error, {Line, Mod, Term}} ->
+                    io:format(["Error on line ", file:format_error({Line, Mod, Term}), "\n"]),
+                    halt(1);
+                {error, R} ->
+                    io:format(["Error reading config file: ", file:format_error(R), "\n"]),
+                    halt(1)
+            end;
+        _ ->
+            ok
+    end,
 
     ok = ping_node(TargetNode),
 
@@ -105,6 +127,16 @@ main(Args) ->
         ["rpc", Module, Function | RpcArgs] ->
             case rpc:call(TargetNode, list_to_atom(Module), list_to_atom(Function),
                           [RpcArgs], 60000) of
+                ok ->
+                    ok;
+                {badrpc, Reason} ->
+                    io:format("RPC to ~p failed: ~p\n", [TargetNode, Reason]),
+                    halt(1);
+                _ ->
+                    halt(1)
+            end;
+        ["rpc_infinity", Module, Function | RpcArgs] ->
+            case rpc:call(TargetNode, list_to_atom(Module), list_to_atom(Function), [RpcArgs], infinity) of
                 ok ->
                     ok;
                 {badrpc, Reason} ->
