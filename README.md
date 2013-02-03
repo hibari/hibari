@@ -69,12 +69,14 @@ Short-term roadmap (as of February 2013)
 - v0.5
   * A complete Thrift API (`do`, `get_many`, and `testset` flag for
     `set` and `replace`)
-  * More `hibari-admin` commands (e.g. control and monitor scavenger)
+  * More `hibari` and `hibari-admin` commands (e.g. control and
+    monitor scavenger)
   * Delete table operation, which is missing in v0.1 series
   * Server-side timestamp and rename (Server-side timestamp is
     required by Thrift API)
   * Server-side counter
   * The latest external libraries (ubf, ubf-thrift, riak-err)
+  * Update for Erlang/OTP R16
   * Basho Bench driver
 
 
