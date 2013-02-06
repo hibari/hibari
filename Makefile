@@ -13,6 +13,8 @@ PLT=$(HOME)/.dialyzer_plt.$(OTPREL)
 DIALYZE_IGNORE_WARN?=dialyze-ignore-warnings.txt
 DIALYZE_NOSPEC_IGNORE_WARN?=dialyze-nospec-ignore-warnings.txt
 
+REBAR?=./rebar
+
 ifeq ($(shell uname -s),Darwin)
 	ifeq ($(shell uname -m),x86_64)
 		otp_configure_flags= --enable-darwin-64bit
@@ -81,49 +83,57 @@ generate: clean compile
 
 compile:
 	@echo "compiling: $(RELPKG) ..."
-	./rebar compile
+	$(REBAR) compile
 
-compile-eqc:
-	@echo "compiling-eqc: $(RELPKG) ..."
-	./rebar compile -D QC -D QC_EQC
+test: eunit
 
-compile-proper:
-	@echo "compiling-proper: $(RELPKG) ..."
-	./rebar compile -D QC -D QC_PROPER
+# eunit-and-some-eqc: clean compile-for-eqc
+# 	@echo "eunit and some eqc testing: $(RELPKG) ..."
+# 	$(REBAR) eunit skip_apps='meck,asciiedoc,edown,ubf,ubf_thrift'
 
-eunit-compile: compile
-	@echo "eunit test compiling: $(RELPKG) ..."
-	./rebar eunit-compile
-
-eqc-compile: compile-eqc
-	@echo "eqc test compiling: $(RELPKG) ..."
-	./rebar eunit-compile -D QC -D QC_EQC
-
-proper-compile: compile-proper
-	@echo "proper test compiling: $(RELPKG) ..."
-	./rebar eunit-compile -D QC -D QC_PROPER
-
-eunit: eunit-compile
+eunit: compile-for-eunit
 	@echo "eunit testing: $(RELPKG) ..."
-	./rebar eunit skip_apps=meck
+	$(REBAR) eunit skip_apps='meck,asciiedoc,edown'
 
-eunit-core: eunit-compile
+eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	./rebar eunit skip_apps='meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf'
+	$(REBAR) eunit skip_apps='meck,asciiedoc,edown,ubf,gdss_ubf_proto,ubf_thrift,ubf'
 
-eunit-thrift: eunit-compile
+eunit-thrift: compile-for-euint
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
+	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
 
-eqc: eqc-compile
-	@echo "eqc testing: $(RELPKG) ... not implemented yet"
+eqc: compile-for-eqc
+	@echo "eqc testing: $(RELPKG) ..."
+	$(REBAR) eqc qc_opts=3000 skip_apps='meck,ubf,ubf_thrift'
 
-proper: proper-compile
-	@echo "proper testing: $(RELPKG) ... not implemented yet"
+proper: compile-for-proper
+	@echo "proper testing: $(RELPKG) ..."
+	$(REBAR) proper skip_apps='meck,ubf,ubf_thrift'
+
+triq: compile-for-triq
+	@echo "triq testing: $(RELPKG) ..."
+	$(REBAR) triq skip_apps='meck,ubf,ubf_thrift'
+
+compile-for-eunit:
+	@echo "compiling-eunit: $(RELPKG) ..."
+	$(REBAR) compile eunit compile_only=true
+
+compile-for-eqc:
+	@echo "compiling-eqc: $(RELPKG) ..."
+	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true
+
+compile-for-proper:
+	@echo "compiling-proper: $(RELPKG) ..."
+	$(REBAR) -D QC -D QC_PROPER compile eqc compile_only=true
+
+compile-for-triq:
+	@echo "compiling-triq: $(RELPKG) ..."
+	$(REBAR) -D QC -D QC_TRIQ compile triq compile_only=true
 
 doc: compile
 	@echo "edoc generating: $(RELPKG) ..."
-	./rebar doc
+	$(REBAR) doc
 
 build-plt: $(PLT)
 
@@ -190,7 +200,7 @@ etags:
 
 clean:
 	@echo "cleaning: $(RELPKG) ..."
-	./rebar clean
+	$(REBAR) clean
 
 realclean: clean
 	@echo "realcleaning: $(RELPKG) ..."
