@@ -48,6 +48,21 @@ operations.
 Hibari v0.5 will have a full-featured Thrift client.
 
 
+# Supported Platforms
+
+Hibari is written in 100% Erlang/OTP.
+
+- **Linux x86_64**
+  * RHEL / CentOS 5 and 6, Fedora 14 or newer
+  * Ubuntu 12.04 LTS or newer
+
+- **Linux ARMv7**
+  * Ubuntu 12.04 LTS or newer
+
+- **Unix Solaris variants**
+  * Joyent SmartOS (64 bit), will be supported from Hibari v0.3
+
+
 # Roadmap
 
 Short-term roadmap (as of February 2013)
@@ -56,9 +71,10 @@ Short-term roadmap (as of February 2013)
 
 Hibari v0.1.x are very early releases after forking proprietary Gemini
 Distributed Storage Service (GDSS). GDSS is a rock-solid key-value
-store and it has used in Tier 1 telecom sector since 2010. However
-GDSS only has native Erlang client in production and also requires to
-write Erlang codes to do basic system administration tasks.
+store and it has been used in production in Tier 1 telecommute sector
+since 2010. However GDSS only has a native Erlang client and also
+requires to write Erlang codes to do basic system administration
+tasks.
 
 Hibari v0.1.x releases contain bug fixes, updates for recent
 Erlang/OTP releases (R14 and R15), prototype implementations for
@@ -66,6 +82,9 @@ non-Erlang client APIs, and Linux shell scripts to perform some of the
 basic system administration tasks.
 
 These v0.1.x releases are considered **unstable**.
+
+- **v0.1** - Released on July 13, 2010
+  * First public release of Hibari
 
 - **v0.1.10** - Released on Feb 4, 2013
   * Minor bug fixes
@@ -80,25 +99,25 @@ These v0.1.x releases are considered **unstable**.
 ## v0.3 series (unstable)
 
 Hibari v0.3 series will have some client API changes as well as having
-Erlang sample client codes and Basho Bench driver.
+sample Erlang client codes and a Basho Bench driver.
 
 These v0.3.x releases will be considered **unstable**.
 
 - **v0.3.0**
   * **Client API changes - Server Side Timestamp**. brick_server will
-    generate the timestamp for a key-value instead of client. This
-    will change the return values from `add`, `replace`, and `set`
-    operations.
-    Link to [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
-    Link to [GitHub Issue](https://github.com/hibari/gdss-client/issues/2)
+    generate the timestamp for a key-value by default instead of
+    client. In addition, return values from `add`, `replace`, and
+    `set` operations will contain the generated timestamp.
+    Link to [**Updated Documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
+    Link to [**GitHub Issue**](https://github.com/hibari/gdss-client/issues/2)
   * **New Client API - Server Side Rename**.
-    Link to [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
-    Link to [GitHub Issue](https://github.com/hibari/gdss-brick/issues/2)
+    Link to [**Updated Documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
+    Link to [**GitHub Issue**](https://github.com/hibari/gdss-brick/issues/2)
   * [Basho/Lager](https://github.com/basho/lager) as the primary logging facility. [GitHub Issue](https://github.com/hibari/hibari/issues/19)
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
-  * Support for building and running on Joyent SmartOS (illmos based
-    OpenSolaris variant)
+  * Support for building and running on Joyent SmartOS (illumos based
+    Solaris variant armed with ZFS, DTrace, Zones and KVM)
   * Sample codes for Erlang native client (`brick_simple`)
   * Basho Bench driver
 
@@ -115,14 +134,14 @@ These v0.5.x releases will be considered **unstable**.
     for `set` and `replace`)
   * More `hibari` and `hibari-admin` commands (e.g. control and
     monitor scavenger)
-  * Delete table operation, which is missing in v0.1 series
+  * Delete table operation, which is missing in earlier series
   * Server-side counter
 
 
 ## v0.6 series (stable)
 
 Hibari v0.6 series will be considered **stable**. These releases will
-have source code package and Opscode Chef cookbook for easier build
+have source code package and Opscode Chef cookbooks for easier build
 and deployment. They will also have major documentation updates and
 more test cases.
 
