@@ -18,7 +18,8 @@ performance especially for read and large value operations.
 
 # Quick Start
 
-Please read Getting Started section of Hibari Application Developer Guide.
+Please read **Getting Started** section of Hibari Application
+Developer Guide.
 
 - [English Version](http://hibari.github.com/hibari-doc/hibari-app-developer-guide.en.html#getting-started)
 - [Japanese Version](http://hibari.github.com/hibari-doc/hibari-app-developer-guide.ja.html#getting-started)
@@ -29,7 +30,7 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
-They are a bit **outdated**, sorry, but documentation rework is
+They are a bit **outdated** -- sorry, but documentation rework is
 planned for Hibari v0.6.
 
 
@@ -53,7 +54,7 @@ Hibari v0.5 will have a full-featured Thrift client.
 Hibari is written in 100% Erlang/OTP.
 
 - **Linux x86_64**
-  * RHEL / CentOS 5 and 6, Fedora 14 or newer
+  * RHEL/CentOS 5.x and 6.x
   * Ubuntu 12.04 LTS or newer
 
 - **Linux ARMv7**
@@ -71,9 +72,9 @@ Short-term roadmap (as of February 2013)
 
 Hibari v0.1.x are very early releases after forking proprietary Gemini
 Distributed Storage Service (GDSS). GDSS is a rock-solid key-value
-store and it has been used in production in Tier 1 telecommute sector
+store and it has been used in production in Tier 1 telecom sector
 since 2010. However GDSS only has a native Erlang client and also
-requires to write Erlang codes to do basic system administration
+requires to write Erlang codes to perform basic system administration
 tasks.
 
 Hibari v0.1.x releases contain bug fixes, updates for recent
@@ -84,7 +85,7 @@ basic system administration tasks.
 These v0.1.x releases are considered **unstable**.
 
 - **v0.1** - Released on July 13, 2010
-  * First public release of Hibari
+  * First public, open source release of Hibari
 
 - **v0.1.10** - Released on Feb 4, 2013
   * Minor bug fixes
@@ -99,7 +100,8 @@ These v0.1.x releases are considered **unstable**.
 ## v0.3 series (unstable)
 
 Hibari v0.3 series will have some client API changes as well as having
-sample Erlang client codes and a Basho Bench driver.
+sample Erlang client codes and a Basho Bench driver. It will also
+start to support deploying on Joyent SmartOS.
 
 These v0.3.x releases will be considered **unstable**.
 
@@ -141,9 +143,9 @@ These v0.5.x releases will be considered **unstable**.
 ## v0.6 series (stable)
 
 Hibari v0.6 series will be considered **stable**. These releases will
-have source code package and Opscode Chef cookbooks for easier build
-and deployment. They will also have major documentation updates and
-more test cases.
+have source code package and Chef cookbooks for easier build and
+deployment. They will also have major documentation updates and more
+test cases.
 
 - **v0.6**
   * **Source code package.** Application developers can build Hibari
