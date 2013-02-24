@@ -1,26 +1,35 @@
 
 v0.3.0 - TBD 2013
 
-This is an unstable major release for Hibari.
+This is an major release for Hibari.
 
 --- NEW FEATURES --------------------------------------------------------
 
-- GH2, GH10 - brick_server new client API - rename (gdss_brick,
-  gdss_client, gdss_admin, gdss_ubf_proto)
-- GH10 - brick_server client API changes - server side timestamp
-  (gdss_brick, gdss_client, gdss_admin, gdss_ubf_proto)
+- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later - *TODO*
+- hibari >> GH19 - Introduce Basho Lager as the primary logging facility - *TODO*
+- gdss-admin >> GH3 - Add an API function to Chain Monitor to get the
+  current best brick of a chain - *TODO*
+- gdss-brick >> GH2 - brick_server new client API - rename
+- gdss-client >> GH2 - brick_simple:{add,set,replace} APIs do not
+  return the server-side timstamp for success
+
 
 --- FIXES ---------------------------------------------------------------
 
-- TBD
+- gdss-brick >> GH11 (CL29834) - squidflash_prime1 could crash hlog
+  common when do_sync is false - *TODO*
+
 
 --- ENHANCEMENTS --------------------------------------------------------
 
-- GH21 (hibari) - Add gmt_elog module again
+*TBD*
 
 
 --- OTHERS --------------------------------------------------------------
 
-- TBD
+- hibari >> GH20 - Remove riak-err - *TODO*
+- hibari >> GH21 - Add gmt_elog module again
+- Introduce qc wrapper
+
 
 _EOF_
