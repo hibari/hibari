@@ -54,7 +54,7 @@ Short-term roadmap (as of February 2013)
 
 ## v0.1 series (unstable)
 
-- v0.1.10
+- v0.1.10 - Released on Feb 4, 2013
   * Minor bug fixes
   * Update for Erlang/OTP R15
   * Support for building on Ubuntu, including ARMv7 architecture
@@ -62,6 +62,15 @@ Short-term roadmap (as of February 2013)
     (remove from the `repo` manifests.)  S3 and JSON-RPC will become
     separate projects and will use `rebar` to manage
     dependencies. (Hibari will continue using `repo`)
+
+
+## v0.3 series (unstable)
+
+- v0.3.0
+  * Server-side timestamp and rename
+  * Update for Erlang/OTP R16
+  * The latest external libraries (ubf, ubf-thrift, riak-err)
+  * Basho Bench driver
 
 
 ## v0.5 series (unstable)
@@ -72,12 +81,7 @@ Short-term roadmap (as of February 2013)
   * More `hibari` and `hibari-admin` commands (e.g. control and
     monitor scavenger)
   * Delete table operation, which is missing in v0.1 series
-  * Server-side timestamp and rename (Server-side timestamp is
-    required by Thrift API)
   * Server-side counter
-  * The latest external libraries (ubf, ubf-thrift, riak-err)
-  * Update for Erlang/OTP R16
-  * Basho Bench driver
 
 
 ## v0.6 series (stable)
@@ -95,7 +99,7 @@ Short-term roadmap (as of February 2013)
 
 ## Unscheduled Features
 
-- MapReduce (mruby?)
+- MapReduce (mruby? or lua?)
 - SNMP support
 - LETS (Google LevelDB) or HanoiDB as an alternative key storage for
   optimizing RAM usage
@@ -103,7 +107,7 @@ Short-term roadmap (as of February 2013)
 - Big writes/reads (`append` to a value and `partial_read` from a value)
 
 
-## License
+# License
 
 Copyright (c) 2005-2013 Hibari developers.  All rights reserved.
 
@@ -120,7 +124,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-## Note for License
+# Note for License
 
 Hibari has decided to display "Hibari developers" as the copyright
 holder name in the source code files and manuals. Actual copyright
