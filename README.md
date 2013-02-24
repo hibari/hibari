@@ -67,7 +67,7 @@ Short-term roadmap (as of February 2013)
 ## v0.3 series (unstable)
 
 - **v0.3.0**
-  * Server-side timestamp and rename
+  * **Client API changes - Server-side timestamp and rename**
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
   * Basho Bench driver
@@ -76,8 +76,8 @@ Short-term roadmap (as of February 2013)
 ## v0.5 series (unstable)
 
 - **v0.5**
-  * A complete Thrift API (`do`, `get_many`, and `testset` flag for
-    `set` and `replace`)
+  * **A complete Thrift API** (`do`, `get_many`, and `testset` flag
+    for `set` and `replace`)
   * More `hibari` and `hibari-admin` commands (e.g. control and
     monitor scavenger)
   * Delete table operation, which is missing in v0.1 series
@@ -87,10 +87,10 @@ Short-term roadmap (as of February 2013)
 ## v0.6 series (stable)
 
 - **v0.6**
-  * Source code package. Application developers can build Hibari
+  * **Source code package.** Application developers can build Hibari
     without `repo` by using this package. (Hibari developers will
     continue using `repo`.)
-  * Documentation rework
+  * **Documentation rework**
   * Sample codes
   * Cookbook for Opscode Chef for automated single-node and multi-node
     deployments
