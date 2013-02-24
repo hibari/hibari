@@ -118,7 +118,7 @@ These v0.3.x releases will be considered **unstable**.
   * [Basho/Lager](https://github.com/basho/lager) as the primary
     logging facility. (Link to [**GitHub issue**](https://github.com/hibari/hibari/issues/19))
   * Update for Erlang/OTP R16
-  * The latest external libraries (ubf, ubf-thrift, riak-err)
+  * The latest external libraries (ubf and ubf-thrift)
   * Support for building and running on Joyent SmartOS (illumos based
     Solaris variant armed with ZFS, DTrace, Zones and KVM)
   * Sample codes for Erlang native client (`brick_simple`)
