@@ -29,8 +29,8 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
-They are a bit outdated. Documentation rework is planned for Hibari
-v0.6.
+They are a bit **outdated**, sorry, but Documentation rework is
+planned for Hibari v0.6.
 
 
 # Mailing Lists
@@ -71,12 +71,15 @@ Short-term roadmap (as of February 2013)
     generate the timestamp for a key-value instead of client. This
     will change the return values from `add`, `replace`, and `set`
     operations.
-    [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424)
+    Link to [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
+    Link to [GitHub Issue](https://github.com/hibari/gdss-client/issues/2)
   * **New Client API - Server Side Rename**.
-    [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876)
+    Link to [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
+    Link to [GitHub Issue](https://github.com/hibari/gdss-brick/issues/2)
+  * [Basho/Lager](https://github.com/basho/lager) as the primary logging facility. [GitHub Issue](https://github.com/hibari/hibari/issues/19)
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
-  * Sample codes for Erlang native client (brick_simple)
+  * Sample codes for Erlang native client (`brick_simple`)
   * Basho Bench driver
 
 
