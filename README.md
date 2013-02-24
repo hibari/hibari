@@ -13,7 +13,7 @@ performance especially for read and large value operations.
 
 # News
 
-- Feb 4, 2013 - Hibari v0.1.10 Released. [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
+- Feb 4, 2013 - **Hibari v0.1.10 Released.** [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
 
 
 # Quick Start
@@ -67,9 +67,15 @@ Short-term roadmap (as of February 2013)
 ## v0.3 series (unstable)
 
 - **v0.3.0**
-  * **Client API changes - Server-side timestamp and rename**
+  * **Client API changes - Server Side Timestamp**. brick_server will
+    generate the timestamp for a key-value instead of client. This
+    will change the return values from **add**, **replace**, and
+    **set** operations.
+    [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424)
+  * **New Client API - Server Side Rename** [Updated Documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1L1876)
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
+  * Sample codes for Erlang native client (brick_simple)
   * Basho Bench driver
 
 
@@ -91,7 +97,7 @@ Short-term roadmap (as of February 2013)
     without `repo` by using this package. (Hibari developers will
     continue using `repo`.)
   * **Documentation rework**
-  * Sample codes
+  * More sample codes
   * Cookbook for Opscode Chef for automated single-node and multi-node
     deployments
   * More QuickCheck and EUnit test cases
@@ -124,7 +130,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-# Note for License
+## Note for License
 
 Hibari has decided to display "Hibari developers" as the copyright
 holder name in the source code files and manuals. Actual copyright
