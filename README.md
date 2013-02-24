@@ -29,7 +29,7 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
-They are a bit **outdated**, sorry, but Documentation rework is
+They are a bit **outdated**, sorry, but documentation rework is
 planned for Hibari v0.6.
 
 
@@ -54,17 +54,35 @@ Short-term roadmap (as of February 2013)
 
 ## v0.1 series (unstable)
 
+Hibari v0.1.x are very early releases after forking proprietary Gemini
+Distributed Storage Service (GDSS). GDSS is a rock-solid key-value
+store and it has used in Tier 1 telecom sector since 2010. However
+GDSS only has native Erlang client in production and also requires to
+write Erlang codes to do basic system administration tasks.
+
+Hibari v0.1.x releases contain bug fixes, updates for recent
+Erlang/OTP releases (R14 and R15), prototype implementations for
+non-Erlang client APIs, and Linux shell scripts to perform some of the
+basic system administration tasks.
+
+These v0.1.x releases are considered **unstable**.
+
 - **v0.1.10** - Released on Feb 4, 2013
   * Minor bug fixes
   * Update for Erlang/OTP R15
   * Support for building on Ubuntu, including ARMv7 architecture
-  * Move S3 and JSON-RPC components out from Hibari distribution
-    (remove from the `repo` manifests.)  S3 and JSON-RPC will become
-    separate projects and will use `rebar` to manage
-    dependencies. (Hibari will continue using `repo`)
+  * Remove S3 and JSON-RPC components from Hibari distribution (remove
+    from the `repo` manifests.)  S3 and JSON-RPC will become separate
+    projects and will use `rebar` to manage dependencies. (Hibari will
+    continue using `repo`)
 
 
 ## v0.3 series (unstable)
+
+Hibari v0.3 series will have some client API changes as well as having
+Erlang sample client codes and Basho Bench driver.
+
+These v0.3.x releases will be considered **unstable**.
 
 - **v0.3.0**
   * **Client API changes - Server Side Timestamp**. brick_server will
@@ -79,11 +97,18 @@ Short-term roadmap (as of February 2013)
   * [Basho/Lager](https://github.com/basho/lager) as the primary logging facility. [GitHub Issue](https://github.com/hibari/hibari/issues/19)
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
+  * Support for building and running on Joyent SmartOS (illmos based
+    OpenSolaris variant)
   * Sample codes for Erlang native client (`brick_simple`)
   * Basho Bench driver
 
 
 ## v0.5 series (unstable)
+
+Hibari v0.5 series will have a complete Thrift API for non-Erlang
+clients.
+
+These v0.5.x releases will be considered **unstable**.
 
 - **v0.5**
   * **A complete Thrift API** (`do`, `get_many`, and `testset` flag
@@ -95,6 +120,11 @@ Short-term roadmap (as of February 2013)
 
 
 ## v0.6 series (stable)
+
+Hibari v0.6 series will be considered **stable**. These releases will
+have source code package and Opscode Chef cookbook for easier build
+and deployment. They will also have major documentation updates and
+more test cases.
 
 - **v0.6**
   * **Source code package.** Application developers can build Hibari
@@ -115,6 +145,7 @@ Short-term roadmap (as of February 2013)
   optimizing RAM usage
 - Scavenger enhancements
 - Big writes/reads (`append` to a value and `partial_read` from a value)
+- Multi-datacenter deployment
 
 
 # License
