@@ -1,0 +1,26 @@
+
+v0.3.0 - TBD 2013
+
+This is an unstable major release for Hibari.
+
+--- NEW FEATURES --------------------------------------------------------
+
+- GH2, GH10 - brick_server new client API - rename (gdss_brick,
+  gdss_client, gdss_admin, gdss_ubf_proto)
+- GH10 - brick_server client API changes - server side timestamp
+  (gdss_brick, gdss_client, gdss_admin, gdss_ubf_proto)
+
+--- FIXES ---------------------------------------------------------------
+
+- TBD
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- GH21 (hibari) - Add gmt_elog module again
+
+
+--- OTHERS --------------------------------------------------------------
+
+- TBD
+
+_EOF_
