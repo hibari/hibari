@@ -107,26 +107,25 @@ These v0.3.x releases will be considered **unstable**.
 
 - **v0.3.0**
   * **New Client API - Server Side Rename**.
-    (Link to [**updated documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
-    Link to [**GitHub issue**](https://github.com/hibari/gdss-brick/issues/2))
+    (Link to [updated documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
+    Link to [GitHub issue](https://github.com/hibari/gdss-brick/issues/2))
   * **Client API changes - Server Side Timestamp**. brick_server will
     generate the timestamp for a key-value by default instead of
     client. In addition, return values from `add`, `replace`, and
     `set` operations will contain the generated timestamp.
-    (Link to [**updated documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
-    Link to [**GitHub issue**](https://github.com/hibari/gdss-client/issues/2))
-  * Introduce [Basho Lager](https://github.com/basho/lager) for more
-    traditional logging that plays nicely with UNIX logging tools like
-    logrotate and syslog.
-    Link to [**GitHub issue**](https://github.com/hibari/hibari/issues/19))
-  * DTrace/SystemTap tracepoints to examine database latency in
+    (Link to [updated documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
+    Link to [GitHub issue](https://github.com/hibari/gdss-client/issues/2))
+  * Introduce [Basho Lager](https://github.com/basho/lager) for
+    **more traditional logging** that plays nicely with UNIX logging
+    tools like `logrotate` and `syslog`.
+  * **DTrace/SystemTap** tracepoints to examine database latency in
     production
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf and ubf-thrift)
   * Support for building and running on Joyent SmartOS (an illumos
     based Solaris variant armed with ZFS, DTrace, Zones and KVM)
   * Sample codes for Erlang native client (`brick_simple`)
-  * Basho Bench driver
+  * **Basho Bench driver**
 
 
 ## v0.5 series (unstable)
