@@ -110,12 +110,13 @@ These v0.3.x releases will be considered **unstable**.
     generate the timestamp for a key-value by default instead of
     client. In addition, return values from `add`, `replace`, and
     `set` operations will contain the generated timestamp.
-    Link to [**Updated Documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
-    Link to [**GitHub Issue**](https://github.com/hibari/gdss-client/issues/2)
+    (Link to [**updated documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
+    Link to [**GitHub issue**](https://github.com/hibari/gdss-client/issues/2))
   * **New Client API - Server Side Rename**.
-    Link to [**Updated Documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
-    Link to [**GitHub Issue**](https://github.com/hibari/gdss-brick/issues/2)
-  * [Basho/Lager](https://github.com/basho/lager) as the primary logging facility. [GitHub Issue](https://github.com/hibari/hibari/issues/19)
+    (Link to [**updated documentation**](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
+    Link to [**GitHub issue**](https://github.com/hibari/gdss-brick/issues/2))
+  * [Basho/Lager](https://github.com/basho/lager) as the primary
+    logging facility. (Link to [**GitHub issue**](https://github.com/hibari/hibari/issues/19))
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
   * Support for building and running on Joyent SmartOS (illumos based
