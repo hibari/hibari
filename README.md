@@ -54,7 +54,7 @@ Short-term roadmap (as of February 2013)
 
 ## v0.1 series (unstable)
 
-- v0.1.10 - Released on Feb 4, 2013
+- **v0.1.10** - Released on Feb 4, 2013
   * Minor bug fixes
   * Update for Erlang/OTP R15
   * Support for building on Ubuntu, including ARMv7 architecture
@@ -66,7 +66,7 @@ Short-term roadmap (as of February 2013)
 
 ## v0.3 series (unstable)
 
-- v0.3.0
+- **v0.3.0**
   * Server-side timestamp and rename
   * Update for Erlang/OTP R16
   * The latest external libraries (ubf, ubf-thrift, riak-err)
@@ -75,7 +75,7 @@ Short-term roadmap (as of February 2013)
 
 ## v0.5 series (unstable)
 
-- v0.5
+- **v0.5**
   * A complete Thrift API (`do`, `get_many`, and `testset` flag for
     `set` and `replace`)
   * More `hibari` and `hibari-admin` commands (e.g. control and
@@ -86,7 +86,7 @@ Short-term roadmap (as of February 2013)
 
 ## v0.6 series (stable)
 
-- v0.6
+- **v0.6**
   * Source code package. Application developers can build Hibari
     without `repo` by using this package. (Hibari developers will
     continue using `repo`.)
