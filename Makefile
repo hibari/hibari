@@ -101,7 +101,7 @@ eunit-core: compile-for-eunit
 
 eunit-thrift: compile-for-euint
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
+	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,meck,asciiedoc,edown'
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
