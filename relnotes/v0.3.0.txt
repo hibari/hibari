@@ -1,7 +1,7 @@
 
 v0.3.0 - TBD 2013
 
-This is an major release for Hibari.
+This is a major release for Hibari.
 
 --- HIGHLIGHTS ----------------------------------------------------------
 
@@ -46,7 +46,7 @@ This is an major release for Hibari.
 
 --- OTHERS --------------------------------------------------------------
 
-- hibari >> GH20 - Remove riak-err - *TODO*
+- hibari >> GH20 - Remove riak-err
 - hibari >> GH21 - Add gmt_elog module again
 - hibari >> GH?? - Introduce qc wrapper
 - hibari >> GH?? - Update for Erlang/OTP R16 - *TODO*
