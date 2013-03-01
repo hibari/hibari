@@ -1,5 +1,5 @@
 
-v0.3.0 - TBD 2013
+v0.3.0 - Not Released (Mid March, 2013)
 
 This is a major release for Hibari.
 
@@ -14,28 +14,21 @@ This is a major release for Hibari.
   with UNIX logging tools like logrotate and syslog
 - DTrace/SystemTap tracepoints to examine database latency in
   production
-- Update for Erlang/OTP R16
-- The latest external libraries (ubf and ubf-thrift)
 - Support for building and running on Joyent SmartOS (an illumos based
   Solaris variant armed with ZFS, DTrace, Zones, and KVM)
-- Sample code for Erlang native client (brick_simple)
-- Basho Bench driver
 
 
 --- NEW FEATURES --------------------------------------------------------
 
-- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later - *TODO*
-- hibari >> GH19 - Introduce Basho Lager as the primary logging facility - *TODO*
-- hibari >> GH27 - Support for building and running on Joyent SmartOS - *TODO*
-- gdss-admin >> GH3 - Add an API function to Chain Monitor to get the
-  current best brick of a chain - *TODO*
+- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later - *INPROGRESS*
+- hibari >> GH19 - Introduce Basho Lager as the primary logging facility
+- hibari >> GH27 - Support for building and running on Joyent SmartOS - *INPROGRESS*
 - gdss-brick >> GH2 - brick_server new client API - rename
 
 
 --- FIXES ---------------------------------------------------------------
 
-- gdss-brick >> GH11 (CL29834) - squidflash_prime1 could crash hlog
-  common when do_sync is false - *TODO*
+None
 
 
 --- ENHANCEMENTS --------------------------------------------------------
@@ -48,12 +41,7 @@ This is a major release for Hibari.
 
 - hibari >> GH20 - Remove riak-err
 - hibari >> GH21 - Add gmt_elog module again
-- hibari >> GH23 - Introduce qc wrapper - *TODO*
-- hibari >> GH24 - Update for Erlang/OTP R16 - *TODO*
-- hibari >> GH26 - Add Basho Bench driver - *TODO*
-- gdss-client >> GH7 - Add sample code for native Erlang client - *TODO*
-- gdss-ubf-proto >> GH7 - Update the external libraries (ubf and
-  ubf-thrift) to the latest version - *TODO*
+- hibari >> GH23 - Introduce qc wrapper - *INPROGRESS*
 
 
 _EOF_

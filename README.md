@@ -105,7 +105,7 @@ start to support deploying on Joyent SmartOS.
 
 These v0.3.x releases will be considered **unstable**.
 
-- **v0.3.0**
+- **v0.3.0** - Not Released (Mid March, 2013)
   * **New Client API - Server Side Rename**.
     (Link to [updated documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
     Link to [GitHub issue](https://github.com/hibari/gdss-brick/issues/2))
@@ -120,10 +120,13 @@ These v0.3.x releases will be considered **unstable**.
     tools like `logrotate` and `syslog`.
   * **DTrace/SystemTap** tracepoints to examine database latency in
     production
-  * Update for Erlang/OTP R16
-  * The latest external libraries (ubf and ubf-thrift)
   * Support for building and running on Joyent SmartOS (an illumos
     based Solaris variant armed with ZFS, DTrace, Zones and KVM)
+
+
+- **v0.3.1** - Not Released (Late April, 2013)
+  * Update for Erlang/OTP R16
+  * The latest external libraries (ubf and ubf-thrift)
   * Sample codes for Erlang native client (`brick_simple`)
   * **Basho Bench driver**
 
@@ -135,7 +138,7 @@ clients.
 
 These v0.5.x releases will be considered **unstable**.
 
-- **v0.5**
+- **v0.5** - Not Released (July, 2013)
   * **A complete Thrift API** (`do`, `get_many`, and `testset` flag
     for `set` and `replace`)
   * More `hibari` and `hibari-admin` commands (e.g. control and
@@ -151,7 +154,7 @@ have source code package and Chef cookbooks for easier build and
 deployment. They will also have major documentation updates and more
 test cases.
 
-- **v0.6**
+- **v0.6** - Net Released (September, 2013)
   * **Source code package.** Application developers can build Hibari
     without `repo` by using this package. (Hibari developers will
     continue using `repo`.)
