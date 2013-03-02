@@ -3,6 +3,10 @@ v0.3.0 - Not Released (Mid March, 2013)
 
 This is a major release for Hibari.
 
+This release requires Erlang/OTP R13B04, R14 or R15. R15B03-1 is the
+version most recently tested for Hibari.
+
+
 --- HIGHLIGHTS ----------------------------------------------------------
 
 - New Client API - Server Side Rename

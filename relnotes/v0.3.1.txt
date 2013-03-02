@@ -3,6 +3,10 @@ v0.3.1 - Not Released (Mid April, 2013)
 
 This is a bug fix release for Hibari.
 
+This release requires Erlang/OTP R13B04, R14, R15 or R16. R15B03-1 and
+R16B are the versions most recently tested for Hibari. - *TODO*
+
+
 --- HIGHLIGHTS ----------------------------------------------------------
 
 - Update for Erlang/OTP R16
