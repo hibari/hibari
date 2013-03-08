@@ -15,6 +15,8 @@ performance especially for read and large value operations.
 
 - Feb 4, 2013 - **Hibari v0.1.10 Released**. [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
 
+- [**More News**](https://github.com/hibari/hibari/wiki/Hot-News)
+
 
 # Quick Start
 
@@ -51,129 +53,19 @@ Hibari v0.5 will have a full-featured Thrift client.
 
 # Supported Platforms
 
-Hibari is written in 100% Erlang/OTP.
+Hibari is written in pure Erlang/OTP and runs on many Unix/Linux
+platforms.
 
-- **Linux x86_64**
-  * RHEL/CentOS 5.x and 6.x
-  * Ubuntu 12.04 LTS or newer
-
-- **Linux ARMv7**
-  * Ubuntu 12.04 LTS or newer
-
-- **Unix Solaris variants**
-  * Joyent SmartOS (64 bit), will be supported from Hibari v0.3
+Please see
+the [**Supported Platforms**](https://github.com/hibari/hibari/wiki/Supported-Platforms)
+page in Hibari Wiki for details.
 
 
 # Roadmap
 
-Short-term roadmap (as of February 2013)
-
-## v0.1 series (unstable)
-
-Hibari v0.1.x are very early releases after forking proprietary Gemini
-Distributed Storage Service (GDSS). GDSS is a rock-solid key-value
-store and it has been used in production in Tier 1 telecom sector
-since 2010. However GDSS only has a native Erlang client and also
-requires to write Erlang codes to perform basic system administration
-tasks.
-
-Hibari v0.1.x releases contain bug fixes, updates for recent
-Erlang/OTP releases (R14 and R15), prototype implementations for
-non-Erlang client APIs, and Linux shell scripts to perform some of the
-basic system administration tasks.
-
-These v0.1.x releases are considered **unstable**.
-
-- **v0.1** - Released on July 13, 2010
-  * First public, open source release of Hibari
-
-- **v0.1.10** - Released on Feb 4, 2013
-  * Minor bug fixes
-  * Update for Erlang/OTP R15
-  * Support for building on Ubuntu, including ARMv7 architecture
-  * Remove S3 and JSON-RPC components from Hibari distribution (remove
-    from the `repo` manifests.)  S3 and JSON-RPC will become separate
-    projects and will use `rebar` to manage dependencies. (Hibari will
-    continue using `repo`)
-
-
-## v0.3 series (unstable)
-
-Hibari v0.3 series will have some client API changes as well as having
-sample Erlang client codes and a Basho Bench driver. It will also
-start to support deploying on Joyent SmartOS.
-
-These v0.3.x releases will be considered **unstable**.
-
-- **v0.3.0** - Not Released (Mid March, 2013)
-  * **New Client API - Server Side Rename**.
-    (Link to [updated documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1876),
-    Link to [GitHub issue](https://github.com/hibari/gdss-brick/issues/2))
-  * **Client API changes - Server Side Timestamp**. brick_server will
-    generate the timestamp for a key-value by default instead of
-    client. In addition, return values from `add`, `replace`, and
-    `set` operations will contain the generated timestamp.
-    (Link to [updated documentation](https://github.com/hibari/hibari-doc/blob/norton-server-rename/src/hibari/hibari-app-developer-guide.en.txt#L1424),
-    Link to [GitHub issue](https://github.com/hibari/gdss-client/issues/2))
-  * Introduce [Basho Lager](https://github.com/basho/lager) for
-    **more traditional logging** that plays nicely with UNIX logging
-    tools like `logrotate` and `syslog`.
-  * **DTrace/SystemTap** tracepoints to examine database latency in
-    production
-  * Support for building and running on Joyent SmartOS (an illumos
-    based Solaris variant armed with ZFS, DTrace, Zones and KVM)
-
-
-- **v0.3.1** - Not Released (Late April, 2013)
-  * Update for Erlang/OTP R16
-  * The latest external libraries (ubf and ubf-thrift)
-  * Sample codes for Erlang native client (`brick_simple`)
-  * **Basho Bench driver**
-
-
-## v0.5 series (unstable)
-
-Hibari v0.5 series will have a complete Thrift API for non-Erlang
-clients.
-
-These v0.5.x releases will be considered **unstable**.
-
-- **v0.5** - Not Released (July, 2013)
-  * **A complete Thrift API** (`do`, `get_many`, and `testset` flag
-    for `set` and `replace`)
-  * More `hibari` and `hibari-admin` commands (e.g. control and
-    monitor scavenger)
-  * Delete table operation, which is missing in earlier series
-  * Server-side counter
-
-
-## v0.6 series (stable)
-
-Hibari v0.6 series will be considered **stable**. These releases will
-have source code package and Chef cookbooks for easier build and
-deployment. They will also have major documentation updates and more
-test cases.
-
-- **v0.6** - Net Released (September, 2013)
-  * **Source code package.** Application developers can build Hibari
-    without `repo` by using this package. (Hibari developers will
-    continue using `repo`.)
-  * **Documentation rework**
-  * More sample codes
-  * Cookbook for Opscode Chef for automated single-node and multi-node
-    deployments
-  * More QuickCheck and EUnit test cases
-
-
-## Unscheduled Features
-
-- MapReduce (mruby? or lua?)
-- SNMP support
-- LETS (Google LevelDB) or HanoiDB as an alternative key storage for
-  optimizing RAM usage
-- Scavenger enhancements
-- Big writes/reads (`append` to a value and `partial_read` from a value)
-- Multi-datacenter deployment
+Please see
+the [**Roadmap**](https://github.com/hibari/hibari/wiki/Roadmap) page
+in Hibari Wiki for the planned features for Hibari v0.3, v0.5, and v0.6.
 
 
 # License
