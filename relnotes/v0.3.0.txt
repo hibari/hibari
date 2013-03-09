@@ -4,7 +4,19 @@ v0.3.0 - Not Released (Mid March, 2013)
 This is a major release for Hibari.
 
 This release requires Erlang/OTP R13B04, R14 or R15. R15B03-1 is the
-version most recently tested for Hibari.
+version most recently tested for Hibari. Note that this release is NOT
+compatible with R16B.
+
+Notes on upgrading from an earlier Hibari release:
+- There is no change in disk storage format so the tables created by
+  an earlier release should work without extra work.
+- There are some client API changes. If you want to do rolling
+  upgrade, you must update you application codes to deal with both
+  v0.1.x and v0.3.x client APIs before upgrading Hibari cluster.
+  For more details, please see GitHub issue gdss-client >> GH2
+  <https://github.com/hibari/gdss-client/issues/2>.
+  Future Hibari release may support different versions of clients,
+  but v0.3.0 doesn't have such feature.
 
 
 --- HIGHLIGHTS ----------------------------------------------------------
