@@ -312,7 +312,7 @@ bootstrap_local(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% read schema filename
     case rpc:call(hd(BootstrapNodes), brick_admin, schema_filename, [], 60000) of
@@ -376,10 +376,10 @@ bootstrap(TargetNode, BigDataP, DiskLoggingP, SyncWritesP
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% check brick nodes
-    [ ok=ping_node(Node) || Node <- Bricks ],
+    [ ok = ping_node(Node) || Node <- Bricks ],
 
     %% read schema filename
     case rpc:call(hd(BootstrapNodes), brick_admin, schema_filename, [], 60000) of
@@ -445,10 +445,10 @@ createtable(TargetNode, Table
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% check brick nodes
-    [ ok=ping_node(Node) || Node <- Bricks ],
+    [ ok = ping_node(Node) || Node <- Bricks ],
 
     MakeChainArgs = [Table, BricksPerChain, Bricks, NumNodesPerBlock, BlockMultFactor],
     case rpc:call(hd(BootstrapNodes), brick_admin, make_chain_description, MakeChainArgs, 60000) of
@@ -511,14 +511,14 @@ client_add(TargetNode, Clients) ->
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% check client nodes
-    [ ok=ping_node(Node) || Node <- Clients ],
+    [ ok = ping_node(Node) || Node <- Clients ],
 
     %% add clients
     [ case rpc:call(hd(BootstrapNodes), brick_admin, add_client_monitor, [Node], 60000) of
-          ok ->
+          {ok, _TS} ->
               ok;
           {badrpc, Reason1} ->
               io:format("RPC(add_client_monitor) to ~p failed: ~p\n"
@@ -556,11 +556,11 @@ client_delete(TargetNode, Clients) ->
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% delete clients
     [ case rpc:call(hd(BootstrapNodes), brick_admin, delete_client_monitor, [Node], 60000) of
-          ok ->
+          {ok, _TS} ->
               ok;
           {badrpc, Reason} ->
               io:format("RPC(delete_client_monitor) to ~p failed: ~p\n"
@@ -580,7 +580,7 @@ client_list(TargetNode) ->
     BootstrapNodes = bootstrap_nodes(TargetNode),
 
     %% check bootstrap nodes
-    [ ok=ping_node(Node) || Node <- BootstrapNodes ],
+    [ ok = ping_node(Node) || Node <- BootstrapNodes ],
 
     %% list clients
     case rpc:call(hd(BootstrapNodes), brick_admin, get_client_monitor_list, [], 60000) of
