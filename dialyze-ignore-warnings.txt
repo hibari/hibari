@@ -322,6 +322,12 @@ gmt_tlog_svr.erl:160: Expression produces a value of type 'ok' | {'error','lager
 mod_admin.erl:744: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 mod_admin.erl:999: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 mod_admin.erl:1002: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
+meck.erl:634: Function raise/6 only terminates with explicit exception
+meck.erl:653: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
+meck_cover.erl:30: Call to missing or unexported function cover:compile_beam/2
+meck_cover.erl:98: Call to missing or unexported function cover:get_term/1
+meck_cover.erl:109: Call to missing or unexported function cover:write/2
+meck_mod.erl:57: Type specification meck_mod:beam_file(module()) -> binary() is a supertype of the success typing: meck_mod:beam_file(atom()) -> binary()
 partition_detector_mnesia.erl:121: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 partition_detector_mnesia.erl:134: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 partition_detector_mnesia.erl:137: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
@@ -347,3 +353,13 @@ partition_detector_server.erl:629: Expression produces a value of type 'ok' | {'
 partition_detector_server.erl:635: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 tbf_gdss_plugin.erl:46: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
 tbf_gdss_plugin.erl:49: Expression produces a value of type 'ok' | {'error','lager_not_running'}, but this value is unmatched
+tbf.erl:338: Type specification tbf:encode(Input::term()) -> iolist() | no_return() is a supertype of the success typing: tbf:encode(atom() | binary() | [atom() | binary() | [atom() | binary() | [any()] | number() | tuple()] | number() | tuple()] | number() | tuple()) -> [<<_:8,_:_*24>> | [binary() | maybe_improper_list(binary() | maybe_improper_list(any(),binary() | []) | byte(),binary() | []),...],...]
+tbf.erl:342: Type specification tbf:encode(Input::term(),module()) -> iolist() | no_return() is a supertype of the success typing: tbf:encode(atom() | binary() | [atom() | binary() | [atom() | binary() | [any()] | number() | tuple()] | number() | tuple()] | number() | tuple(),atom() | tuple()) -> [<<_:8,_:_*24>> | [binary() | maybe_improper_list(binary() | maybe_improper_list(any(),binary() | []) | byte(),binary() | []),...],...]
+tbf.erl:392: Type specification tbf:decode_init() -> cont2() is a supertype of the success typing: tbf:decode_init() -> {'more',fun((#state{x::'undefined' | binary(),stack::'undefined' | [any()] | tuple(),size::'undefined' | integer(),safe::'false' | 'true' | 'undefined',vsn::'undefined' | integer(),mod::atom()}) -> any()),#state{x::'undefined' | binary(),stack::'undefined' | [any()] | tuple(),size::'undefined' | integer(),safe::'false' | 'true' | 'undefined',vsn::'undefined' | integer(),mod::atom()}}
+tbf.erl:396: Type specification tbf:decode_init(Safe::boolean()) -> cont2() is a supertype of the success typing: tbf:decode_init(boolean()) -> {'more',fun((#state{x::'undefined' | binary(),stack::'undefined' | [any()] | tuple(),size::'undefined' | integer(),safe::'false' | 'true' | 'undefined',vsn::'undefined' | integer(),mod::atom()}) -> any()),#state{x::'undefined' | binary(),stack::'undefined' | [any()] | tuple(),size::'undefined' | integer(),safe::'false' | 'true' | 'undefined',vsn::'undefined' | integer(),mod::atom()}}
+tbf.erl:408: Type specification tbf:decode(Input::binary(),module()) -> ok() | error() | cont1() is a supertype of the success typing: tbf:decode(binary(),atom()) -> {'error',_} | {'more',fun()} | {'ok',_,binary(),integer()}
+ubf_client.erl:76: Type specification ubf_client:connect(host() | plugins(),ipport() | server()) -> {'ok',Client::pid(),service()} | {'error',term()} is a supertype of the success typing: ubf_client:connect([atom() | char() | tuple()],pos_integer()) -> {'error',_} | {'ok',pid(),'undefined' | {'#S',nonempty_string()}}
+ubf_client.erl:84: Type specification ubf_client:connect(host() | plugins(),ipport() | server(),timeout()) -> {'ok',Client::pid(),service()} | {'error',term()} is a supertype of the success typing: ubf_client:connect([atom() | char() | tuple()],pos_integer(),'infinity' | non_neg_integer()) -> {'error',_} | {'ok',pid(),'undefined' | {'#S',nonempty_string()}}
+ubf_client.erl:396: Type specification ubf_client:lpc(plugin(),Call::term()) -> term() is a supertype of the success typing: ubf_client:lpc(atom() | tuple(),_) -> {'error','stop'} | {'reply',_,_}
+ubf_client.erl:403: Type specification ubf_client:lpc(plugin(),Call::term(),statename()) -> term() is a supertype of the success typing: ubf_client:lpc(atom() | tuple(),_,atom()) -> {'error','stop'} | {'reply',_,_}
+ubf_server.erl:201: The created fun only terminates with explicit exception

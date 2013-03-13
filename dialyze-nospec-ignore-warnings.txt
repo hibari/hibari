@@ -26,3 +26,6 @@ ebf.erl:68: Function decode_init/0 has no local return
 ebf.erl:72: Function decode_init/1 has no local return
 meck.erl:630: Function invalidate_and_raise/6 has no local return
 meck.erl:653: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
+meck_cover.erl:30: Call to missing or unexported function cover:compile_beam/2
+meck_cover.erl:98: Call to missing or unexported function cover:get_term/1
+meck_cover.erl:109: Call to missing or unexported function cover:write/2
