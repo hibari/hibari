@@ -80,11 +80,11 @@ wait_for_table(HibariAdmin, Table) ->
             case gmt_loop:do_while(fun poll_brick/1, {Table, <<"k">>, ?POLLING_MAX_RETRY}) of
                 ok ->
                     ok;
-                Err1 ->
-                    {error, Err1}
+                Err ->
+                    {error, Err}
             end;
-        Err2 ->
-            {error, Err2}
+        Err ->
+            {error, Err}
     end.
 
 -spec go_async(admin_node(), table()) -> ok | {error, term()}.
