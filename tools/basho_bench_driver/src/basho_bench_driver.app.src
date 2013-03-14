@@ -1,0 +1,14 @@
+{application, basho_bench_driver,
+ [
+  {description, "Basho Bench Driver for Hibari"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  sasl,
+                  gdss_client
+                 ]},
+  {mod, { basho_bench_driver_app, []}},
+  {env, []}
+ ]}.
