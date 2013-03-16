@@ -42,7 +42,6 @@
 -define(UTILS, basho_bench_utils_hibari).
 -define(PREFIX_SEPARATOR, "/").
 -define(MD5_TAG, md5).
--define(MD5_SKIP, skip).
 
 
 %% ====================================================================
@@ -81,8 +80,6 @@ run(get, KeyGen, _ValGen, #state{table=Table, verify_read=true}=State) ->
             Md5Hash  = crypto:md5(Val),
             case proplists:get_value(?MD5_TAG, Props) of
                 Md5Hash ->
-                    {ok, State};
-                ?MD5_SKIP ->
                     {ok, State};
                 undefined ->
                     {error, md5_undefined, State};
@@ -186,7 +183,7 @@ run(set, KeyGen, ValGen, #state{table=Table}=State) ->
 run(rename, KeyGen, _ValGen, #state{table=Table}=State) ->
     OldKey = prefixed_key(KeyGen, State),
     NewKey = prefixed_key(KeyGen, State),
-    case brick_simple:rename(Table, OldKey, NewKey, [{?MD5_TAG, ?MD5_SKIP}]) of
+    case brick_simple:rename(Table, OldKey, NewKey, [{attrib_directive, keep}]) of
         {ok, _TS}->
             {ok, State};
         key_not_exist ->
