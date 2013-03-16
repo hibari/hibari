@@ -44,7 +44,8 @@ Notes on upgrading from an earlier Hibari release:
 
 --- FIXES ---------------------------------------------------------------
 
-None
+- gdss-client >> GH8 - brick_simple_client:find_the_brick/3 crashes
+  for unknown table
 
 
 --- ENHANCEMENTS --------------------------------------------------------
