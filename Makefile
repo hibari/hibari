@@ -121,7 +121,7 @@ eunit-thrift: compile-for-euint
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
-	$(REBAR) eqc qc_opts=3000 skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) eqc qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
 
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
@@ -137,7 +137,7 @@ compile-for-eunit:
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true
+	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='ubf'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."
