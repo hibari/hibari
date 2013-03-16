@@ -227,7 +227,7 @@ init(Table) ->
     ok = ?UTILS:start_net_kernel(MyNode),
 
     HibariAdminNodes = basho_bench_config:get(hibari_admin_nodes, ['hibari@127.0.0.1']),
-    HibariBrickNodes = basho_bench_config:get(hibari_brikc_nodes, ['hibari@127.0.0.1']),
+    HibariBrickNodes = basho_bench_config:get(hibari_brick_nodes, ['hibari@127.0.0.1']),
 
     Cookie  = basho_bench_config:get(hibari_cookie, 'hibari'),
     case ?UTILS:set_cookie(HibariBrickNodes, Cookie) of
