@@ -115,7 +115,7 @@ eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
 	$(REBAR) eunit skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
 
-eunit-thrift: compile-for-euint
+eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
 	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
 
