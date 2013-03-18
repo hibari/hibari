@@ -123,6 +123,10 @@ eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
 	$(REBAR) eqc qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
 
+eqc-thrift: compile-for-eqc
+	@echo "eqc testing (thrift): $(RELPKG) ..."
+	$(REBAR) eqc qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
+
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
 	$(REBAR) proper skip_apps='meck,ubf,ubf_thrift'
