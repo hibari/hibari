@@ -41,9 +41,9 @@ Notes on upgrading from an earlier Hibari release:
 - hibari >> GH27 - Support for building and running on Joyent SmartOS - *INPROGRESS*
 - gdss-brick >> GH2 - brick_server new client API - rename
 - gdss-brick >> GH13 - Add attrib and exp_time directive flags to
-  rename/6 - *INPROGRESS*
+  rename/6
 - gdss-brick >> GH14 - Add attrib and exp_time directive flags to
-  replace/6 and set/6 - *INPROGRESS*
+  replace/6 and set/6
 
 
 --- FIXES ---------------------------------------------------------------
