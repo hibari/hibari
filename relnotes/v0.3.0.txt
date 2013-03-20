@@ -1,5 +1,5 @@
 
-v0.3.0 - Not Released (Mid March, 2013)
+v0.3.0 - Not Released (Late March, 2013)
 
 This is a major release for Hibari.
 
