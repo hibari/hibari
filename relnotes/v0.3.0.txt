@@ -62,7 +62,7 @@ Notes on upgrading from an earlier Hibari release:
 
 - hibari >> GH20 - Remove riak-err
 - hibari >> GH21 - Add gmt_elog module again
-- hibari >> GH23 - Introduce qc wrapper - *INPROGRESS*
+- hibari >> GH23 - Introduce qc wrapper
 
 
 _EOF_
