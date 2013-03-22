@@ -36,9 +36,9 @@ Notes on upgrading from an earlier Hibari release:
 
 --- NEW FEATURES --------------------------------------------------------
 
-- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later - *INPROGRESS*
+- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later
 - hibari >> GH19 - Introduce Basho Lager as the primary logging facility
-- hibari >> GH27 - Support for building and running on Joyent SmartOS - *INPROGRESS*
+- hibari >> GH27 - Support for building and running on Joyent SmartOS
 - gdss-brick >> GH2 - brick_server new client API - rename
 - gdss-brick >> GH13 - Add attrib and exp_time directive flags to
   rename/6
