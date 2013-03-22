@@ -141,7 +141,7 @@ compile-for-eunit:
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='ubf'
+	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='ubf,ubf_thrift'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."
