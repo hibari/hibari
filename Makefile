@@ -109,7 +109,7 @@ compile:
 
 eunit: compile-for-eunit
 	@echo "eunit testing: $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='meck,asciiedoc,edown'
+	$(REBAR) eunit skip_apps='meck,asciiedoc,edown,lager'
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
@@ -141,7 +141,7 @@ compile-for-eunit:
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='ubf,ubf_thrift'
+	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."
