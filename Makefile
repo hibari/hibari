@@ -84,7 +84,15 @@ check-package: bootstrap-package
 	@sleep 1
 	./tmp/hibari/bin/hibari-admin client-list
 	./tmp/hibari/bin/hibari-admin client-delete hibari@127.0.0.1
+	./tmp/hibari/bin/hibari stop
+	./tmp/hibari/bin/hibari start
+	@sleep 10
+	./tmp/hibari/bin/hibari ping
 	./tmp/hibari/bin/hibari checkpoint
+	./tmp/hibari/bin/hibari stop
+	./tmp/hibari/bin/hibari start
+	@sleep 10
+	./tmp/hibari/bin/hibari ping
 	./tmp/hibari/bin/hibari stop
 
 package: generate
