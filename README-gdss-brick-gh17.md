@@ -242,6 +242,10 @@ pong
 $ ./tmp/hibari/bin/hibari attach
 Attaching to /home/tatsuya/workhub/dev/hibari/hibari/tmp/hibari/tmp/erlang.pipe.1 (^D to exit)
 
+(hibari@127.0.0.1)1>
+```
+
+```erl
 (hibari@127.0.0.1)1> gmt_hlog_common:tool_list_md(perf1_ch1_b1, 10).
 1: --------------------
 MDKey: <<16,0,0,0,2,18,152,203,224,16,8,4,16,8,8,255,255,255,254,128,127,255,113,24,46,58,209,51,153,0,8,255>>
