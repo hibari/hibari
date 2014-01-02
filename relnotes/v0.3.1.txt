@@ -1,16 +1,32 @@
 
-v0.3.1 - Not Released (Mid April, 2013)
+v0.3.1 - Not Released (Early 2014)
 
 This is a bug fix release for Hibari.
 
-This release requires Erlang/OTP R13B04, R14, R15 or R16. R15B03-1 and
-R16B are the versions most recently tested for Hibari. - *TODO*
+This release requires Erlang/OTP R16. R16B03 is the version most
+recently tested for Hibari.
+
+IMPORTANT: No upgrade is provided from an earlier Hibari release:
+
+- Storage format change:
+  * The disk storage format was significantly changed in v0.3.0,
+    and Hibari v0.3.x does not support older disk storage format.
+    Therefore, it is not possible to upgrade from an earlier Hibari
+    release.
+
+    There is no plan to provide an offline migration tool unless
+    someone asks for it. For more details, please see GitHub issue:
+    gdss-brick >> GH17 <https://github.com/hibari/gdss-brick/issues/17>
+
+- Client API change:
+  * There was some client API changes in v0.3.0. You must update you
+    application codes for v0.3.x client APIs. For more details, please
+    see GitHub issue:
+    gdss-client >> GH2 <https://github.com/hibari/gdss-client/issues/2>.
 
 
 --- HIGHLIGHTS ----------------------------------------------------------
 
-- Update for Erlang/OTP R16
-- The latest external libraries (ubf and ubf-thrift)
 - Sample code for Erlang native client (brick_simple)
 - Basho Bench driver
 
@@ -34,11 +50,8 @@ R16B are the versions most recently tested for Hibari. - *TODO*
 
 --- OTHERS --------------------------------------------------------------
 
-- hibari >> GH24 - Update for Erlang/OTP R16 - *TODO*
 - hibari >> GH26 - Add Basho Bench driver - *TODO*
 - gdss-client >> GH7 - Add sample code for native Erlang client - *TODO*
-- gdss-ubf-proto >> GH7 - Update the external libraries (ubf and
-  ubf-thrift) to the latest version - *TODO*
 
 
 _EOF_
