@@ -23,7 +23,7 @@ $ repo forall -c "git branch dev origin/dev"
 $ repo forall -c "git checkout dev"
 $ git checkout gbrick-gh17-redesign-disk-storage
 $ (cd lib/gdss_brick; git checkout gbrick-gh17-redesign-disk-storage)
-$ (cd lib/gdss_admin; git checkout hibari-gh33-scavenger-bad-seq)
+$ (cd lib/gdss_admin; git checkout gbrick-gh17-redesign-disk-storage)
 $ (cd lib/asciidoc; git checkout upstream-master)
 $ (cd lib/edown; git checkout upstream-master)
 $ (cd lib/meck; git checkout upstream-master)
@@ -38,7 +38,7 @@ project hibari/lib/asciiedoc/                   branch upstream-master
 project hibari/lib/cluster_info/                branch dev
 project hibari/lib/congestion_watcher/          branch dev
 project hibari/lib/edown/                       branch upstream-master
-project hibari/lib/gdss_admin/                  branch hibari-gh33-scavenger-bad-seq
+project hibari/lib/gdss_admin/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_brick/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_client/                 branch dev
 project hibari/lib/gdss_ubf_proto/              branch dev
@@ -139,7 +139,7 @@ project hibari/lib/asciiedoc/                   branch upstream-master
 project hibari/lib/cluster_info/                branch dev
 project hibari/lib/congestion_watcher/          branch dev
 project hibari/lib/edown/                       branch dev
-project hibari/lib/gdss_admin/                  branch hibari-gh33-scavenger-bad-seq
+project hibari/lib/gdss_admin/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_brick/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_client/                 branch dev
 project hibari/lib/gdss_ubf_proto/              branch dev
