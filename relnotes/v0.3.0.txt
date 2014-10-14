@@ -82,6 +82,7 @@ IMPORTANT: No upgrade path is provided from an earlier Hibari release:
 - hibari >> GH23 - Introduce qc wrapper
 - hibari >> GH24 - Update for Erlang/OTP R16
 - hibari >> GH37 - Update for Erlang/OTP 17.x
+- hibari >> GH39 - Drop support for older Erlang/OTP releases (*TODO*)
 - gdss-ubf-proto >> GH7 - Update the external libraries (ubf and
   ubf-thrift) to the latest version - *TODO*
 
