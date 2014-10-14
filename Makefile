@@ -165,7 +165,7 @@ doc: compile
 
 clean:
 	@echo "cleaning: $(RELPKG) ..."
-	$(REBAR) clean
+	$(REBAR) -r clean
 
 realclean: clean
 	@echo "realcleaning: $(RELPKG) ..."
