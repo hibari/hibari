@@ -6,10 +6,10 @@ This is a short memo about how to build Hibari from a topic branch
 https://github.com/hibari/gdss-brick/issues/17
 
 
-### Erlang/OTP R16B
+### Erlang/OTP 17.3 or R16B03-1
 
-Erlang/OTP R16B03 is recommended. R16A or newer is required to build
-the LevelDB port driver.
+Erlang/OTP 17.3 or R16B03-1 is recommended. R16A or newer is required
+to build h2leveldb, the LevelDB port driver.
 
 
 ### Dependencies
@@ -24,31 +24,25 @@ $ repo forall -c "git checkout dev"
 $ git checkout gbrick-gh17-redesign-disk-storage
 $ (cd lib/gdss_brick; git checkout gbrick-gh17-redesign-disk-storage)
 $ (cd lib/gdss_admin; git checkout gbrick-gh17-redesign-disk-storage)
-$ (cd lib/asciidoc; git checkout upstream-master)
-$ (cd lib/edown; git checkout upstream-master)
-$ (cd lib/meck; git checkout upstream-master)
-$ (cd lib/qc; git checkout upstream-master)
-$ (cd lib/ubf; git checkout upstream-master)
-$ (cd lib/ubf_thrift; git checkout upstream-master)
 
 $ repo status
 project hibari/                                 branch gbrick-gh17-redesign-disk-storage
 project hibari-doc/                             branch dev
-project hibari/lib/asciiedoc/                   branch upstream-master
+project hibari/lib/asciiedoc/                   branch dev
 project hibari/lib/cluster_info/                branch dev
 project hibari/lib/congestion_watcher/          branch dev
-project hibari/lib/edown/                       branch upstream-master
+project hibari/lib/edown/                       branch dev
 project hibari/lib/gdss_admin/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_brick/                  branch gbrick-gh17-redesign-disk-storage
 project hibari/lib/gdss_client/                 branch dev
 project hibari/lib/gdss_ubf_proto/              branch dev
 project hibari/lib/gmt_util/                    branch dev
 project hibari/lib/lager/                       branch dev
-project hibari/lib/meck/                        branch upstream-master
+project hibari/lib/meck/                        branch dev
 project hibari/lib/partition_detector/          branch dev
-project hibari/lib/qc/                          branch upstream-master
-project hibari/lib/ubf/                         branch upstream-master
-project hibari/lib/ubf_thrift/                  branch upstream-master
+project hibari/lib/qc/                          branch dev
+project hibari/lib/ubf/                         branch dev
+project hibari/lib/ubf_thrift/                  branch dev
 project patches/                                branch dev
 ```
 
