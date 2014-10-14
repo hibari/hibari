@@ -1,46 +1,52 @@
 
-v0.3.0 - Not Released (Early 2014)
+v0.3.0 - Not Released (Early 2015)
 
 This is a major release of Hibari.
 
-This release requires Erlang/OTP R16. R16B03 is the version most
-recently tested for Hibari.
+This release requires Erlang/OTP R16 or 17. R16B03-1 and 17.3 are
+the versions most recently tested for Hibari.
 
-IMPORTANT: No upgrade is provided from an earlier Hibari release:
+IMPORTANT: No upgrade path is provided from an earlier Hibari release:
 
-- Storage format change:
+- Storage Format Change:
   * The disk storage format is significantly changed in this release,
-    and Hibari v0.3.x does not support older disk storage format.
-    Therefore, it is not possible to upgrade from an earlier Hibari
-    release.
+    and Hibari v0.3.0 does not support older disk storage format.
+    It is not possible to upgrade from an earlier Hibari release.
 
-    There is no plan to provide an offline migration tool unless
-    someone asks for it. For more details, please see GitHub issue:
+    At this point, there is no plan to provide an offline migration
+    tool unless someone asks for it. For more details about storage
+    format change, please see GitHub issue at:
     gdss-brick >> GH17 <https://github.com/hibari/gdss-brick/issues/17>
 
-- Client API change:
+- Client API Changes:
   * There are some client API changes. You must update you application
-    codes for v0.3.x client APIs. For more details, please see GitHub
-    issue:
-    gdss-client >> GH2 <https://github.com/hibari/gdss-client/issues/2>.
+    codes for v0.3.x client APIs. For more details, please see the
+    following GitHub issues:
+
+    ** gdss-client >> GH2 <https://github.com/hibari/gdss-client/issues/2>.
+    **
 
 
 --- HIGHLIGHTS ----------------------------------------------------------
 
-- Update for Erlang/OTP R16
-- The latest external libraries (ubf and ubf-thrift)
-- New storage format
-- New Client API - Server Side Rename
-- Client API changes - Server Side Timestamp. brick_server will
-  generate the timestamp for a key-value by default instead of
-  client to provide the timestamp. In addition, return values from
-  add, replace, and set operations contain the generated timestamp.
-- Introduce Basho Lager for more traditional logging that plays nicely
-  with UNIX logging tools like logrotate and syslog
-- DTrace/SystemTap tracepoints to examine database latency in
-  production
-- Support for building and running on Joyent SmartOS (an illumos based
-  Solaris variant armed with ZFS, DTrace, Zones, and KVM)
+- Latest Libraries
+  * Update for Erlang/OTP R16 and 17
+  * The latest external libraries (ubf and ubf-thrift)
+- New Storage Format
+  * *TODO*
+- Enhanced Client API
+  * New: Server Side Copy
+  * New: Server Side Rename
+  * New: Server Side Counter
+  * New: WAL Sync Request
+  * Enhancement: Server Side Timestamp.
+- New Logging Format
+  * Introduce Basho Lager for more traditional logging that plays
+    nicely with UNIX logging tools like logrotate and syslog
+- Metrics and Tracepoints to Examine Database Latency in Production
+  * Introduce brick_metrics module, a folsom based metrics system
+    to measure and report latency inside Hibari
+  * DTrace/SystemTap tracepoints
 
 
 --- NEW FEATURES --------------------------------------------------------
@@ -75,6 +81,7 @@ IMPORTANT: No upgrade is provided from an earlier Hibari release:
 - hibari >> GH21 - Add gmt_elog module again
 - hibari >> GH23 - Introduce qc wrapper
 - hibari >> GH24 - Update for Erlang/OTP R16 - *TODO*
+- hibari >> GH37 - Update for Erlang/OTP 17.x - *TODO*
 - gdss-ubf-proto >> GH7 - Update the external libraries (ubf and
   ubf-thrift) to the latest version - *TODO*
 
