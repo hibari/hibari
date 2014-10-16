@@ -70,7 +70,7 @@ in Hibari Wiki for the planned features for Hibari v0.3, v0.5, and v0.6.
 
 # License
 
-Copyright (c) 2005-2013 Hibari developers.  All rights reserved.
+Copyright (c) 2005-2014 Hibari developers.  All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
