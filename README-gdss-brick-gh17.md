@@ -47,20 +47,17 @@ project patches/                                branch dev
 ```
 
 Add the following projects (git repositories) under the lib directory.
-Note that **leveldb_edrv** is not open-sourced yet.
 
 ```console
 $ cd ~/workhub/dev/hibari/hibari/lib
 
 $ git clone git://github.com/ubf/pmod_transform.git
-$ git clone git://github.com/norton/leveldb.git
-$ git clone git://github.com/norton/snappy.git
+$ git clone git://github.com/leveldb-erlang/h2leveldb.git
+$ git clone git://github.com/leveldb-erlang/HyperLevelDB.git
+$ git clone git://github.com/leveldb-erlang/snappy.git
 $ git clone git://github.com/uwiger/sext.git
 $ git clone git://github.com/boundary/folsom.git
 $ git clone git://github.com/boundary/bear.git
-
-# Not publicly available as of January 2nd, 2014.
-$ git clone git://github.com/tatsuya6502/leveldb_edrv
 ```
 
 ### Set the console.log to debug level
