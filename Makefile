@@ -93,11 +93,11 @@ compile-proper:
 
 eunit-compile: compile
 	@echo "eunit test compiling: $(RELPKG) ..."
-	./rebar eunit-compile
+	./rebar eunit-compile skip_apps='meck'
 
 eqc-compile: compile-eqc
 	@echo "eqc test compiling: $(RELPKG) ..."
-	./rebar eunit-compile -D QC -D QC_EQC
+	./rebar eunit-compile -D QC -D QC_EQC skip_apps='meck'
 
 proper-compile: compile-proper
 	@echo "proper test compiling: $(RELPKG) ..."
@@ -190,7 +190,7 @@ etags:
 
 clean:
 	@echo "cleaning: $(RELPKG) ..."
-	./rebar clean
+	./rebar clean -r
 
 realclean: clean
 	@echo "realcleaning: $(RELPKG) ..."
