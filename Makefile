@@ -93,27 +93,27 @@ compile-proper:
 
 eunit-compile: compile
 	@echo "eunit test compiling: $(RELPKG) ..."
-	./rebar eunit-compile skip_apps='meck'
+	./rebar eunit -r compile_only=true skip_apps='meck'
 
 eqc-compile: compile-eqc
 	@echo "eqc test compiling: $(RELPKG) ..."
-	./rebar eunit-compile -D QC -D QC_EQC skip_apps='meck'
+	./rebar eunit -r -D QC -D QC_EQC compile_only=true skip_apps='meck'
 
 proper-compile: compile-proper
 	@echo "proper test compiling: $(RELPKG) ..."
-	./rebar eunit-compile -D QC -D QC_PROPER
+	./rebar eunit -r -D QC -D QC_PROPER compile_only=true skip_apps='meck'
 
 eunit: eunit-compile
 	@echo "eunit testing: $(RELPKG) ..."
-	./rebar eunit skip_apps=meck
+	./rebar eunit -r skip_apps=meck
 
 eunit-core: eunit-compile
 	@echo "eunit testing (core): $(RELPKG) ..."
-	./rebar eunit skip_apps='meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf'
+	./rebar eunit -r skip_apps='meck,asciiedoc,edown,gdss_ubf_proto,ubf_thrift,ubf'
 
 eunit-thrift: eunit-compile
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	./rebar eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
+	./rebar eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,riak_err,meck,asciiedoc,edown'
 
 eqc: eqc-compile
 	@echo "eqc testing: $(RELPKG) ... not implemented yet"
