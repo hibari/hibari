@@ -98,6 +98,7 @@ generate: clean compile
 	@echo "generating: $(RELPKG) ..."
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
+	@find . -name shallow -type l -exec test ! -e {} \; -print | xargs rm -f
 	./rebar generate
 	@perl -i -pe 's/%% (.* generated) at .*//g;' \
 		rel/hibari/releases/*/*.rel \

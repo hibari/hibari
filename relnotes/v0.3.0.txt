@@ -63,6 +63,8 @@ IMPORTANT: No upgrade path is provided from an earlier Hibari release:
 
 --- FIXES ---------------------------------------------------------------
 
+- hibari >> GH47 - reltool command will fail to generate package due
+  to broken symlinks created by repo command
 - gdss-client >> GH8 - brick_simple_client:find_the_brick/3 crashes
   for unknown table
 
