@@ -3,6 +3,10 @@ v0.1.10 - February 2013
 
 This is a maintenance release for Hibari.
 
+This release requires Erlang/OTP R13B04, R14 or R15. R15B03-1 is the
+version most recently tested for Hibari.
+
+
 --- FIXES ---------------------------------------------------------------
 
 - Python EBF Client - Turn on TCP_NODELAY to avoid poor performance

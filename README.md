@@ -13,12 +13,15 @@ performance especially for read and large value operations.
 
 # News
 
-- Feb 4, 2013 - Hibari v0.1.10 Released. [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
+- Feb 4, 2013 - **Hibari v0.1.10 Released**. [Release Note](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
+
+- [**More News**](https://github.com/hibari/hibari/wiki/Hot-News)
 
 
 # Quick Start
 
-Please read Getting Started section of Hibari Application Developer Guide.
+Please read **Getting Started** section of Hibari Application
+Developer Guide.
 
 - [English Version](http://hibari.github.com/hibari-doc/hibari-app-developer-guide.en.html#getting-started)
 - [Japanese Version](http://hibari.github.com/hibari-doc/hibari-app-developer-guide.ja.html#getting-started)
@@ -29,8 +32,8 @@ Please read Getting Started section of Hibari Application Developer Guide.
 - [English Version](http://hibari.github.com/hibari-doc/)
 - [Japanese Version](http://hibari.github.com/hibari-doc/)
 
-They are a bit outdated. Documentation rework is planned for Hibari
-v0.6.
+They are a bit **outdated** -- sorry, but documentation rework is
+planned for Hibari v0.6.
 
 
 # Mailing Lists
@@ -48,64 +51,26 @@ operations.
 Hibari v0.5 will have a full-featured Thrift client.
 
 
+# Supported Platforms
+
+Hibari is written in pure Erlang/OTP and runs on many Unix/Linux
+platforms.
+
+Please see
+the [**Supported Platforms**](https://github.com/hibari/hibari/wiki/Supported-Platforms)
+page in Hibari Wiki for details.
+
+
 # Roadmap
 
-Short-term roadmap (as of February 2013)
-
-## v0.1 series (unstable)
-
-- v0.1.10
-  * Minor bug fixes
-  * Update for Erlang/OTP R15
-  * Support for building on Ubuntu, including ARMv7 architecture
-  * Move S3 and JSON-RPC components out from Hibari distribution
-    (remove from the `repo` manifests.)  S3 and JSON-RPC will become
-    separate projects and will use `rebar` to manage
-    dependencies. (Hibari will continue using `repo`)
+Please see
+the [**Roadmap**](https://github.com/hibari/hibari/wiki/Roadmap) page
+in Hibari Wiki for the planned features for Hibari v0.3, v0.5, and v0.6.
 
 
-## v0.5 series (unstable)
+# License
 
-- v0.5
-  * A complete Thrift API (`do`, `get_many`, and `testset` flag for
-    `set` and `replace`)
-  * More `hibari` and `hibari-admin` commands (e.g. control and
-    monitor scavenger)
-  * Delete table operation, which is missing in v0.1 series
-  * Server-side timestamp and rename (Server-side timestamp is
-    required by Thrift API)
-  * Server-side counter
-  * The latest external libraries (ubf, ubf-thrift, riak-err)
-  * Update for Erlang/OTP R16
-  * Basho Bench driver
-
-
-## v0.6 series (stable)
-
-- v0.6
-  * Source code package. Application developers can build Hibari
-    without `repo` by using this package. (Hibari developers will
-    continue using `repo`.)
-  * Documentation rework
-  * Sample codes
-  * Cookbook for Opscode Chef for automated single-node and multi-node
-    deployments
-  * More QuickCheck and EUnit test cases
-
-
-## Unscheduled Features
-
-- MapReduce (mruby?)
-- SNMP support
-- LETS (Google LevelDB) or HanoiDB as an alternative key storage for
-  optimizing RAM usage
-- Scavenger enhancements
-- Big writes/reads (`append` to a value and `partial_read` from a value)
-
-
-## License
-
-Copyright (c) 2005-2013 Hibari developers.  All rights reserved.
+Copyright (c) 2005-2015 Hibari developers.  All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

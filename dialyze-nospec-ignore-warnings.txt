@@ -15,14 +15,17 @@ leexinc.hrl:248: The pattern <Rest, Line, {'end_token', _T, Push}, Error> can ne
 leexinc.hrl:253: The pattern <Rest, Line, {'skip_token', Push}, Error> can never match the type <_,_,'error',_>
 leexinc.hrl:256: The pattern <Rest, Line, {'error', _S}, Error> can never match the type <_,_,'error',_>
 brick_chainmon.erl:1096: The created fun has no local return
-brick_ets.erl:3053: The created fun has no local return
+brick_ets.erl:3165: The created fun has no local return
 brick_mboxmon.erl:313: The created fun has no local return
 brick_mboxmon.erl:329: Function start_water_report_loop/3 has no local return
-brick_server.erl:4995: The created fun has no local return
+brick_server.erl:4997: The created fun has no local return
 ebf.erl:44: Function encode/1 has no local return
 ebf.erl:55: Function decode/1 has no local return
 ebf.erl:59: Function decode/2 has no local return
 ebf.erl:68: Function decode_init/0 has no local return
 ebf.erl:72: Function decode_init/1 has no local return
-meck.erl:621: Function invalidate_and_raise/6 has no local return
-meck.erl:644: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
+meck.erl:630: Function invalidate_and_raise/6 has no local return
+meck.erl:653: The pattern <Mod, Func, Args, [Meck = {'meck', 'exec', _Arity} | Stack]> can never match the type <atom(),_,_,[{atom(),atom(),[any()] | byte(),[any()]},...]>
+meck_cover.erl:30: Call to missing or unexported function cover:compile_beam/2
+meck_cover.erl:98: Call to missing or unexported function cover:get_term/1
+meck_cover.erl:109: Call to missing or unexported function cover:write/2
