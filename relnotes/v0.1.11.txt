@@ -1,0 +1,19 @@
+
+v0.1.11 - March 2015
+
+This is a maintenance release for Hibari.
+
+This release required Erlang/OTP 17. 17.4 is the version most recently
+tested for Hibari.
+
+IMPORTANT: UBF related stuff has been removed because UBF version 1 is
+not compatible with Erlang/OTP 17. Therefore, only Erlang native
+client API is available in this release.
+
+--- OTHERS --------------------------------------------------------------
+
+- hibari >> GH40 Embedded Hibari
+- hibari >> GH41 Update Hibari master branch (v0.1.x) for Erlang/OTP
+  17.x (Removed UBF related stuff)
+
+_EOF_

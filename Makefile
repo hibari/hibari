@@ -118,31 +118,31 @@ eunit-core: compile-for-eunit
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
-	$(REBAR) eqc qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
 
 eqc-thrift: compile-for-eqc
 	@echo "eqc testing (thrift): $(RELPKG) ..."
-	$(REBAR) eqc qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
 
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
-	$(REBAR) proper skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) proper -r skip_apps='meck,ubf,ubf_thrift'
 
 triq: compile-for-triq
 	@echo "triq testing: $(RELPKG) ..."
-	$(REBAR) triq skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) triq -r skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-eunit:
 	@echo "compiling-eunit: $(RELPKG) ..."
-	$(REBAR) compile eunit compile_only=true
+	$(REBAR) compile -r eunit compile_only=true
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) -D QC -D QC_EQC compile eqc -r compile_only=true skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."
