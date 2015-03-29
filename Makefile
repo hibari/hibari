@@ -99,6 +99,8 @@ generate: clean compile
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
 	@find . -name shallow -type l -exec test ! -e {} \; -print | xargs rm -f
+	@rm -f ./lib/ubf/priv/doc/src/asciidoc.js
+	@rm -f ./lib/ubf/priv/doc/src/bootstrap
 	./rebar generate
 	@perl -i -pe 's/%% (.* generated) at .*//g;' \
 		rel/hibari/releases/*/*.rel \
@@ -110,11 +112,11 @@ compile:
 
 eunit: compile-for-eunit
 	@echo "eunit testing: $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='meck,asciiedoc,edown,lager'
+	$(REBAR) eunit -r skip_apps='meck,asciiedoc,edown,lager'
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
@@ -138,7 +140,7 @@ triq: compile-for-triq
 
 compile-for-eunit:
 	@echo "compiling-eunit: $(RELPKG) ..."
-	$(REBAR) compile -r eunit compile_only=true
+	$(REBAR) compile -r eunit compile_only=true skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
