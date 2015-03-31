@@ -99,6 +99,7 @@ generate: clean compile
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
 	@find . -name shallow -type l -exec test ! -e {} \; -print | xargs rm -f
+	@find . -name packed-refs -type l -exec test ! -e {} \; -print | xargs rm -f
 	@rm -f ./lib/ubf/priv/doc/src/asciidoc.js
 	@rm -f ./lib/ubf/priv/doc/src/bootstrap
 	./rebar generate
