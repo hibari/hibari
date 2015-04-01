@@ -1,0 +1,50 @@
+
+v0.1.12 - Mid 2015
+
+This is a maintenance release for Hibari.
+
+This release requires Erlang/OTP R16 or 17. 17.4 is the versions most
+recently tested for Hibari.
+
+A previous release v0.1.11 contained some enhancements to the client
+API.
+
+- new client API - rename
+- server side timestamp
+
+You must update you application codes for v1.1.11 client API. For
+more details, please see the GitHub issue:
+https://github.com/hibari/gdss-client/issues/2
+
+
+--- HIGHLIGHTS ----------------------------------------------------------
+
+- *TODO*
+
+
+--- NEW FEATURES --------------------------------------------------------
+
+- *TODO*
+
+
+--- FIXES ---------------------------------------------------------------
+
+- gdss-ubf-proto >> GH5 - Python Thrift client - import Hibari does
+  not work
+
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- *TODO*
+
+
+--- OTHERS --------------------------------------------------------------
+
+- hibari >> GH50     - Host Hibari docs at Read The Docs
+- gdss-brick >> GH5  - valid return formats for get_many
+- hibari-doc >> GH6  - Application Developer's Guide - remove
+  deprecated timeout = 'infinity'
+- hibari-doc >> GH11 - Application Developer's Guide - new error
+  response {val_error, len()} for brick_simple API
+
+_EOF_
