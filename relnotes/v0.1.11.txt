@@ -1,19 +1,77 @@
 
-v0.1.11 - March 2015
+v0.1.11 - April 2015
 
 This is a maintenance release for Hibari.
 
-This release required Erlang/OTP 17. 17.4 is the version most recently
-tested for Hibari.
+Hibari has been updated to support Erlang/OTP 17 and R16. 17.4 is the
+version most recently tested for Hibari. Also external libraries such
+as UBF are updated to the latest versions. Note that Erlang/OTP
+releases prior to R16 are no longer supported.
 
-IMPORTANT: UBF related stuff has been removed because UBF version 1 is
-not compatible with Erlang/OTP 17. Therefore, only Erlang native
-client API is available in this release.
+This release contains some enhancements to the client API.
+
+- new client API - rename
+- server side timestamp
+
+You must update you application codes for v1.1.11 client API. For
+more details, please see the GitHub issue:
+https://github.com/hibari/gdss-client/issues/2
+
+The logging facility is changed from riak-err to lager.
+
+
+--- HIGHLIGHTS ----------------------------------------------------------
+
+- Latest Libraries
+  * Update for Erlang/OTP 17 and R16
+  * The latest external libraries (ubf and ubf-thrift)
+- Enhanced Client API
+  * New: Server Side Rename
+  * Enhancement: Server Side Timestamp.
+- New Logging Format
+  * Introduce Basho Lager for more traditional logging that plays
+    nicely with UNIX logging tools like logrotate and syslog
+
+
+--- NEW FEATURES --------------------------------------------------------
+
+- hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later
+- hibari >> GH19 - Introduce Basho Lager as the primary logging facility
+- hibari >> GH40 - Embedded Hibari
+- gdss-brick >> GH2  - brick_server new client API - rename
+- gdss-brick >> GH13 - Add attrib and exp_time directive flags to
+  rename/6
+- gdss-brick >> GH14 - Add attrib and exp_time directive flags to
+  replace/6 and set/6
+
+
+--- FIXES ---------------------------------------------------------------
+
+- hibari >> GH47 - reltool command will fail to generate package due
+  to broken symlinks created by repo command
+- gdss-brick >> GH6  - set and replace txn doesn't fail (as expected)
+- gdss-client >> GH8 - brick_simple_client:find_the_brick/3 crashes
+  for unknown table
+
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- gdss-client >> GH2 - brick_simple:{add,set,replace} APIs do not
+  return the server-side timstamp for success
+
 
 --- OTHERS --------------------------------------------------------------
 
-- hibari >> GH40 Embedded Hibari
-- hibari >> GH41 Update Hibari master branch (v0.1.x) for Erlang/OTP
-  17.x (Removed UBF related stuff)
+- hibari >> GH10 - Config file and rebar-related changes for R15B
+- hibari >> GH20 - Remove riak-err
+- hibari >> GH21 - Add gmt_elog module again
+- hibari >> GH23 - Introduce qc wrapper
+- hibari >> GH24 - Update for Erlang/OTP R16
+- hibari >> GH37 - Update for Erlang/OTP 17.x
+- hibari >> GH39 - Drop support for older Erlang/OTP releases
+- gdss-admin >> GH7 - Update QuickCheck test cases for qc wrapper 2.0
+  and eqc 1.33
+- gdss-ubf-proto >> GH7 - Update the external libraries (ubf and
+  ubf-thrift) to the latest version
 
 _EOF_
