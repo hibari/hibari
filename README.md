@@ -62,7 +62,7 @@ replication methodology*" and delivers distinct features.
   * Update external libraries such as UBF to the latest versions
   * Enhanced client API: server side rename and server side timestamp
   * New logging format. Introduce Basho Lager for more traditional
-    logging that plays nicely with UNIX logging tools like logrotate and
+    logging that plays nicely with Unix logging tools like logrotate and
     syslog
 
 - Feb 4, 2013 - **Hibari v0.1.10 Released**. [Release Notes](https://github.com/hibari/hibari/blob/master/relnotes/v0.1.10.txt)
@@ -108,7 +108,7 @@ operations.
 
 If you need a client library for other programming language, please
 feel free to post a request at the
-[Hibari mailing list](http://groups.google.com/forum/#!forum/hibaridb-users)
+[Hibari mailing list](http://groups.google.com/forum/#!forum/hibaridb-users).
 
 
 ## Supported Platforms
