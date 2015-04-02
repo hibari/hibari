@@ -10,6 +10,7 @@ version most recently tested for Hibari.
 --- FIXES ---------------------------------------------------------------
 
 - Python EBF Client - Turn on TCP_NODELAY to avoid poor performance
+- gdss-brick >> GH6  - set and replace txn doesn't fail (as expected)
 
 --- ENHANCEMENTS --------------------------------------------------------
 

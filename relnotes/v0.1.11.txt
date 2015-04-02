@@ -32,7 +32,6 @@ The logging facility is changed from riak-err to lager.
   * Introduce Basho Lager for more traditional logging that plays
     nicely with UNIX logging tools like logrotate and syslog
 
-
 --- NEW FEATURES --------------------------------------------------------
 
 - hibari >> GH18 - Add DTrace tracepoints for Erlang/OTP R15 or later
@@ -44,21 +43,17 @@ The logging facility is changed from riak-err to lager.
 - gdss-brick >> GH14 - Add attrib and exp_time directive flags to
   replace/6 and set/6
 
-
 --- FIXES ---------------------------------------------------------------
 
 - hibari >> GH47 - reltool command will fail to generate package due
   to broken symlinks created by repo command
-- gdss-brick >> GH6  - set and replace txn doesn't fail (as expected)
 - gdss-client >> GH8 - brick_simple_client:find_the_brick/3 crashes
   for unknown table
-
 
 --- ENHANCEMENTS --------------------------------------------------------
 
 - gdss-client >> GH2 - brick_simple:{add,set,replace} APIs do not
   return the server-side timstamp for success
-
 
 --- OTHERS --------------------------------------------------------------
 
