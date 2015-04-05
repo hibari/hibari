@@ -1,0 +1,51 @@
+
+v0.3.1 - Not Released (Late 2015)
+
+This is a bug fix release for Hibari.
+
+This release requires Erlang/OTP R16 or newer. 18.x is (will be) the
+version most recently tested for Hibari.
+
+IMPORTANT: No upgrade is provided from Hibari v0.1.x release:
+
+- Storage Format Change:
+  * The disk storage format is significantly changed in this release,
+    and Hibari v0.3.0 does not support older disk storage format.
+    It is not possible to upgrade from an earlier Hibari release.
+
+    At this point, there is no plan to provide an offline migration
+    tool unless someone asks for it. For more details about storage
+    format change, please see GitHub issue at:
+    gdss-brick >> GH17 <https://github.com/hibari/gdss-brick/issues/17>
+
+
+--- HIGHLIGHTS ----------------------------------------------------------
+
+- Sample code for Erlang native client (brick_simple)
+- Basho Bench driver
+
+
+--- NEW FEATURES --------------------------------------------------------
+
+- gdss-admin >> GH3 - Add an API function to Chain Monitor to get the
+  current best brick of a chain - *TODO*
+
+
+--- FIXES ---------------------------------------------------------------
+
+- gdss-brick >> GH11 (CL29834) - squidflash_prime1 could crash hlog
+  common when do_sync is false - *TODO*
+
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- *TODO*
+
+
+--- OTHERS --------------------------------------------------------------
+
+- hibari >> GH26 - Add Basho Bench driver - *TODO*
+- gdss-client >> GH7 - Add sample code for native Erlang client - *TODO*
+
+
+_EOF_

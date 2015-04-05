@@ -1,0 +1,60 @@
+
+v0.3.0 - Not Released (Late 2015)
+
+This is a major release of Hibari.
+
+This release requires Erlang/OTP R16 or 17. R16B03-1 and 17.4 are
+the versions most recently tested for Hibari.
+
+IMPORTANT: No upgrade path is provided from Hibari v0.1.x release:
+
+- Storage Format Change:
+  * The disk storage format is significantly changed in this release,
+    and Hibari v0.3.0 does not support older disk storage format.
+    It is not possible to upgrade from an earlier Hibari release.
+
+    At this point, there is no plan to provide an offline migration
+    tool unless someone asks for it. For more details about storage
+    format change, please see GitHub issue at:
+    gdss-brick >> GH17 <https://github.com/hibari/gdss-brick/issues/17>
+
+
+--- HIGHLIGHTS ----------------------------------------------------------
+
+- New Storage Format
+  * *TODO*
+- Enhanced Client API
+  * New: Server Side Copy
+  * New: Server Side Rename
+  * New: Server Side Counter
+  * New: WAL Sync Request
+- Metrics and Tracepoints to Examine Database Latency in Production
+  * Introduce brick_metrics module, a folsom based metrics system
+    to measure and report latency inside Hibari
+  * DTrace/SystemTap tracepoints
+
+
+--- NEW FEATURES --------------------------------------------------------
+
+- hibari >> GH27 - Support for building and running on Joyent SmartOS
+
+
+--- FIXES ---------------------------------------------------------------
+
+- *TODO*
+
+
+--- ENHANCEMENTS --------------------------------------------------------
+
+- gdss-brick >> GH17 - Redesign disk storage and checkpoint/scavenger
+  processes
+- gdss-client >> GH2 - brick_simple:{add,set,replace} APIs do not
+  return the server-side timstamp for success
+
+
+--- OTHERS --------------------------------------------------------------
+
+- *TODO*
+
+
+_EOF_
