@@ -101,6 +101,10 @@ generate: clean compile
 	@echo "generating: $(RELPKG) ..."
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
+	@find . -name shallow -type l -exec test ! -e {} \; -print | xargs rm -f
+	@find . -name packed-refs -type l -exec test ! -e {} \; -print | xargs rm -f
+	@rm -f ./lib/ubf/priv/doc/src/asciidoc.js
+	@rm -f ./lib/ubf/priv/doc/src/bootstrap
 	./rebar generate
 	@perl -i -pe 's/%% (.* generated) at .*//g;' \
 		rel/hibari/releases/*/*.rel \
@@ -112,39 +116,39 @@ compile:
 
 eunit: compile-for-eunit
 	@echo "eunit testing: $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='meck,asciiedoc,edown,lager'
+	$(REBAR) eunit -r skip_apps='meck,asciiedoc,edown,lager'
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	$(REBAR) eunit skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
-	$(REBAR) eqc qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
 
 eqc-thrift: compile-for-eqc
 	@echo "eqc testing (thrift): $(RELPKG) ..."
-	$(REBAR) eqc qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
 
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
-	$(REBAR) proper skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) proper -r skip_apps='meck,ubf,ubf_thrift'
 
 triq: compile-for-triq
 	@echo "triq testing: $(RELPKG) ..."
-	$(REBAR) triq skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) triq -r skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-eunit:
 	@echo "compiling-eunit: $(RELPKG) ..."
-	$(REBAR) compile eunit compile_only=true
+	$(REBAR) compile -r eunit compile_only=true skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc compile_only=true skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) -D QC -D QC_EQC compile eqc -r compile_only=true skip_apps='meck,ubf,ubf_thrift'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."

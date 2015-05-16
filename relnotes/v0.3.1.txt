@@ -1,28 +1,22 @@
 
-v0.3.1 - Not Released (Early 2014)
+v0.3.1 - Not Released (Late 2015)
 
 This is a bug fix release for Hibari.
 
-This release requires Erlang/OTP R16. R16B03 is the version most
-recently tested for Hibari.
+This release requires Erlang/OTP R16 or newer. 18.x is (will be) the
+version most recently tested for Hibari.
 
-IMPORTANT: No upgrade is provided from an earlier Hibari release:
+IMPORTANT: No upgrade is provided from Hibari v0.1.x release:
 
-- Storage format change:
-  * The disk storage format was significantly changed in v0.3.0,
-    and Hibari v0.3.x does not support older disk storage format.
-    Therefore, it is not possible to upgrade from an earlier Hibari
-    release.
+- Storage Format Change:
+  * The disk storage format is significantly changed in this release,
+    and Hibari v0.3.0 does not support older disk storage format.
+    It is not possible to upgrade from an earlier Hibari release.
 
-    There is no plan to provide an offline migration tool unless
-    someone asks for it. For more details, please see GitHub issue:
+    At this point, there is no plan to provide an offline migration
+    tool unless someone asks for it. For more details about storage
+    format change, please see GitHub issue at:
     gdss-brick >> GH17 <https://github.com/hibari/gdss-brick/issues/17>
-
-- Client API change:
-  * There was some client API changes in v0.3.0. You must update you
-    application codes for v0.3.x client APIs. For more details, please
-    see GitHub issue:
-    gdss-client >> GH2 <https://github.com/hibari/gdss-client/issues/2>.
 
 
 --- HIGHLIGHTS ----------------------------------------------------------
