@@ -46,6 +46,7 @@ endif
 
 .PHONY: all test \
 	bootstrap-package check-package package generate \
+	bootstrap-dirty-package dirty-package generate-no-clean \
 	compile eunit eunit-core eunit-thrift \
 	eqc proper triq \
 	compile-for-eunit comple-for-eqc compile-for-proper compile-for-triq \
@@ -67,7 +68,9 @@ all: compile
 
 test: eunit
 
-bootstrap-package: package
+bootstrap-package: clean bootstrap-dirty-package
+
+bootstrap-dirty-package: dirty-package
 	@echo "bootstrapping package: $(RELPKG) ..."
 	@-./tmp/hibari/bin/hibari stop &> /dev/null
 	@rm -rf ./tmp
@@ -90,14 +93,18 @@ check-package: bootstrap-package
 	./tmp/hibari/bin/hibari ping
 	./tmp/hibari/bin/hibari stop
 
-package: generate
+package: clean dirty-package
+
+dirty-package: generate-no-clean
 	@echo "packaging: $(RELPKG) ..."
 	@rm -f ../$(RELTGZ) ../$(RELMD5)
 	@tar -C ./rel -czf ../$(RELTGZ) hibari
 	@(cd .. && (md5sum $(RELTGZ) 2> /dev/null || md5 -r $(RELTGZ) 2> /dev/null) | tee $(RELMD5))
 	@(cd .. && ls -l $(RELTGZ) $(RELMD5))
 
-generate: clean compile
+generate: clean generate-no-clean
+
+generate-no-clean: compile
 	@echo "generating: $(RELPKG) ..."
 	@find ./lib -name svn -type l | xargs rm -f
 	@find ./lib -name rr-cache -type l | xargs rm -f
@@ -116,39 +123,39 @@ compile:
 
 eunit: compile-for-eunit
 	@echo "eunit testing: $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='meck,asciiedoc,edown,lager'
+	$(REBAR) eunit -r skip_apps='folsom,bear,meck,asciiedoc,edown,lager'
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,folsom,bear,lager,meck,asciiedoc,edown'
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,folsom,bear,lager,meck,asciiedoc,edown'
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
-	$(REBAR) eqc -r qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='folsom,bear,lager,meck,ubf,ubf_thrift'
 
 eqc-thrift: compile-for-eqc
 	@echo "eqc testing (thrift): $(RELPKG) ..."
-	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,folsom,bear,lager,meck'
 
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
-	$(REBAR) proper -r skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) proper -r skip_apps='folsom,bear,meck,ubf,ubf_thrift'
 
 triq: compile-for-triq
 	@echo "triq testing: $(RELPKG) ..."
-	$(REBAR) triq -r skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) triq -r skip_apps='folsom,bear,meck,ubf,ubf_thrift'
 
 compile-for-eunit:
 	@echo "compiling-eunit: $(RELPKG) ..."
-	$(REBAR) compile -r eunit compile_only=true skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) compile -r eunit compile_only=true skip_apps='folsom,bear,meck,ubf,ubf_thrift'
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."
-	$(REBAR) -D QC -D QC_EQC compile eqc -r compile_only=true skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) -D QC -D QC_EQC compile eqc -r compile_only=true skip_apps='folsom,bear,meck,ubf,ubf_thrift'
 
 compile-for-proper:
 	@echo "compiling-proper: $(RELPKG) ..."
