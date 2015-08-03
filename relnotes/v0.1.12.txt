@@ -31,6 +31,7 @@ https://github.com/hibari/gdss-client/issues/2
 
 - gdss-ubf-proto >> GH5 - Python Thrift client - import Hibari does
   not work
+- gmt-utils >> GH3 - gmt_util:node_localid/1 fails with badarg
 
 
 --- ENHANCEMENTS --------------------------------------------------------
