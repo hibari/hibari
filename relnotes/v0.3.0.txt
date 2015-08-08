@@ -50,6 +50,8 @@ IMPORTANT: No upgrade path is provided from Hibari v0.1.x release:
   processes
 - gdss-brick >> GH24 - brick_server client API enhancement -
   'reversed' option for get_many/5
+- gdss-brick >> GH25 - brick_server client API enhancement -
+  'include_start_key' option for get_many/5
 - gdss-client >> GH2 - brick_simple:{add,set,replace} APIs do not
   return the server-side timstamp for success
 
