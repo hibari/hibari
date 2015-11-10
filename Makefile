@@ -117,7 +117,7 @@ eunit: compile-for-eunit
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,thrift,lager,meck,asciiedoc,edown'
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
@@ -141,7 +141,7 @@ triq: compile-for-triq
 
 compile-for-eunit:
 	@echo "compiling-eunit: $(RELPKG) ..."
-	$(REBAR) compile -r eunit compile_only=true skip_apps='meck,ubf,ubf_thrift'
+	$(REBAR) compile -r eunit compile_only=true skip_apps='meck,ubf,ubf_thrift,thrift'
 
 compile-for-eqc:
 	@echo "compiling-eqc: $(RELPKG) ..."

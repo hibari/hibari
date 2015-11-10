@@ -1,13 +1,13 @@
 
-v0.1.12 - Mid 2015
+v0.1.12 - Late 2015
 
 This is a maintenance release for Hibari.
 
-This release requires Erlang/OTP R16 or 17. 17.4 is the versions most
-recently tested for Hibari.
+Hibari has been updated to support Erlang/OTP 18, as well as 17 and
+R16. OTP 18.1.3 is the version most recently tested for Hibari.
 
-A previous release v0.1.11 contained some enhancements to the client
-API.
+Note that a previous release v0.1.11 contained some enhancements to
+the client API:
 
 - new client API - rename
 - server side timestamp
@@ -19,7 +19,9 @@ https://github.com/hibari/gdss-client/issues/2
 
 --- HIGHLIGHTS ----------------------------------------------------------
 
-- *TODO*
+- Latest Libraries
+  * Update for Erlang/OTP 18
+  * The latest external libraries (ubf, edown and asciiedoc)
 
 
 --- NEW FEATURES --------------------------------------------------------
@@ -42,6 +44,7 @@ https://github.com/hibari/gdss-client/issues/2
 --- OTHERS --------------------------------------------------------------
 
 - hibari >> GH50     - Host Hibari docs at Read The Docs
+- hibari >> GH51     - Update for Erlang/OTP 18
 - gdss-brick >> GH5  - valid return formats for get_many
 - hibari-doc >> GH6  - Application Developer's Guide - remove
   deprecated timeout = 'infinity'
