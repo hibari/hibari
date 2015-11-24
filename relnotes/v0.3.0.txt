@@ -1,10 +1,10 @@
 
-v0.3.0 - Not Released (Late 2015)
+v0.3.0 - Not Released
 
 This is a major release of Hibari.
 
-This release requires Erlang/OTP R16 or 17. R16B03-1 and 17.4 are
-the versions most recently tested for Hibari.
+This release requires Erlang/OTP 18, 17 or R16. OTP 18.1.4 is the
+version most recently tested for Hibari.
 
 IMPORTANT: No upgrade path is provided from Hibari v0.1.x release:
 
@@ -36,7 +36,7 @@ IMPORTANT: No upgrade path is provided from Hibari v0.1.x release:
 
 --- NEW FEATURES --------------------------------------------------------
 
-- hibari >> GH27 - Support for building and running on Joyent SmartOS
+- *TODO*
 
 
 --- FIXES ---------------------------------------------------------------
