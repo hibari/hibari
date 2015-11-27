@@ -45,6 +45,7 @@ https://github.com/hibari/gdss-client/issues/2
 
 - hibari >> GH50     - Host Hibari docs at Read The Docs
 - hibari >> GH51     - Update for Erlang/OTP 18
+- hibari >> GH56     - Include eper
 - gdss-brick >> GH5  - valid return formats for get_many
 - hibari-doc >> GH6  - Application Developer's Guide - remove
   deprecated timeout = 'infinity'
