@@ -117,19 +117,19 @@ eunit: compile-for-eunit
 
 eunit-core: compile-for-eunit
 	@echo "eunit testing (core): $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,thrift,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='ubf,gdss_ubf_proto,ubf_thrift,thrift,lager,eper,meck,asciiedoc,edown'
 
 eunit-thrift: compile-for-eunit
 	@echo "eunit testing (thrift): $(RELPKG) ..."
-	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck,asciiedoc,edown'
+	$(REBAR) eunit -r skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,eper,meck,asciiedoc,edown'
 
 eqc: compile-for-eqc
 	@echo "eqc testing: $(RELPKG) ..."
-	$(REBAR) eqc -r qc_opts=3000 skip_apps='lager,meck,ubf,ubf_thrift'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='lager,eper,meck,ubf,ubf_thrift'
 
 eqc-thrift: compile-for-eqc
 	@echo "eqc testing (thrift): $(RELPKG) ..."
-	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,meck'
+	$(REBAR) eqc -r qc_opts=3000 skip_apps='gdss_brick,gdss_client,gdss_admin,cluster_info,partition_detector,congestion_watcher,gmt_util,lager,eper,meck'
 
 proper: compile-for-proper
 	@echo "proper testing: $(RELPKG) ..."
